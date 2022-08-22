@@ -11,10 +11,10 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.math.ttypes
-import MOSIM.mmi.core.ttypes
-import MOSIM.mmi.avatar.ttypes
-import MOSIM.mmi.constraints.ttypes
+import MMIStandard.math.ttypes
+import MMIStandard.core.ttypes
+import MMIStandard.avatar.ttypes
+import MMIStandard.constraints.ttypes
 
 from thrift.transport import TTransport
 all_structs = []
@@ -1013,13 +1013,13 @@ class MTransformManipulation(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.Position = MOSIM.mmi.math.ttypes.MVector3()
+                    self.Position = MMIStandard.math.ttypes.MVector3()
                     self.Position.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.Rotation = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.Rotation = MMIStandard.math.ttypes.MQuaternion()
                     self.Rotation.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1096,7 +1096,7 @@ class MBoxColliderProperties(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.Size = MOSIM.mmi.math.ttypes.MVector3()
+                    self.Size = MMIStandard.math.ttypes.MVector3()
                     self.Size.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1170,7 +1170,7 @@ class MCapsuleColliderProperties(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.MainAxis = MOSIM.mmi.math.ttypes.MVector3()
+                    self.MainAxis = MMIStandard.math.ttypes.MVector3()
                     self.MainAxis.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1245,7 +1245,7 @@ class MMeshColliderProperties(object):
                     self.Vertices = []
                     (_etype59, _size56) = iprot.readListBegin()
                     for _i60 in range(_size56):
-                        _elem61 = MOSIM.mmi.math.ttypes.MVector3()
+                        _elem61 = MMIStandard.math.ttypes.MVector3()
                         _elem61.read(iprot)
                         self.Vertices.append(_elem61)
                     iprot.readListEnd()
@@ -1345,7 +1345,7 @@ class MMesh(object):
                     self.Vertices = []
                     (_etype73, _size70) = iprot.readListBegin()
                     for _i74 in range(_size70):
-                        _elem75 = MOSIM.mmi.math.ttypes.MVector3()
+                        _elem75 = MMIStandard.math.ttypes.MVector3()
                         _elem75.read(iprot)
                         self.Vertices.append(_elem75)
                     iprot.readListEnd()
@@ -1366,7 +1366,7 @@ class MMesh(object):
                     self.UVCoordinates = []
                     (_etype85, _size82) = iprot.readListBegin()
                     for _i86 in range(_size82):
-                        _elem87 = MOSIM.mmi.math.ttypes.MVector2()
+                        _elem87 = MMIStandard.math.ttypes.MVector2()
                         _elem87.read(iprot)
                         self.UVCoordinates.append(_elem87)
                     iprot.readListEnd()
@@ -1479,7 +1479,7 @@ class MNavigationMesh(object):
                     self.Vertices = []
                     (_etype103, _size100) = iprot.readListBegin()
                     for _i104 in range(_size100):
-                        _elem105 = MOSIM.mmi.math.ttypes.MVector3()
+                        _elem105 = MMIStandard.math.ttypes.MVector3()
                         _elem105.read(iprot)
                         self.Vertices.append(_elem105)
                     iprot.readListEnd()
@@ -1989,13 +1989,13 @@ class MCollider(object):
                     iprot.skip(ftype)
             elif fid == 9:
                 if ftype == TType.STRUCT:
-                    self.PositionOffset = MOSIM.mmi.math.ttypes.MVector3()
+                    self.PositionOffset = MMIStandard.math.ttypes.MVector3()
                     self.PositionOffset.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 10:
                 if ftype == TType.STRUCT:
-                    self.RotationOffset = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.RotationOffset = MMIStandard.math.ttypes.MQuaternion()
                     self.RotationOffset.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2156,7 +2156,7 @@ class MSceneObject(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.Transform = MOSIM.mmi.math.ttypes.MTransform()
+                    self.Transform = MMIStandard.math.ttypes.MTransform()
                     self.Transform.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2205,7 +2205,7 @@ class MSceneObject(object):
                     self.Constraints = []
                     (_etype215, _size212) = iprot.readListBegin()
                     for _i216 in range(_size212):
-                        _elem217 = MOSIM.mmi.constraints.ttypes.MConstraint()
+                        _elem217 = MMIStandard.constraints.ttypes.MConstraint()
                         _elem217.read(iprot)
                         self.Constraints.append(_elem217)
                     iprot.readListEnd()
@@ -2368,7 +2368,7 @@ class MSceneObjectUpdate(object):
                     self.HandPoses = []
                     (_etype225, _size222) = iprot.readListBegin()
                     for _i226 in range(_size222):
-                        _elem227 = MOSIM.mmi.avatar.ttypes.MHandPose()
+                        _elem227 = MMIStandard.avatar.ttypes.MHandPose()
                         _elem227.read(iprot)
                         self.HandPoses.append(_elem227)
                     iprot.readListEnd()
@@ -2401,7 +2401,7 @@ class MSceneObjectUpdate(object):
                     self.Constraints = []
                     (_etype243, _size240) = iprot.readListBegin()
                     for _i244 in range(_size240):
-                        _elem245 = MOSIM.mmi.constraints.ttypes.MConstraint()
+                        _elem245 = MMIStandard.constraints.ttypes.MConstraint()
                         _elem245.read(iprot)
                         self.Constraints.append(_elem245)
                     iprot.readListEnd()
@@ -2556,7 +2556,7 @@ class MSceneUpdate(object):
                     self.AddedAvatars = []
                     (_etype271, _size268) = iprot.readListBegin()
                     for _i272 in range(_size268):
-                        _elem273 = MOSIM.mmi.avatar.ttypes.MAvatar()
+                        _elem273 = MMIStandard.avatar.ttypes.MAvatar()
                         _elem273.read(iprot)
                         self.AddedAvatars.append(_elem273)
                     iprot.readListEnd()
@@ -2688,7 +2688,7 @@ class MAvatarUpdate(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.PostureValues = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.PostureValues = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.PostureValues.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2704,7 +2704,7 @@ class MAvatarUpdate(object):
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.STRUCT:
-                    self.Description = MOSIM.mmi.avatar.ttypes.MAvatarDescription()
+                    self.Description = MMIStandard.avatar.ttypes.MAvatarDescription()
                     self.Description.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2846,41 +2846,41 @@ all_structs.append(MTransformManipulation)
 MTransformManipulation.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'Target', 'UTF8', None, ),  # 1
-    (2, TType.STRUCT, 'Position', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 2
-    (3, TType.STRUCT, 'Rotation', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 3
+    (2, TType.STRUCT, 'Position', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 2
+    (3, TType.STRUCT, 'Rotation', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 3
     (4, TType.STRING, 'Parent', 'UTF8', None, ),  # 4
 )
 all_structs.append(MBoxColliderProperties)
 MBoxColliderProperties.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'Size', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 1
+    (1, TType.STRUCT, 'Size', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 1
 )
 all_structs.append(MCapsuleColliderProperties)
 MCapsuleColliderProperties.thrift_spec = (
     None,  # 0
     (1, TType.DOUBLE, 'Radius', None, None, ),  # 1
     (2, TType.DOUBLE, 'Height', None, None, ),  # 2
-    (3, TType.STRUCT, 'MainAxis', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 3
+    (3, TType.STRUCT, 'MainAxis', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 3
 )
 all_structs.append(MMeshColliderProperties)
 MMeshColliderProperties.thrift_spec = (
     None,  # 0
-    (1, TType.LIST, 'Vertices', (TType.STRUCT, [MOSIM.mmi.math.ttypes.MVector3, None], False), None, ),  # 1
+    (1, TType.LIST, 'Vertices', (TType.STRUCT, [MMIStandard.math.ttypes.MVector3, None], False), None, ),  # 1
     (2, TType.LIST, 'Triangles', (TType.I32, None, False), None, ),  # 2
 )
 all_structs.append(MMesh)
 MMesh.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'ID', 'UTF8', None, ),  # 1
-    (2, TType.LIST, 'Vertices', (TType.STRUCT, [MOSIM.mmi.math.ttypes.MVector3, None], False), None, ),  # 2
+    (2, TType.LIST, 'Vertices', (TType.STRUCT, [MMIStandard.math.ttypes.MVector3, None], False), None, ),  # 2
     (3, TType.LIST, 'Triangles', (TType.I32, None, False), None, ),  # 3
-    (4, TType.LIST, 'UVCoordinates', (TType.STRUCT, [MOSIM.mmi.math.ttypes.MVector2, None], False), None, ),  # 4
+    (4, TType.LIST, 'UVCoordinates', (TType.STRUCT, [MMIStandard.math.ttypes.MVector2, None], False), None, ),  # 4
     (5, TType.MAP, 'Properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 5
 )
 all_structs.append(MNavigationMesh)
 MNavigationMesh.thrift_spec = (
     None,  # 0
-    (1, TType.LIST, 'Vertices', (TType.STRUCT, [MOSIM.mmi.math.ttypes.MVector3, None], False), None, ),  # 1
+    (1, TType.LIST, 'Vertices', (TType.STRUCT, [MMIStandard.math.ttypes.MVector3, None], False), None, ),  # 1
     (2, TType.LIST, 'Triangles', (TType.I32, None, False), None, ),  # 2
     (3, TType.MAP, 'Properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 3
 )
@@ -2918,8 +2918,8 @@ MCollider.thrift_spec = (
     (6, TType.STRUCT, 'ConeColliderProperties', [MConeColliderProperties, None], None, ),  # 6
     (7, TType.STRUCT, 'CylinderColliderProperties', [MCylinderColliderProperties, None], None, ),  # 7
     (8, TType.STRUCT, 'MeshColliderProperties', [MMeshColliderProperties, None], None, ),  # 8
-    (9, TType.STRUCT, 'PositionOffset', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 9
-    (10, TType.STRUCT, 'RotationOffset', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 10
+    (9, TType.STRUCT, 'PositionOffset', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 9
+    (10, TType.STRUCT, 'RotationOffset', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 10
     (11, TType.LIST, 'Colliders', (TType.STRUCT, [MCollider, None], False), None, ),  # 11
     (12, TType.MAP, 'Properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 12
 )
@@ -2928,14 +2928,14 @@ MSceneObject.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'ID', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'Name', 'UTF8', None, ),  # 2
-    (3, TType.STRUCT, 'Transform', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 3
+    (3, TType.STRUCT, 'Transform', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 3
     (4, TType.STRUCT, 'Collider', [MCollider, None], None, ),  # 4
     (5, TType.STRUCT, 'Mesh', [MMesh, None], None, ),  # 5
     (6, TType.STRUCT, 'PhysicsProperties', [MPhysicsProperties, None], None, ),  # 6
     None,  # 7
     (8, TType.MAP, 'Properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 8
     (9, TType.LIST, 'Attachments', (TType.STRUCT, [MAttachment, None], False), None, ),  # 9
-    (10, TType.LIST, 'Constraints', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MConstraint, None], False), None, ),  # 10
+    (10, TType.LIST, 'Constraints', (TType.STRUCT, [MMIStandard.constraints.ttypes.MConstraint, None], False), None, ),  # 10
 )
 all_structs.append(MSceneObjectUpdate)
 MSceneObjectUpdate.thrift_spec = (
@@ -2946,10 +2946,10 @@ MSceneObjectUpdate.thrift_spec = (
     (4, TType.STRUCT, 'Collider', [MCollider, None], None, ),  # 4
     (5, TType.STRUCT, 'Mesh', [MMesh, None], None, ),  # 5
     (6, TType.STRUCT, 'PhysicsProperties', [MPhysicsProperties, None], None, ),  # 6
-    (7, TType.LIST, 'HandPoses', (TType.STRUCT, [MOSIM.mmi.avatar.ttypes.MHandPose, None], False), None, ),  # 7
+    (7, TType.LIST, 'HandPoses', (TType.STRUCT, [MMIStandard.avatar.ttypes.MHandPose, None], False), None, ),  # 7
     (8, TType.LIST, 'Properties', (TType.STRUCT, [MPropertyUpdate, None], False), None, ),  # 8
     (9, TType.LIST, 'Attachments', (TType.STRUCT, [MAttachment, None], False), None, ),  # 9
-    (10, TType.LIST, 'Constraints', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MConstraint, None], False), None, ),  # 10
+    (10, TType.LIST, 'Constraints', (TType.STRUCT, [MMIStandard.constraints.ttypes.MConstraint, None], False), None, ),  # 10
 )
 all_structs.append(MSceneUpdate)
 MSceneUpdate.thrift_spec = (
@@ -2958,7 +2958,7 @@ MSceneUpdate.thrift_spec = (
     (2, TType.LIST, 'ChangedSceneObjects', (TType.STRUCT, [MSceneObjectUpdate, None], False), None, ),  # 2
     (3, TType.LIST, 'RemovedSceneObjects', (TType.STRING, 'UTF8', False), None, ),  # 3
     None,  # 4
-    (5, TType.LIST, 'AddedAvatars', (TType.STRUCT, [MOSIM.mmi.avatar.ttypes.MAvatar, None], False), None, ),  # 5
+    (5, TType.LIST, 'AddedAvatars', (TType.STRUCT, [MMIStandard.avatar.ttypes.MAvatar, None], False), None, ),  # 5
     (6, TType.LIST, 'ChangedAvatars', (TType.STRUCT, [MAvatarUpdate, None], False), None, ),  # 6
     (7, TType.LIST, 'RemovedAvatars', (TType.STRING, 'UTF8', False), None, ),  # 7
 )
@@ -2966,9 +2966,9 @@ all_structs.append(MAvatarUpdate)
 MAvatarUpdate.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'ID', 'UTF8', None, ),  # 1
-    (2, TType.STRUCT, 'PostureValues', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 2
+    (2, TType.STRUCT, 'PostureValues', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 2
     (3, TType.LIST, 'SceneObjects', (TType.STRING, 'UTF8', False), None, ),  # 3
-    (4, TType.STRUCT, 'Description', [MOSIM.mmi.avatar.ttypes.MAvatarDescription, None], None, ),  # 4
+    (4, TType.STRUCT, 'Description', [MMIStandard.avatar.ttypes.MAvatarDescription, None], None, ),  # 4
     (5, TType.LIST, 'Properties', (TType.STRUCT, [MPropertyUpdate, None], False), None, ),  # 5
 )
 fix_spec(all_structs)

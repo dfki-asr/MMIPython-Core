@@ -70,29 +70,37 @@ class Iface(object):
         """
         pass
 
-    def Dispose(self, parameters):
+    def Dispose(self, avatarID, parameters):
         """
         Parameters:
+         - avatarID
          - parameters
 
         """
         pass
 
-    def CreateCheckpoint(self):
+    def CreateCheckpoint(self, avatarID):
+        """
+        Parameters:
+         - avatarID
+
+        """
         pass
 
-    def RestoreCheckpoint(self, data):
+    def RestoreCheckpoint(self, data, avatarID):
         """
         Parameters:
          - data
+         - avatarID
 
         """
         pass
 
-    def ExecuteFunction(self, name, parameters):
+    def ExecuteFunction(self, name, avatarID, parameters):
         """
         Parameters:
          - name
+         - avatarID
          - parameters
 
         """
@@ -304,18 +312,20 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "Abort failed: unknown result")
 
-    def Dispose(self, parameters):
+    def Dispose(self, avatarID, parameters):
         """
         Parameters:
+         - avatarID
          - parameters
 
         """
-        self.send_Dispose(parameters)
+        self.send_Dispose(avatarID, parameters)
         return self.recv_Dispose()
 
-    def send_Dispose(self, parameters):
+    def send_Dispose(self, avatarID, parameters):
         self._oprot.writeMessageBegin('Dispose', TMessageType.CALL, self._seqid)
         args = Dispose_args()
+        args.avatarID = avatarID
         args.parameters = parameters
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
@@ -336,13 +346,19 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "Dispose failed: unknown result")
 
-    def CreateCheckpoint(self):
-        self.send_CreateCheckpoint()
+    def CreateCheckpoint(self, avatarID):
+        """
+        Parameters:
+         - avatarID
+
+        """
+        self.send_CreateCheckpoint(avatarID)
         return self.recv_CreateCheckpoint()
 
-    def send_CreateCheckpoint(self):
+    def send_CreateCheckpoint(self, avatarID):
         self._oprot.writeMessageBegin('CreateCheckpoint', TMessageType.CALL, self._seqid)
         args = CreateCheckpoint_args()
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -362,19 +378,21 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "CreateCheckpoint failed: unknown result")
 
-    def RestoreCheckpoint(self, data):
+    def RestoreCheckpoint(self, data, avatarID):
         """
         Parameters:
          - data
+         - avatarID
 
         """
-        self.send_RestoreCheckpoint(data)
+        self.send_RestoreCheckpoint(data, avatarID)
         return self.recv_RestoreCheckpoint()
 
-    def send_RestoreCheckpoint(self, data):
+    def send_RestoreCheckpoint(self, data, avatarID):
         self._oprot.writeMessageBegin('RestoreCheckpoint', TMessageType.CALL, self._seqid)
         args = RestoreCheckpoint_args()
         args.data = data
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -394,20 +412,22 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "RestoreCheckpoint failed: unknown result")
 
-    def ExecuteFunction(self, name, parameters):
+    def ExecuteFunction(self, name, avatarID, parameters):
         """
         Parameters:
          - name
+         - avatarID
          - parameters
 
         """
-        self.send_ExecuteFunction(name, parameters)
+        self.send_ExecuteFunction(name, avatarID, parameters)
         return self.recv_ExecuteFunction()
 
-    def send_ExecuteFunction(self, name, parameters):
+    def send_ExecuteFunction(self, name, avatarID, parameters):
         self._oprot.writeMessageBegin('ExecuteFunction', TMessageType.CALL, self._seqid)
         args = ExecuteFunction_args()
         args.name = name
+        args.avatarID = avatarID
         args.parameters = parameters
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
@@ -609,7 +629,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = Dispose_result()
         try:
-            result.success = self._handler.Dispose(args.parameters)
+            result.success = self._handler.Dispose(args.avatarID, args.parameters)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -632,7 +652,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = CreateCheckpoint_result()
         try:
-            result.success = self._handler.CreateCheckpoint()
+            result.success = self._handler.CreateCheckpoint(args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -655,7 +675,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = RestoreCheckpoint_result()
         try:
-            result.success = self._handler.RestoreCheckpoint(args.data)
+            result.success = self._handler.RestoreCheckpoint(args.data, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -678,7 +698,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = ExecuteFunction_result()
         try:
-            result.success = self._handler.ExecuteFunction(args.name, args.parameters)
+            result.success = self._handler.ExecuteFunction(args.name, args.avatarID, args.parameters)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -722,7 +742,7 @@ class Initialize_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.avatarDescription = MOSIM.mmi.avatar.ttypes.MAvatarDescription()
+                    self.avatarDescription = MMIStandard.avatar.ttypes.MAvatarDescription()
                     self.avatarDescription.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -778,7 +798,7 @@ class Initialize_args(object):
 all_structs.append(Initialize_args)
 Initialize_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'avatarDescription', [MOSIM.mmi.avatar.ttypes.MAvatarDescription, None], None, ),  # 1
+    (1, TType.STRUCT, 'avatarDescription', [MMIStandard.avatar.ttypes.MAvatarDescription, None], None, ),  # 1
     (2, TType.MAP, 'properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 2
 )
 
@@ -805,7 +825,7 @@ class Initialize_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -841,7 +861,7 @@ class Initialize_result(object):
         return not (self == other)
 all_structs.append(Initialize_result)
 Initialize_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -943,7 +963,7 @@ class AssignInstruction_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -979,7 +999,7 @@ class AssignInstruction_result(object):
         return not (self == other)
 all_structs.append(AssignInstruction_result)
 AssignInstruction_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1208,7 +1228,7 @@ class GetBoundaryConstraints_result(object):
                     self.success = []
                     (_etype151, _size148) = iprot.readListBegin()
                     for _i152 in range(_size148):
-                        _elem153 = MOSIM.mmi.constraints.ttypes.MConstraint()
+                        _elem153 = MMIStandard.constraints.ttypes.MConstraint()
                         _elem153.read(iprot)
                         self.success.append(_elem153)
                     iprot.readListEnd()
@@ -1249,7 +1269,7 @@ class GetBoundaryConstraints_result(object):
         return not (self == other)
 all_structs.append(GetBoundaryConstraints_result)
 GetBoundaryConstraints_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MConstraint, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.constraints.ttypes.MConstraint, None], False), None, ),  # 0
 )
 
 
@@ -1338,7 +1358,7 @@ class CheckPrerequisites_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1374,7 +1394,7 @@ class CheckPrerequisites_result(object):
         return not (self == other)
 all_structs.append(CheckPrerequisites_result)
 CheckPrerequisites_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1462,7 +1482,7 @@ class Abort_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1498,19 +1518,21 @@ class Abort_result(object):
         return not (self == other)
 all_structs.append(Abort_result)
 Abort_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
 class Dispose_args(object):
     """
     Attributes:
+     - avatarID
      - parameters
 
     """
 
 
-    def __init__(self, parameters=None,):
+    def __init__(self, avatarID=None, parameters=None,):
+        self.avatarID = avatarID
         self.parameters = parameters
 
     def read(self, iprot):
@@ -1523,6 +1545,11 @@ class Dispose_args(object):
             if ftype == TType.STOP:
                 break
             if fid == 1:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 2:
                 if ftype == TType.MAP:
                     self.parameters = {}
                     (_ktype156, _vtype157, _size155) = iprot.readMapBegin()
@@ -1543,8 +1570,12 @@ class Dispose_args(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('Dispose_args')
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 1)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
+            oprot.writeFieldEnd()
         if self.parameters is not None:
-            oprot.writeFieldBegin('parameters', TType.MAP, 1)
+            oprot.writeFieldBegin('parameters', TType.MAP, 2)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.parameters))
             for kiter162, viter163 in self.parameters.items():
                 oprot.writeString(kiter162.encode('utf-8') if sys.version_info[0] == 2 else kiter162)
@@ -1570,7 +1601,8 @@ class Dispose_args(object):
 all_structs.append(Dispose_args)
 Dispose_args.thrift_spec = (
     None,  # 0
-    (1, TType.MAP, 'parameters', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 1
+    (1, TType.STRING, 'avatarID', 'UTF8', None, ),  # 1
+    (2, TType.MAP, 'parameters', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 2
 )
 
 
@@ -1596,7 +1628,7 @@ class Dispose_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1632,12 +1664,20 @@ class Dispose_result(object):
         return not (self == other)
 all_structs.append(Dispose_result)
 Dispose_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
 class CreateCheckpoint_args(object):
+    """
+    Attributes:
+     - avatarID
 
+    """
+
+
+    def __init__(self, avatarID=None,):
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1648,6 +1688,11 @@ class CreateCheckpoint_args(object):
             (fname, ftype, fid) = iprot.readFieldBegin()
             if ftype == TType.STOP:
                 break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1658,6 +1703,10 @@ class CreateCheckpoint_args(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('CreateCheckpoint_args')
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 1)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -1676,6 +1725,8 @@ class CreateCheckpoint_args(object):
         return not (self == other)
 all_structs.append(CreateCheckpoint_args)
 CreateCheckpoint_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'avatarID', 'UTF8', None, ),  # 1
 )
 
 
@@ -1744,12 +1795,14 @@ class RestoreCheckpoint_args(object):
     """
     Attributes:
      - data
+     - avatarID
 
     """
 
 
-    def __init__(self, data=None,):
+    def __init__(self, data=None, avatarID=None,):
         self.data = data
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1765,6 +1818,11 @@ class RestoreCheckpoint_args(object):
                     self.data = iprot.readBinary()
                 else:
                     iprot.skip(ftype)
+            elif fid == 2:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1778,6 +1836,10 @@ class RestoreCheckpoint_args(object):
         if self.data is not None:
             oprot.writeFieldBegin('data', TType.STRING, 1)
             oprot.writeBinary(self.data)
+            oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 2)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -1799,6 +1861,7 @@ all_structs.append(RestoreCheckpoint_args)
 RestoreCheckpoint_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'data', 'BINARY', None, ),  # 1
+    (2, TType.STRING, 'avatarID', 'UTF8', None, ),  # 2
 )
 
 
@@ -1824,7 +1887,7 @@ class RestoreCheckpoint_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1860,7 +1923,7 @@ class RestoreCheckpoint_result(object):
         return not (self == other)
 all_structs.append(RestoreCheckpoint_result)
 RestoreCheckpoint_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1868,13 +1931,15 @@ class ExecuteFunction_args(object):
     """
     Attributes:
      - name
+     - avatarID
      - parameters
 
     """
 
 
-    def __init__(self, name=None, parameters=None,):
+    def __init__(self, name=None, avatarID=None, parameters=None,):
         self.name = name
+        self.avatarID = avatarID
         self.parameters = parameters
 
     def read(self, iprot):
@@ -1892,6 +1957,11 @@ class ExecuteFunction_args(object):
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 3:
                 if ftype == TType.MAP:
                     self.parameters = {}
                     (_ktype165, _vtype166, _size164) = iprot.readMapBegin()
@@ -1916,8 +1986,12 @@ class ExecuteFunction_args(object):
             oprot.writeFieldBegin('name', TType.STRING, 1)
             oprot.writeString(self.name.encode('utf-8') if sys.version_info[0] == 2 else self.name)
             oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 2)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
+            oprot.writeFieldEnd()
         if self.parameters is not None:
-            oprot.writeFieldBegin('parameters', TType.MAP, 2)
+            oprot.writeFieldBegin('parameters', TType.MAP, 3)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.parameters))
             for kiter171, viter172 in self.parameters.items():
                 oprot.writeString(kiter171.encode('utf-8') if sys.version_info[0] == 2 else kiter171)
@@ -1944,7 +2018,8 @@ all_structs.append(ExecuteFunction_args)
 ExecuteFunction_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'name', 'UTF8', None, ),  # 1
-    (2, TType.MAP, 'parameters', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 2
+    (2, TType.STRING, 'avatarID', 'UTF8', None, ),  # 2
+    (3, TType.MAP, 'parameters', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 3
 )
 
 

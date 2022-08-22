@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def GetSceneObjects(self):
         pass
 
@@ -175,9 +175,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def GetSceneObjects(self):
         self.send_GetSceneObjects()
@@ -928,9 +928,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "GetAttachmentsParentsRecursive failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["GetSceneObjects"] = Processor.process_GetSceneObjects
         self._processMap["GetSceneObjectByID"] = Processor.process_GetSceneObjectByID
         self._processMap["GetSceneObjectByName"] = Processor.process_GetSceneObjectByName
@@ -1624,7 +1624,7 @@ class GetSceneObjects_result(object):
                     self.success = []
                     (_etype71, _size68) = iprot.readListBegin()
                     for _i72 in range(_size68):
-                        _elem73 = MOSIM.mmi.scene.ttypes.MSceneObject()
+                        _elem73 = MMIStandard.scene.ttypes.MSceneObject()
                         _elem73.read(iprot)
                         self.success.append(_elem73)
                     iprot.readListEnd()
@@ -1665,7 +1665,7 @@ class GetSceneObjects_result(object):
         return not (self == other)
 all_structs.append(GetSceneObjects_result)
 GetSceneObjects_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MSceneObject, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MSceneObject, None], False), None, ),  # 0
 )
 
 
@@ -1753,7 +1753,7 @@ class GetSceneObjectByID_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.scene.ttypes.MSceneObject()
+                    self.success = MMIStandard.scene.ttypes.MSceneObject()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1789,7 +1789,7 @@ class GetSceneObjectByID_result(object):
         return not (self == other)
 all_structs.append(GetSceneObjectByID_result)
 GetSceneObjectByID_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.scene.ttypes.MSceneObject, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.scene.ttypes.MSceneObject, None], None, ),  # 0
 )
 
 
@@ -1877,7 +1877,7 @@ class GetSceneObjectByName_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.scene.ttypes.MSceneObject()
+                    self.success = MMIStandard.scene.ttypes.MSceneObject()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1913,7 +1913,7 @@ class GetSceneObjectByName_result(object):
         return not (self == other)
 all_structs.append(GetSceneObjectByName_result)
 GetSceneObjectByName_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.scene.ttypes.MSceneObject, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.scene.ttypes.MSceneObject, None], None, ),  # 0
 )
 
 
@@ -1941,7 +1941,7 @@ class GetSceneObjectsInRange_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.position = MOSIM.mmi.math.ttypes.MVector3()
+                    self.position = MMIStandard.math.ttypes.MVector3()
                     self.position.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1987,7 +1987,7 @@ class GetSceneObjectsInRange_args(object):
 all_structs.append(GetSceneObjectsInRange_args)
 GetSceneObjectsInRange_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'position', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 1
+    (1, TType.STRUCT, 'position', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 1
     (2, TType.DOUBLE, 'range', None, None, ),  # 2
 )
 
@@ -2017,7 +2017,7 @@ class GetSceneObjectsInRange_result(object):
                     self.success = []
                     (_etype78, _size75) = iprot.readListBegin()
                     for _i79 in range(_size75):
-                        _elem80 = MOSIM.mmi.scene.ttypes.MSceneObject()
+                        _elem80 = MMIStandard.scene.ttypes.MSceneObject()
                         _elem80.read(iprot)
                         self.success.append(_elem80)
                     iprot.readListEnd()
@@ -2058,7 +2058,7 @@ class GetSceneObjectsInRange_result(object):
         return not (self == other)
 all_structs.append(GetSceneObjectsInRange_result)
 GetSceneObjectsInRange_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MSceneObject, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MSceneObject, None], False), None, ),  # 0
 )
 
 
@@ -2130,7 +2130,7 @@ class GetColliders_result(object):
                     self.success = []
                     (_etype85, _size82) = iprot.readListBegin()
                     for _i86 in range(_size82):
-                        _elem87 = MOSIM.mmi.scene.ttypes.MCollider()
+                        _elem87 = MMIStandard.scene.ttypes.MCollider()
                         _elem87.read(iprot)
                         self.success.append(_elem87)
                     iprot.readListEnd()
@@ -2171,7 +2171,7 @@ class GetColliders_result(object):
         return not (self == other)
 all_structs.append(GetColliders_result)
 GetColliders_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MCollider, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MCollider, None], False), None, ),  # 0
 )
 
 
@@ -2259,7 +2259,7 @@ class GetColliderById_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.scene.ttypes.MCollider()
+                    self.success = MMIStandard.scene.ttypes.MCollider()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2295,7 +2295,7 @@ class GetColliderById_result(object):
         return not (self == other)
 all_structs.append(GetColliderById_result)
 GetColliderById_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.scene.ttypes.MCollider, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.scene.ttypes.MCollider, None], None, ),  # 0
 )
 
 
@@ -2323,7 +2323,7 @@ class GetCollidersInRange_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.position = MOSIM.mmi.math.ttypes.MVector3()
+                    self.position = MMIStandard.math.ttypes.MVector3()
                     self.position.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2369,7 +2369,7 @@ class GetCollidersInRange_args(object):
 all_structs.append(GetCollidersInRange_args)
 GetCollidersInRange_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'position', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 1
+    (1, TType.STRUCT, 'position', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 1
     (2, TType.DOUBLE, 'range', None, None, ),  # 2
 )
 
@@ -2399,7 +2399,7 @@ class GetCollidersInRange_result(object):
                     self.success = []
                     (_etype92, _size89) = iprot.readListBegin()
                     for _i93 in range(_size89):
-                        _elem94 = MOSIM.mmi.scene.ttypes.MCollider()
+                        _elem94 = MMIStandard.scene.ttypes.MCollider()
                         _elem94.read(iprot)
                         self.success.append(_elem94)
                     iprot.readListEnd()
@@ -2440,7 +2440,7 @@ class GetCollidersInRange_result(object):
         return not (self == other)
 all_structs.append(GetCollidersInRange_result)
 GetCollidersInRange_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MCollider, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MCollider, None], False), None, ),  # 0
 )
 
 
@@ -2512,7 +2512,7 @@ class GetMeshes_result(object):
                     self.success = []
                     (_etype99, _size96) = iprot.readListBegin()
                     for _i100 in range(_size96):
-                        _elem101 = MOSIM.mmi.scene.ttypes.MMesh()
+                        _elem101 = MMIStandard.scene.ttypes.MMesh()
                         _elem101.read(iprot)
                         self.success.append(_elem101)
                     iprot.readListEnd()
@@ -2553,7 +2553,7 @@ class GetMeshes_result(object):
         return not (self == other)
 all_structs.append(GetMeshes_result)
 GetMeshes_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MMesh, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MMesh, None], False), None, ),  # 0
 )
 
 
@@ -2641,7 +2641,7 @@ class GetMeshByID_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.scene.ttypes.MMesh()
+                    self.success = MMIStandard.scene.ttypes.MMesh()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2677,7 +2677,7 @@ class GetMeshByID_result(object):
         return not (self == other)
 all_structs.append(GetMeshByID_result)
 GetMeshByID_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.scene.ttypes.MMesh, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.scene.ttypes.MMesh, None], None, ),  # 0
 )
 
 
@@ -2749,7 +2749,7 @@ class GetTransforms_result(object):
                     self.success = []
                     (_etype106, _size103) = iprot.readListBegin()
                     for _i107 in range(_size103):
-                        _elem108 = MOSIM.mmi.math.ttypes.MTransform()
+                        _elem108 = MMIStandard.math.ttypes.MTransform()
                         _elem108.read(iprot)
                         self.success.append(_elem108)
                     iprot.readListEnd()
@@ -2790,7 +2790,7 @@ class GetTransforms_result(object):
         return not (self == other)
 all_structs.append(GetTransforms_result)
 GetTransforms_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.math.ttypes.MTransform, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.math.ttypes.MTransform, None], False), None, ),  # 0
 )
 
 
@@ -2878,7 +2878,7 @@ class GetTransformByID_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MTransform()
+                    self.success = MMIStandard.math.ttypes.MTransform()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2914,7 +2914,7 @@ class GetTransformByID_result(object):
         return not (self == other)
 all_structs.append(GetTransformByID_result)
 GetTransformByID_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 0
 )
 
 
@@ -2986,7 +2986,7 @@ class GetAvatars_result(object):
                     self.success = []
                     (_etype113, _size110) = iprot.readListBegin()
                     for _i114 in range(_size110):
-                        _elem115 = MOSIM.mmi.avatar.ttypes.MAvatar()
+                        _elem115 = MMIStandard.avatar.ttypes.MAvatar()
                         _elem115.read(iprot)
                         self.success.append(_elem115)
                     iprot.readListEnd()
@@ -3027,7 +3027,7 @@ class GetAvatars_result(object):
         return not (self == other)
 all_structs.append(GetAvatars_result)
 GetAvatars_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.avatar.ttypes.MAvatar, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.avatar.ttypes.MAvatar, None], False), None, ),  # 0
 )
 
 
@@ -3115,7 +3115,7 @@ class GetAvatarByID_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatar()
+                    self.success = MMIStandard.avatar.ttypes.MAvatar()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3151,7 +3151,7 @@ class GetAvatarByID_result(object):
         return not (self == other)
 all_structs.append(GetAvatarByID_result)
 GetAvatarByID_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatar, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatar, None], None, ),  # 0
 )
 
 
@@ -3239,7 +3239,7 @@ class GetAvatarByName_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatar()
+                    self.success = MMIStandard.avatar.ttypes.MAvatar()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3275,7 +3275,7 @@ class GetAvatarByName_result(object):
         return not (self == other)
 all_structs.append(GetAvatarByName_result)
 GetAvatarByName_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatar, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatar, None], None, ),  # 0
 )
 
 
@@ -3303,7 +3303,7 @@ class GetAvatarsInRange_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.position = MOSIM.mmi.math.ttypes.MVector3()
+                    self.position = MMIStandard.math.ttypes.MVector3()
                     self.position.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3349,7 +3349,7 @@ class GetAvatarsInRange_args(object):
 all_structs.append(GetAvatarsInRange_args)
 GetAvatarsInRange_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'position', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 1
+    (1, TType.STRUCT, 'position', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 1
     (2, TType.DOUBLE, 'distance', None, None, ),  # 2
 )
 
@@ -3379,7 +3379,7 @@ class GetAvatarsInRange_result(object):
                     self.success = []
                     (_etype120, _size117) = iprot.readListBegin()
                     for _i121 in range(_size117):
-                        _elem122 = MOSIM.mmi.avatar.ttypes.MAvatar()
+                        _elem122 = MMIStandard.avatar.ttypes.MAvatar()
                         _elem122.read(iprot)
                         self.success.append(_elem122)
                     iprot.readListEnd()
@@ -3420,7 +3420,7 @@ class GetAvatarsInRange_result(object):
         return not (self == other)
 all_structs.append(GetAvatarsInRange_result)
 GetAvatarsInRange_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.avatar.ttypes.MAvatar, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.avatar.ttypes.MAvatar, None], False), None, ),  # 0
 )
 
 
@@ -3593,7 +3593,7 @@ class GetSceneChanges_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.scene.ttypes.MSceneUpdate()
+                    self.success = MMIStandard.scene.ttypes.MSceneUpdate()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3629,7 +3629,7 @@ class GetSceneChanges_result(object):
         return not (self == other)
 all_structs.append(GetSceneChanges_result)
 GetSceneChanges_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.scene.ttypes.MSceneUpdate, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.scene.ttypes.MSceneUpdate, None], None, ),  # 0
 )
 
 
@@ -3698,7 +3698,7 @@ class GetFullScene_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.scene.ttypes.MSceneUpdate()
+                    self.success = MMIStandard.scene.ttypes.MSceneUpdate()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3734,7 +3734,7 @@ class GetFullScene_result(object):
         return not (self == other)
 all_structs.append(GetFullScene_result)
 GetFullScene_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.scene.ttypes.MSceneUpdate, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.scene.ttypes.MSceneUpdate, None], None, ),  # 0
 )
 
 
@@ -3803,7 +3803,7 @@ class GetNavigationMesh_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.scene.ttypes.MNavigationMesh()
+                    self.success = MMIStandard.scene.ttypes.MNavigationMesh()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3839,7 +3839,7 @@ class GetNavigationMesh_result(object):
         return not (self == other)
 all_structs.append(GetNavigationMesh_result)
 GetNavigationMesh_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.scene.ttypes.MNavigationMesh, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.scene.ttypes.MNavigationMesh, None], None, ),  # 0
 )
 
 
@@ -4046,7 +4046,7 @@ class GetAttachments_result(object):
                     self.success = []
                     (_etype127, _size124) = iprot.readListBegin()
                     for _i128 in range(_size124):
-                        _elem129 = MOSIM.mmi.scene.ttypes.MAttachment()
+                        _elem129 = MMIStandard.scene.ttypes.MAttachment()
                         _elem129.read(iprot)
                         self.success.append(_elem129)
                     iprot.readListEnd()
@@ -4087,7 +4087,7 @@ class GetAttachments_result(object):
         return not (self == other)
 all_structs.append(GetAttachments_result)
 GetAttachments_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MAttachment, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MAttachment, None], False), None, ),  # 0
 )
 
 
@@ -4178,7 +4178,7 @@ class GetAttachmentsByID_result(object):
                     self.success = []
                     (_etype134, _size131) = iprot.readListBegin()
                     for _i135 in range(_size131):
-                        _elem136 = MOSIM.mmi.scene.ttypes.MAttachment()
+                        _elem136 = MMIStandard.scene.ttypes.MAttachment()
                         _elem136.read(iprot)
                         self.success.append(_elem136)
                     iprot.readListEnd()
@@ -4219,7 +4219,7 @@ class GetAttachmentsByID_result(object):
         return not (self == other)
 all_structs.append(GetAttachmentsByID_result)
 GetAttachmentsByID_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MAttachment, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MAttachment, None], False), None, ),  # 0
 )
 
 
@@ -4310,7 +4310,7 @@ class GetAttachmentsByName_result(object):
                     self.success = []
                     (_etype141, _size138) = iprot.readListBegin()
                     for _i142 in range(_size138):
-                        _elem143 = MOSIM.mmi.scene.ttypes.MAttachment()
+                        _elem143 = MMIStandard.scene.ttypes.MAttachment()
                         _elem143.read(iprot)
                         self.success.append(_elem143)
                     iprot.readListEnd()
@@ -4351,7 +4351,7 @@ class GetAttachmentsByName_result(object):
         return not (self == other)
 all_structs.append(GetAttachmentsByName_result)
 GetAttachmentsByName_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MAttachment, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MAttachment, None], False), None, ),  # 0
 )
 
 
@@ -4442,7 +4442,7 @@ class GetAttachmentsChildrenRecursive_result(object):
                     self.success = []
                     (_etype148, _size145) = iprot.readListBegin()
                     for _i149 in range(_size145):
-                        _elem150 = MOSIM.mmi.scene.ttypes.MAttachment()
+                        _elem150 = MMIStandard.scene.ttypes.MAttachment()
                         _elem150.read(iprot)
                         self.success.append(_elem150)
                     iprot.readListEnd()
@@ -4483,7 +4483,7 @@ class GetAttachmentsChildrenRecursive_result(object):
         return not (self == other)
 all_structs.append(GetAttachmentsChildrenRecursive_result)
 GetAttachmentsChildrenRecursive_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MAttachment, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MAttachment, None], False), None, ),  # 0
 )
 
 
@@ -4574,7 +4574,7 @@ class GetAttachmentsParentsRecursive_result(object):
                     self.success = []
                     (_etype155, _size152) = iprot.readListBegin()
                     for _i156 in range(_size152):
-                        _elem157 = MOSIM.mmi.scene.ttypes.MAttachment()
+                        _elem157 = MMIStandard.scene.ttypes.MAttachment()
                         _elem157.read(iprot)
                         self.success.append(_elem157)
                     iprot.readListEnd()
@@ -4615,7 +4615,7 @@ class GetAttachmentsParentsRecursive_result(object):
         return not (self == other)
 all_structs.append(GetAttachmentsParentsRecursive_result)
 GetAttachmentsParentsRecursive_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MAttachment, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MAttachment, None], False), None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

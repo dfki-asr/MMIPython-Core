@@ -11,16 +11,16 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.math.ttypes
-import MOSIM.mmi.core.ttypes
-import MOSIM.mmi.scene.ttypes
-import MOSIM.mmi.services.ttypes
-import MOSIM.mmi.mmu.ttypes
-import MOSIM.mmi.agent.ttypes
-import MOSIM.mmi.avatar.ttypes
-import MOSIM.mmi.constraints.ttypes
-import MOSIM.mmi.cosim.ttypes
-import MOSIM.mmi.register.ttypes
+import MMIStandard.math.ttypes
+import MMIStandard.core.ttypes
+import MMIStandard.scene.ttypes
+import MMIStandard.services.ttypes
+import MMIStandard.mmu.ttypes
+import MMIStandard.agent.ttypes
+import MMIStandard.avatar.ttypes
+import MMIStandard.constraints.ttypes
+import MMIStandard.cosim.ttypes
+import MMIStandard.register.ttypes
 
 from thrift.transport import TTransport
 all_structs = []

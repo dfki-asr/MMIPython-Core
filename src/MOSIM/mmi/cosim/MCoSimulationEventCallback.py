@@ -309,7 +309,7 @@ class OnFrameEnd_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.newPosture = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.newPosture = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.newPosture.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -346,7 +346,7 @@ class OnFrameEnd_args(object):
 all_structs.append(OnFrameEnd_args)
 OnFrameEnd_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'newPosture', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (1, TType.STRUCT, 'newPosture', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
 )
 
 

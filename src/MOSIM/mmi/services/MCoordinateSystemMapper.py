@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def TransformToMMI_L(self, transform, coordinateSystem):
         """
         Parameters:
@@ -141,9 +141,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def TransformToMMI_L(self, transform, coordinateSystem):
         """
@@ -578,9 +578,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "VectorFromMMI failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["TransformToMMI_L"] = Processor.process_TransformToMMI_L
         self._processMap["TransformToMMI"] = Processor.process_TransformToMMI
         self._processMap["TransformFromMMI_L"] = Processor.process_TransformFromMMI_L
@@ -918,7 +918,7 @@ class TransformToMMI_L_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.transform = MOSIM.mmi.math.ttypes.MTransform()
+                    self.transform = MMIStandard.math.ttypes.MTransform()
                     self.transform.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -972,7 +972,7 @@ class TransformToMMI_L_args(object):
 all_structs.append(TransformToMMI_L_args)
 TransformToMMI_L_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'transform', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 1
+    (1, TType.STRUCT, 'transform', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 1
     (2, TType.LIST, 'coordinateSystem', (TType.I32, None, False), None, ),  # 2
 )
 
@@ -999,7 +999,7 @@ class TransformToMMI_L_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MTransform()
+                    self.success = MMIStandard.math.ttypes.MTransform()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1035,7 +1035,7 @@ class TransformToMMI_L_result(object):
         return not (self == other)
 all_structs.append(TransformToMMI_L_result)
 TransformToMMI_L_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 0
 )
 
 
@@ -1067,7 +1067,7 @@ class TransformToMMI_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.transform = MOSIM.mmi.math.ttypes.MTransform()
+                    self.transform = MMIStandard.math.ttypes.MTransform()
                     self.transform.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1131,7 +1131,7 @@ class TransformToMMI_args(object):
 all_structs.append(TransformToMMI_args)
 TransformToMMI_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'transform', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 1
+    (1, TType.STRUCT, 'transform', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 1
     (2, TType.I32, 'firstAxis', None, None, ),  # 2
     (3, TType.I32, 'secondAxis', None, None, ),  # 3
     (4, TType.I32, 'thirdAxis', None, None, ),  # 4
@@ -1160,7 +1160,7 @@ class TransformToMMI_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MTransform()
+                    self.success = MMIStandard.math.ttypes.MTransform()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1196,7 +1196,7 @@ class TransformToMMI_result(object):
         return not (self == other)
 all_structs.append(TransformToMMI_result)
 TransformToMMI_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 0
 )
 
 
@@ -1224,7 +1224,7 @@ class TransformFromMMI_L_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.transform = MOSIM.mmi.math.ttypes.MTransform()
+                    self.transform = MMIStandard.math.ttypes.MTransform()
                     self.transform.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1278,7 +1278,7 @@ class TransformFromMMI_L_args(object):
 all_structs.append(TransformFromMMI_L_args)
 TransformFromMMI_L_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'transform', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 1
+    (1, TType.STRUCT, 'transform', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 1
     (2, TType.LIST, 'coordinateSystem', (TType.I32, None, False), None, ),  # 2
 )
 
@@ -1305,7 +1305,7 @@ class TransformFromMMI_L_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MTransform()
+                    self.success = MMIStandard.math.ttypes.MTransform()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1341,7 +1341,7 @@ class TransformFromMMI_L_result(object):
         return not (self == other)
 all_structs.append(TransformFromMMI_L_result)
 TransformFromMMI_L_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 0
 )
 
 
@@ -1373,7 +1373,7 @@ class TransformFromMMI_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.transform = MOSIM.mmi.math.ttypes.MTransform()
+                    self.transform = MMIStandard.math.ttypes.MTransform()
                     self.transform.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1437,7 +1437,7 @@ class TransformFromMMI_args(object):
 all_structs.append(TransformFromMMI_args)
 TransformFromMMI_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'transform', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 1
+    (1, TType.STRUCT, 'transform', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 1
     (2, TType.I32, 'firstAxis', None, None, ),  # 2
     (3, TType.I32, 'secondAxis', None, None, ),  # 3
     (4, TType.I32, 'thirdAxis', None, None, ),  # 4
@@ -1466,7 +1466,7 @@ class TransformFromMMI_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MTransform()
+                    self.success = MMIStandard.math.ttypes.MTransform()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1502,7 +1502,7 @@ class TransformFromMMI_result(object):
         return not (self == other)
 all_structs.append(TransformFromMMI_result)
 TransformFromMMI_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 0
 )
 
 
@@ -1530,7 +1530,7 @@ class QuaternionToMMI_L_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.quat = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.quat = MMIStandard.math.ttypes.MQuaternion()
                     self.quat.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1584,7 +1584,7 @@ class QuaternionToMMI_L_args(object):
 all_structs.append(QuaternionToMMI_L_args)
 QuaternionToMMI_L_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'quat', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 1
+    (1, TType.STRUCT, 'quat', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 1
     (2, TType.LIST, 'coordinateSystem', (TType.I32, None, False), None, ),  # 2
 )
 
@@ -1611,7 +1611,7 @@ class QuaternionToMMI_L_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.success = MMIStandard.math.ttypes.MQuaternion()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1647,7 +1647,7 @@ class QuaternionToMMI_L_result(object):
         return not (self == other)
 all_structs.append(QuaternionToMMI_L_result)
 QuaternionToMMI_L_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 0
 )
 
 
@@ -1679,7 +1679,7 @@ class QuaternionToMMI_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.quat = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.quat = MMIStandard.math.ttypes.MQuaternion()
                     self.quat.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1743,7 +1743,7 @@ class QuaternionToMMI_args(object):
 all_structs.append(QuaternionToMMI_args)
 QuaternionToMMI_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'quat', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 1
+    (1, TType.STRUCT, 'quat', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 1
     (2, TType.I32, 'firstAxis', None, None, ),  # 2
     (3, TType.I32, 'secondAxis', None, None, ),  # 3
     (4, TType.I32, 'thirdAxis', None, None, ),  # 4
@@ -1772,7 +1772,7 @@ class QuaternionToMMI_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.success = MMIStandard.math.ttypes.MQuaternion()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1808,7 +1808,7 @@ class QuaternionToMMI_result(object):
         return not (self == other)
 all_structs.append(QuaternionToMMI_result)
 QuaternionToMMI_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 0
 )
 
 
@@ -1836,7 +1836,7 @@ class QuaternionFromMMI_L_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.quat = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.quat = MMIStandard.math.ttypes.MQuaternion()
                     self.quat.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1890,7 +1890,7 @@ class QuaternionFromMMI_L_args(object):
 all_structs.append(QuaternionFromMMI_L_args)
 QuaternionFromMMI_L_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'quat', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 1
+    (1, TType.STRUCT, 'quat', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 1
     (2, TType.LIST, 'coordinateSystem', (TType.I32, None, False), None, ),  # 2
 )
 
@@ -1917,7 +1917,7 @@ class QuaternionFromMMI_L_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.success = MMIStandard.math.ttypes.MQuaternion()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1953,7 +1953,7 @@ class QuaternionFromMMI_L_result(object):
         return not (self == other)
 all_structs.append(QuaternionFromMMI_L_result)
 QuaternionFromMMI_L_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 0
 )
 
 
@@ -1985,7 +1985,7 @@ class QuaternionFromMMI_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.quat = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.quat = MMIStandard.math.ttypes.MQuaternion()
                     self.quat.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2049,7 +2049,7 @@ class QuaternionFromMMI_args(object):
 all_structs.append(QuaternionFromMMI_args)
 QuaternionFromMMI_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'quat', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 1
+    (1, TType.STRUCT, 'quat', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 1
     (2, TType.I32, 'firstAxis', None, None, ),  # 2
     (3, TType.I32, 'secondAxis', None, None, ),  # 3
     (4, TType.I32, 'thirdAxis', None, None, ),  # 4
@@ -2078,7 +2078,7 @@ class QuaternionFromMMI_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.success = MMIStandard.math.ttypes.MQuaternion()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2114,7 +2114,7 @@ class QuaternionFromMMI_result(object):
         return not (self == other)
 all_structs.append(QuaternionFromMMI_result)
 QuaternionFromMMI_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 0
 )
 
 
@@ -2142,7 +2142,7 @@ class VectorToMMI_L_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.quat = MOSIM.mmi.math.ttypes.MVector3()
+                    self.quat = MMIStandard.math.ttypes.MVector3()
                     self.quat.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2196,7 +2196,7 @@ class VectorToMMI_L_args(object):
 all_structs.append(VectorToMMI_L_args)
 VectorToMMI_L_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'quat', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 1
+    (1, TType.STRUCT, 'quat', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 1
     (2, TType.LIST, 'coordinateSystem', (TType.I32, None, False), None, ),  # 2
 )
 
@@ -2223,7 +2223,7 @@ class VectorToMMI_L_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MVector3()
+                    self.success = MMIStandard.math.ttypes.MVector3()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2259,7 +2259,7 @@ class VectorToMMI_L_result(object):
         return not (self == other)
 all_structs.append(VectorToMMI_L_result)
 VectorToMMI_L_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 0
 )
 
 
@@ -2291,7 +2291,7 @@ class VectorToMMI_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.quat = MOSIM.mmi.math.ttypes.MVector3()
+                    self.quat = MMIStandard.math.ttypes.MVector3()
                     self.quat.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2355,7 +2355,7 @@ class VectorToMMI_args(object):
 all_structs.append(VectorToMMI_args)
 VectorToMMI_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'quat', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 1
+    (1, TType.STRUCT, 'quat', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 1
     (2, TType.I32, 'firstAxis', None, None, ),  # 2
     (3, TType.I32, 'secondAxis', None, None, ),  # 3
     (4, TType.I32, 'thirdAxis', None, None, ),  # 4
@@ -2384,7 +2384,7 @@ class VectorToMMI_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MVector3()
+                    self.success = MMIStandard.math.ttypes.MVector3()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2420,7 +2420,7 @@ class VectorToMMI_result(object):
         return not (self == other)
 all_structs.append(VectorToMMI_result)
 VectorToMMI_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 0
 )
 
 
@@ -2448,7 +2448,7 @@ class VectorFromMMI_L_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.quat = MOSIM.mmi.math.ttypes.MVector3()
+                    self.quat = MMIStandard.math.ttypes.MVector3()
                     self.quat.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2502,7 +2502,7 @@ class VectorFromMMI_L_args(object):
 all_structs.append(VectorFromMMI_L_args)
 VectorFromMMI_L_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'quat', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 1
+    (1, TType.STRUCT, 'quat', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 1
     (2, TType.LIST, 'coordinateSystem', (TType.I32, None, False), None, ),  # 2
 )
 
@@ -2529,7 +2529,7 @@ class VectorFromMMI_L_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MVector3()
+                    self.success = MMIStandard.math.ttypes.MVector3()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2565,7 +2565,7 @@ class VectorFromMMI_L_result(object):
         return not (self == other)
 all_structs.append(VectorFromMMI_L_result)
 VectorFromMMI_L_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 0
 )
 
 
@@ -2597,7 +2597,7 @@ class VectorFromMMI_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.quat = MOSIM.mmi.math.ttypes.MVector3()
+                    self.quat = MMIStandard.math.ttypes.MVector3()
                     self.quat.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2661,7 +2661,7 @@ class VectorFromMMI_args(object):
 all_structs.append(VectorFromMMI_args)
 VectorFromMMI_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'quat', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 1
+    (1, TType.STRUCT, 'quat', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 1
     (2, TType.I32, 'firstAxis', None, None, ),  # 2
     (3, TType.I32, 'secondAxis', None, None, ),  # 3
     (4, TType.I32, 'thirdAxis', None, None, ),  # 4
@@ -2690,7 +2690,7 @@ class VectorFromMMI_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MVector3()
+                    self.success = MMIStandard.math.ttypes.MVector3()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2726,7 +2726,7 @@ class VectorFromMMI_result(object):
         return not (self == other)
 all_structs.append(VectorFromMMI_result)
 VectorFromMMI_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def ComputePenetration(self, colliderA, transformA, colliderB, transformB):
         """
         Parameters:
@@ -43,9 +43,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def ComputePenetration(self, colliderA, transformA, colliderB, transformB):
         """
@@ -124,9 +124,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "CausesCollision failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["ComputePenetration"] = Processor.process_ComputePenetration
         self._processMap["CausesCollision"] = Processor.process_CausesCollision
         self._on_message_begin = None
@@ -228,25 +228,25 @@ class ComputePenetration_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.colliderA = MOSIM.mmi.scene.ttypes.MCollider()
+                    self.colliderA = MMIStandard.scene.ttypes.MCollider()
                     self.colliderA.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.transformA = MOSIM.mmi.math.ttypes.MTransform()
+                    self.transformA = MMIStandard.math.ttypes.MTransform()
                     self.transformA.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.colliderB = MOSIM.mmi.scene.ttypes.MCollider()
+                    self.colliderB = MMIStandard.scene.ttypes.MCollider()
                     self.colliderB.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.STRUCT:
-                    self.transformB = MOSIM.mmi.math.ttypes.MTransform()
+                    self.transformB = MMIStandard.math.ttypes.MTransform()
                     self.transformB.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -295,10 +295,10 @@ class ComputePenetration_args(object):
 all_structs.append(ComputePenetration_args)
 ComputePenetration_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'colliderA', [MOSIM.mmi.scene.ttypes.MCollider, None], None, ),  # 1
-    (2, TType.STRUCT, 'transformA', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 2
-    (3, TType.STRUCT, 'colliderB', [MOSIM.mmi.scene.ttypes.MCollider, None], None, ),  # 3
-    (4, TType.STRUCT, 'transformB', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 4
+    (1, TType.STRUCT, 'colliderA', [MMIStandard.scene.ttypes.MCollider, None], None, ),  # 1
+    (2, TType.STRUCT, 'transformA', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 2
+    (3, TType.STRUCT, 'colliderB', [MMIStandard.scene.ttypes.MCollider, None], None, ),  # 3
+    (4, TType.STRUCT, 'transformB', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 4
 )
 
 
@@ -324,7 +324,7 @@ class ComputePenetration_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MVector3()
+                    self.success = MMIStandard.math.ttypes.MVector3()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -360,7 +360,7 @@ class ComputePenetration_result(object):
         return not (self == other)
 all_structs.append(ComputePenetration_result)
 ComputePenetration_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 0
 )
 
 
@@ -392,25 +392,25 @@ class CausesCollision_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.colliderA = MOSIM.mmi.scene.ttypes.MCollider()
+                    self.colliderA = MMIStandard.scene.ttypes.MCollider()
                     self.colliderA.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.transformA = MOSIM.mmi.math.ttypes.MTransform()
+                    self.transformA = MMIStandard.math.ttypes.MTransform()
                     self.transformA.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.colliderB = MOSIM.mmi.scene.ttypes.MCollider()
+                    self.colliderB = MMIStandard.scene.ttypes.MCollider()
                     self.colliderB.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.STRUCT:
-                    self.transformB = MOSIM.mmi.math.ttypes.MTransform()
+                    self.transformB = MMIStandard.math.ttypes.MTransform()
                     self.transformB.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -459,10 +459,10 @@ class CausesCollision_args(object):
 all_structs.append(CausesCollision_args)
 CausesCollision_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'colliderA', [MOSIM.mmi.scene.ttypes.MCollider, None], None, ),  # 1
-    (2, TType.STRUCT, 'transformA', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 2
-    (3, TType.STRUCT, 'colliderB', [MOSIM.mmi.scene.ttypes.MCollider, None], None, ),  # 3
-    (4, TType.STRUCT, 'transformB', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 4
+    (1, TType.STRUCT, 'colliderA', [MMIStandard.scene.ttypes.MCollider, None], None, ),  # 1
+    (2, TType.STRUCT, 'transformA', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 2
+    (3, TType.STRUCT, 'colliderB', [MMIStandard.scene.ttypes.MCollider, None], None, ),  # 3
+    (4, TType.STRUCT, 'transformB', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 4
 )
 
 

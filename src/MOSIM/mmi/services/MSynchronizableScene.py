@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def ApplyUpdates(self, sceneUpdates):
         """
         Parameters:
@@ -37,9 +37,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def ApplyUpdates(self, sceneUpdates):
         """
@@ -106,9 +106,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "ApplyManipulations failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["ApplyUpdates"] = Processor.process_ApplyUpdates
         self._processMap["ApplyManipulations"] = Processor.process_ApplyManipulations
         self._on_message_begin = None
@@ -204,7 +204,7 @@ class ApplyUpdates_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.sceneUpdates = MOSIM.mmi.scene.ttypes.MSceneUpdate()
+                    self.sceneUpdates = MMIStandard.scene.ttypes.MSceneUpdate()
                     self.sceneUpdates.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -241,7 +241,7 @@ class ApplyUpdates_args(object):
 all_structs.append(ApplyUpdates_args)
 ApplyUpdates_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'sceneUpdates', [MOSIM.mmi.scene.ttypes.MSceneUpdate, None], None, ),  # 1
+    (1, TType.STRUCT, 'sceneUpdates', [MMIStandard.scene.ttypes.MSceneUpdate, None], None, ),  # 1
 )
 
 
@@ -267,7 +267,7 @@ class ApplyUpdates_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -303,7 +303,7 @@ class ApplyUpdates_result(object):
         return not (self == other)
 all_structs.append(ApplyUpdates_result)
 ApplyUpdates_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -332,7 +332,7 @@ class ApplyManipulations_args(object):
                     self.sceneManipulations = []
                     (_etype353, _size350) = iprot.readListBegin()
                     for _i354 in range(_size350):
-                        _elem355 = MOSIM.mmi.scene.ttypes.MSceneManipulation()
+                        _elem355 = MMIStandard.scene.ttypes.MSceneManipulation()
                         _elem355.read(iprot)
                         self.sceneManipulations.append(_elem355)
                     iprot.readListEnd()
@@ -374,7 +374,7 @@ class ApplyManipulations_args(object):
 all_structs.append(ApplyManipulations_args)
 ApplyManipulations_args.thrift_spec = (
     None,  # 0
-    (1, TType.LIST, 'sceneManipulations', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MSceneManipulation, None], False), None, ),  # 1
+    (1, TType.LIST, 'sceneManipulations', (TType.STRUCT, [MMIStandard.scene.ttypes.MSceneManipulation, None], False), None, ),  # 1
 )
 
 
@@ -400,7 +400,7 @@ class ApplyManipulations_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -436,7 +436,7 @@ class ApplyManipulations_result(object):
         return not (self == other)
 all_structs.append(ApplyManipulations_result)
 ApplyManipulations_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

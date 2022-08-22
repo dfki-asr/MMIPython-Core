@@ -16,8 +16,8 @@ else:
 from thrift.transport import TTransport, TSocket, TSSLSocket, THttpClient
 from thrift.protocol.TBinaryProtocol import TBinaryProtocol
 
-from MOSIM.mmi.mmu import MotionModelUnit
-from MOSIM.mmi.mmu.ttypes import *
+from MMIStandard.mmu import MotionModelUnit
+from MMIStandard.mmu.ttypes import *
 
 if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('')
@@ -30,10 +30,10 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('   GetBoundaryConstraints(MInstruction instruction)')
     print('  MBoolResponse CheckPrerequisites(MInstruction instruction)')
     print('  MBoolResponse Abort(string instructionId)')
-    print('  MBoolResponse Dispose( parameters)')
-    print('  string CreateCheckpoint()')
-    print('  MBoolResponse RestoreCheckpoint(string data)')
-    print('   ExecuteFunction(string name,  parameters)')
+    print('  MBoolResponse Dispose(string avatarID,  parameters)')
+    print('  string CreateCheckpoint(string avatarID)')
+    print('  MBoolResponse RestoreCheckpoint(string data, string avatarID)')
+    print('   ExecuteFunction(string name, string avatarID,  parameters)')
     print('')
     sys.exit(0)
 
@@ -150,28 +150,28 @@ elif cmd == 'Abort':
     pp.pprint(client.Abort(args[0],))
 
 elif cmd == 'Dispose':
-    if len(args) != 1:
-        print('Dispose requires 1 args')
+    if len(args) != 2:
+        print('Dispose requires 2 args')
         sys.exit(1)
-    pp.pprint(client.Dispose(eval(args[0]),))
+    pp.pprint(client.Dispose(args[0], eval(args[1]),))
 
 elif cmd == 'CreateCheckpoint':
-    if len(args) != 0:
-        print('CreateCheckpoint requires 0 args')
+    if len(args) != 1:
+        print('CreateCheckpoint requires 1 args')
         sys.exit(1)
-    pp.pprint(client.CreateCheckpoint())
+    pp.pprint(client.CreateCheckpoint(args[0],))
 
 elif cmd == 'RestoreCheckpoint':
-    if len(args) != 1:
-        print('RestoreCheckpoint requires 1 args')
+    if len(args) != 2:
+        print('RestoreCheckpoint requires 2 args')
         sys.exit(1)
-    pp.pprint(client.RestoreCheckpoint(args[0],))
+    pp.pprint(client.RestoreCheckpoint(args[0], args[1],))
 
 elif cmd == 'ExecuteFunction':
-    if len(args) != 2:
-        print('ExecuteFunction requires 2 args')
+    if len(args) != 3:
+        print('ExecuteFunction requires 3 args')
         sys.exit(1)
-    pp.pprint(client.ExecuteFunction(args[0], eval(args[1]),))
+    pp.pprint(client.ExecuteFunction(args[0], args[1], eval(args[2]),))
 
 else:
     print('Unrecognized method %s' % cmd)

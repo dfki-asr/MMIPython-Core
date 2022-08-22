@@ -788,7 +788,7 @@ class GetRegisteredServices_result(object):
                     self.success = []
                     (_etype113, _size110) = iprot.readListBegin()
                     for _i114 in range(_size110):
-                        _elem115 = MOSIM.mmi.core.ttypes.MServiceDescription()
+                        _elem115 = MMIStandard.core.ttypes.MServiceDescription()
                         _elem115.read(iprot)
                         self.success.append(_elem115)
                     iprot.readListEnd()
@@ -829,7 +829,7 @@ class GetRegisteredServices_result(object):
         return not (self == other)
 all_structs.append(GetRegisteredServices_result)
 GetRegisteredServices_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.core.ttypes.MServiceDescription, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.core.ttypes.MServiceDescription, None], False), None, ),  # 0
 )
 
 
@@ -920,12 +920,12 @@ class GetAvailableMMUs_result(object):
                     self.success = {}
                     (_ktype118, _vtype119, _size117) = iprot.readMapBegin()
                     for _i121 in range(_size117):
-                        _key122 = MOSIM.mmi.mmu.ttypes.MMUDescription()
+                        _key122 = MMIStandard.mmu.ttypes.MMUDescription()
                         _key122.read(iprot)
                         _val123 = []
                         (_etype127, _size124) = iprot.readListBegin()
                         for _i128 in range(_size124):
-                            _elem129 = MOSIM.mmi.core.ttypes.MIPAddress()
+                            _elem129 = MMIStandard.core.ttypes.MIPAddress()
                             _elem129.read(iprot)
                             _val123.append(_elem129)
                         iprot.readListEnd()
@@ -972,7 +972,7 @@ class GetAvailableMMUs_result(object):
         return not (self == other)
 all_structs.append(GetAvailableMMUs_result)
 GetAvailableMMUs_result.thrift_spec = (
-    (0, TType.MAP, 'success', (TType.STRUCT, [MOSIM.mmi.mmu.ttypes.MMUDescription, None], TType.LIST, (TType.STRUCT, [MOSIM.mmi.core.ttypes.MIPAddress, None], False), False), None, ),  # 0
+    (0, TType.MAP, 'success', (TType.STRUCT, [MMIStandard.mmu.ttypes.MMUDescription, None], TType.LIST, (TType.STRUCT, [MMIStandard.core.ttypes.MIPAddress, None], False), False), None, ),  # 0
 )
 
 
@@ -1061,7 +1061,7 @@ class RegisterAdapter_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1097,7 +1097,7 @@ class RegisterAdapter_result(object):
         return not (self == other)
 all_structs.append(RegisterAdapter_result)
 RegisterAdapter_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1186,7 +1186,7 @@ class UnregisterAdapter_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1222,7 +1222,7 @@ class UnregisterAdapter_result(object):
         return not (self == other)
 all_structs.append(UnregisterAdapter_result)
 UnregisterAdapter_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1248,7 +1248,7 @@ class RegisterService_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.serviceDescription = MOSIM.mmi.core.ttypes.MServiceDescription()
+                    self.serviceDescription = MMIStandard.core.ttypes.MServiceDescription()
                     self.serviceDescription.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1285,7 +1285,7 @@ class RegisterService_args(object):
 all_structs.append(RegisterService_args)
 RegisterService_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'serviceDescription', [MOSIM.mmi.core.ttypes.MServiceDescription, None], None, ),  # 1
+    (1, TType.STRUCT, 'serviceDescription', [MMIStandard.core.ttypes.MServiceDescription, None], None, ),  # 1
 )
 
 
@@ -1311,7 +1311,7 @@ class RegisterService_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1347,7 +1347,7 @@ class RegisterService_result(object):
         return not (self == other)
 all_structs.append(RegisterService_result)
 RegisterService_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1373,7 +1373,7 @@ class UnregisterService_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.serviceDescription = MOSIM.mmi.core.ttypes.MServiceDescription()
+                    self.serviceDescription = MMIStandard.core.ttypes.MServiceDescription()
                     self.serviceDescription.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1410,7 +1410,7 @@ class UnregisterService_args(object):
 all_structs.append(UnregisterService_args)
 UnregisterService_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'serviceDescription', [MOSIM.mmi.core.ttypes.MServiceDescription, None], None, ),  # 1
+    (1, TType.STRUCT, 'serviceDescription', [MMIStandard.core.ttypes.MServiceDescription, None], None, ),  # 1
 )
 
 
@@ -1436,7 +1436,7 @@ class UnregisterService_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1472,7 +1472,7 @@ class UnregisterService_result(object):
         return not (self == other)
 all_structs.append(UnregisterService_result)
 UnregisterService_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 

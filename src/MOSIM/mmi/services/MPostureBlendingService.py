@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def Blend(self, startPosture, targetPosture, weight, mask, properties):
         """
         Parameters:
@@ -45,9 +45,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def Blend(self, startPosture, targetPosture, weight, mask, properties):
         """
@@ -130,9 +130,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "BlendMany failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["Blend"] = Processor.process_Blend
         self._processMap["BlendMany"] = Processor.process_BlendMany
         self._on_message_begin = None
@@ -236,13 +236,13 @@ class Blend_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.startPosture = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.startPosture = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.startPosture.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.targetPosture = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.targetPosture = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.targetPosture.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -330,8 +330,8 @@ class Blend_args(object):
 all_structs.append(Blend_args)
 Blend_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'startPosture', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
-    (2, TType.STRUCT, 'targetPosture', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 2
+    (1, TType.STRUCT, 'startPosture', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (2, TType.STRUCT, 'targetPosture', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 2
     (3, TType.DOUBLE, 'weight', None, None, ),  # 3
     (4, TType.MAP, 'mask', (TType.I32, None, TType.DOUBLE, None, False), None, ),  # 4
     (5, TType.MAP, 'properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 5
@@ -360,7 +360,7 @@ class Blend_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -396,7 +396,7 @@ class Blend_result(object):
         return not (self == other)
 all_structs.append(Blend_result)
 Blend_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
 )
 
 
@@ -430,13 +430,13 @@ class BlendMany_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.startPosture = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.startPosture = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.startPosture.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.targetPosture = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.targetPosture = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.targetPosture.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -532,8 +532,8 @@ class BlendMany_args(object):
 all_structs.append(BlendMany_args)
 BlendMany_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'startPosture', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
-    (2, TType.STRUCT, 'targetPosture', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 2
+    (1, TType.STRUCT, 'startPosture', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (2, TType.STRUCT, 'targetPosture', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 2
     (3, TType.LIST, 'weights', (TType.DOUBLE, None, False), None, ),  # 3
     (4, TType.MAP, 'mask', (TType.I32, None, TType.DOUBLE, None, False), None, ),  # 4
     (5, TType.MAP, 'properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 5
@@ -565,7 +565,7 @@ class BlendMany_result(object):
                     self.success = []
                     (_etype237, _size234) = iprot.readListBegin()
                     for _i238 in range(_size234):
-                        _elem239 = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                        _elem239 = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                         _elem239.read(iprot)
                         self.success.append(_elem239)
                     iprot.readListEnd()
@@ -606,7 +606,7 @@ class BlendMany_result(object):
         return not (self == other)
 all_structs.append(BlendMany_result)
 BlendMany_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], False), None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

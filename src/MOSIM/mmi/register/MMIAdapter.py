@@ -82,22 +82,24 @@ class Iface(object):
         """
         pass
 
-    def Dispose(self, mmuID, sessionID):
+    def Dispose(self, mmuID, sessionID, avatarID):
         """
         Parameters:
          - mmuID
          - sessionID
+         - avatarID
 
         """
         pass
 
-    def ExecuteFunction(self, name, parameters, mmuID, sessionID):
+    def ExecuteFunction(self, name, parameters, mmuID, sessionID, avatarID):
         """
         Parameters:
          - name
          - parameters
          - mmuID
          - sessionID
+         - avatarID
 
         """
         pass
@@ -108,10 +110,11 @@ class Iface(object):
     def GetAdapterDescription(self):
         pass
 
-    def CreateSession(self, sessionID):
+    def CreateSession(self, sessionID, sceneID):
         """
         Parameters:
          - sessionID
+         - sceneID
 
         """
         pass
@@ -427,21 +430,23 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "Abort failed: unknown result")
 
-    def Dispose(self, mmuID, sessionID):
+    def Dispose(self, mmuID, sessionID, avatarID):
         """
         Parameters:
          - mmuID
          - sessionID
+         - avatarID
 
         """
-        self.send_Dispose(mmuID, sessionID)
+        self.send_Dispose(mmuID, sessionID, avatarID)
         return self.recv_Dispose()
 
-    def send_Dispose(self, mmuID, sessionID):
+    def send_Dispose(self, mmuID, sessionID, avatarID):
         self._oprot.writeMessageBegin('Dispose', TMessageType.CALL, self._seqid)
         args = Dispose_args()
         args.mmuID = mmuID
         args.sessionID = sessionID
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -461,25 +466,27 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "Dispose failed: unknown result")
 
-    def ExecuteFunction(self, name, parameters, mmuID, sessionID):
+    def ExecuteFunction(self, name, parameters, mmuID, sessionID, avatarID):
         """
         Parameters:
          - name
          - parameters
          - mmuID
          - sessionID
+         - avatarID
 
         """
-        self.send_ExecuteFunction(name, parameters, mmuID, sessionID)
+        self.send_ExecuteFunction(name, parameters, mmuID, sessionID, avatarID)
         return self.recv_ExecuteFunction()
 
-    def send_ExecuteFunction(self, name, parameters, mmuID, sessionID):
+    def send_ExecuteFunction(self, name, parameters, mmuID, sessionID, avatarID):
         self._oprot.writeMessageBegin('ExecuteFunction', TMessageType.CALL, self._seqid)
         args = ExecuteFunction_args()
         args.name = name
         args.parameters = parameters
         args.mmuID = mmuID
         args.sessionID = sessionID
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -551,19 +558,21 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "GetAdapterDescription failed: unknown result")
 
-    def CreateSession(self, sessionID):
+    def CreateSession(self, sessionID, sceneID):
         """
         Parameters:
          - sessionID
+         - sceneID
 
         """
-        self.send_CreateSession(sessionID)
+        self.send_CreateSession(sessionID, sceneID)
         return self.recv_CreateSession()
 
-    def send_CreateSession(self, sessionID):
+    def send_CreateSession(self, sessionID, sceneID):
         self._oprot.writeMessageBegin('CreateSession', TMessageType.CALL, self._seqid)
         args = CreateSession_args()
         args.sessionID = sessionID
+        args.sceneID = sceneID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -1101,7 +1110,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = Dispose_result()
         try:
-            result.success = self._handler.Dispose(args.mmuID, args.sessionID)
+            result.success = self._handler.Dispose(args.mmuID, args.sessionID, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -1124,7 +1133,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = ExecuteFunction_result()
         try:
-            result.success = self._handler.ExecuteFunction(args.name, args.parameters, args.mmuID, args.sessionID)
+            result.success = self._handler.ExecuteFunction(args.name, args.parameters, args.mmuID, args.sessionID, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -1193,7 +1202,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = CreateSession_result()
         try:
-            result.success = self._handler.CreateSession(args.sessionID)
+            result.success = self._handler.CreateSession(args.sessionID, args.sceneID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -1471,7 +1480,7 @@ class Initialize_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.avatarDescription = MOSIM.mmi.avatar.ttypes.MAvatarDescription()
+                    self.avatarDescription = MMIStandard.avatar.ttypes.MAvatarDescription()
                     self.avatarDescription.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1545,7 +1554,7 @@ class Initialize_args(object):
 all_structs.append(Initialize_args)
 Initialize_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'avatarDescription', [MOSIM.mmi.avatar.ttypes.MAvatarDescription, None], None, ),  # 1
+    (1, TType.STRUCT, 'avatarDescription', [MMIStandard.avatar.ttypes.MAvatarDescription, None], None, ),  # 1
     (2, TType.MAP, 'properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 2
     (3, TType.STRING, 'mmuID', 'UTF8', None, ),  # 3
     (4, TType.STRING, 'sessionID', 'UTF8', None, ),  # 4
@@ -1574,7 +1583,7 @@ class Initialize_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1610,7 +1619,7 @@ class Initialize_result(object):
         return not (self == other)
 all_structs.append(Initialize_result)
 Initialize_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1642,13 +1651,13 @@ class AssignInstruction_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.instruction = MOSIM.mmi.mmu.ttypes.MInstruction()
+                    self.instruction = MMIStandard.mmu.ttypes.MInstruction()
                     self.instruction.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.simulationState = MOSIM.mmi.mmu.ttypes.MSimulationState()
+                    self.simulationState = MMIStandard.mmu.ttypes.MSimulationState()
                     self.simulationState.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1707,8 +1716,8 @@ class AssignInstruction_args(object):
 all_structs.append(AssignInstruction_args)
 AssignInstruction_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'instruction', [MOSIM.mmi.mmu.ttypes.MInstruction, None], None, ),  # 1
-    (2, TType.STRUCT, 'simulationState', [MOSIM.mmi.mmu.ttypes.MSimulationState, None], None, ),  # 2
+    (1, TType.STRUCT, 'instruction', [MMIStandard.mmu.ttypes.MInstruction, None], None, ),  # 1
+    (2, TType.STRUCT, 'simulationState', [MMIStandard.mmu.ttypes.MSimulationState, None], None, ),  # 2
     (3, TType.STRING, 'mmuID', 'UTF8', None, ),  # 3
     (4, TType.STRING, 'sessionID', 'UTF8', None, ),  # 4
 )
@@ -1736,7 +1745,7 @@ class AssignInstruction_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1772,7 +1781,7 @@ class AssignInstruction_result(object):
         return not (self == other)
 all_structs.append(AssignInstruction_result)
 AssignInstruction_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1809,7 +1818,7 @@ class DoStep_args(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.simulationState = MOSIM.mmi.mmu.ttypes.MSimulationState()
+                    self.simulationState = MMIStandard.mmu.ttypes.MSimulationState()
                     self.simulationState.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1869,7 +1878,7 @@ all_structs.append(DoStep_args)
 DoStep_args.thrift_spec = (
     None,  # 0
     (1, TType.DOUBLE, 'time', None, None, ),  # 1
-    (2, TType.STRUCT, 'simulationState', [MOSIM.mmi.mmu.ttypes.MSimulationState, None], None, ),  # 2
+    (2, TType.STRUCT, 'simulationState', [MMIStandard.mmu.ttypes.MSimulationState, None], None, ),  # 2
     (3, TType.STRING, 'mmuID', 'UTF8', None, ),  # 3
     (4, TType.STRING, 'sessionID', 'UTF8', None, ),  # 4
 )
@@ -1897,7 +1906,7 @@ class DoStep_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.mmu.ttypes.MSimulationResult()
+                    self.success = MMIStandard.mmu.ttypes.MSimulationResult()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1933,7 +1942,7 @@ class DoStep_result(object):
         return not (self == other)
 all_structs.append(DoStep_result)
 DoStep_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.mmu.ttypes.MSimulationResult, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.mmu.ttypes.MSimulationResult, None], None, ),  # 0
 )
 
 
@@ -1963,7 +1972,7 @@ class GetBoundaryConstraints_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.instruction = MOSIM.mmi.mmu.ttypes.MInstruction()
+                    self.instruction = MMIStandard.mmu.ttypes.MInstruction()
                     self.instruction.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2018,7 +2027,7 @@ class GetBoundaryConstraints_args(object):
 all_structs.append(GetBoundaryConstraints_args)
 GetBoundaryConstraints_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'instruction', [MOSIM.mmi.mmu.ttypes.MInstruction, None], None, ),  # 1
+    (1, TType.STRUCT, 'instruction', [MMIStandard.mmu.ttypes.MInstruction, None], None, ),  # 1
     (2, TType.STRING, 'mmuID', 'UTF8', None, ),  # 2
     (3, TType.STRING, 'sessionID', 'UTF8', None, ),  # 3
 )
@@ -2049,7 +2058,7 @@ class GetBoundaryConstraints_result(object):
                     self.success = []
                     (_etype35, _size32) = iprot.readListBegin()
                     for _i36 in range(_size32):
-                        _elem37 = MOSIM.mmi.constraints.ttypes.MConstraint()
+                        _elem37 = MMIStandard.constraints.ttypes.MConstraint()
                         _elem37.read(iprot)
                         self.success.append(_elem37)
                     iprot.readListEnd()
@@ -2090,7 +2099,7 @@ class GetBoundaryConstraints_result(object):
         return not (self == other)
 all_structs.append(GetBoundaryConstraints_result)
 GetBoundaryConstraints_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MConstraint, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.constraints.ttypes.MConstraint, None], False), None, ),  # 0
 )
 
 
@@ -2120,7 +2129,7 @@ class CheckPrerequisites_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.instruction = MOSIM.mmi.mmu.ttypes.MInstruction()
+                    self.instruction = MMIStandard.mmu.ttypes.MInstruction()
                     self.instruction.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2175,7 +2184,7 @@ class CheckPrerequisites_args(object):
 all_structs.append(CheckPrerequisites_args)
 CheckPrerequisites_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'instruction', [MOSIM.mmi.mmu.ttypes.MInstruction, None], None, ),  # 1
+    (1, TType.STRUCT, 'instruction', [MMIStandard.mmu.ttypes.MInstruction, None], None, ),  # 1
     (2, TType.STRING, 'mmuID', 'UTF8', None, ),  # 2
     (3, TType.STRING, 'sessionID', 'UTF8', None, ),  # 3
 )
@@ -2203,7 +2212,7 @@ class CheckPrerequisites_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2239,7 +2248,7 @@ class CheckPrerequisites_result(object):
         return not (self == other)
 all_structs.append(CheckPrerequisites_result)
 CheckPrerequisites_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -2351,7 +2360,7 @@ class Abort_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2387,7 +2396,7 @@ class Abort_result(object):
         return not (self == other)
 all_structs.append(Abort_result)
 Abort_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -2396,13 +2405,15 @@ class Dispose_args(object):
     Attributes:
      - mmuID
      - sessionID
+     - avatarID
 
     """
 
 
-    def __init__(self, mmuID=None, sessionID=None,):
+    def __init__(self, mmuID=None, sessionID=None, avatarID=None,):
         self.mmuID = mmuID
         self.sessionID = sessionID
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -2423,6 +2434,11 @@ class Dispose_args(object):
                     self.sessionID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 3:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -2440,6 +2456,10 @@ class Dispose_args(object):
         if self.sessionID is not None:
             oprot.writeFieldBegin('sessionID', TType.STRING, 2)
             oprot.writeString(self.sessionID.encode('utf-8') if sys.version_info[0] == 2 else self.sessionID)
+            oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 3)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -2462,6 +2482,7 @@ Dispose_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'mmuID', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'sessionID', 'UTF8', None, ),  # 2
+    (3, TType.STRING, 'avatarID', 'UTF8', None, ),  # 3
 )
 
 
@@ -2487,7 +2508,7 @@ class Dispose_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2523,7 +2544,7 @@ class Dispose_result(object):
         return not (self == other)
 all_structs.append(Dispose_result)
 Dispose_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -2534,15 +2555,17 @@ class ExecuteFunction_args(object):
      - parameters
      - mmuID
      - sessionID
+     - avatarID
 
     """
 
 
-    def __init__(self, name=None, parameters=None, mmuID=None, sessionID=None,):
+    def __init__(self, name=None, parameters=None, mmuID=None, sessionID=None, avatarID=None,):
         self.name = name
         self.parameters = parameters
         self.mmuID = mmuID
         self.sessionID = sessionID
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -2579,6 +2602,11 @@ class ExecuteFunction_args(object):
                     self.sessionID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 5:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -2609,6 +2637,10 @@ class ExecuteFunction_args(object):
             oprot.writeFieldBegin('sessionID', TType.STRING, 4)
             oprot.writeString(self.sessionID.encode('utf-8') if sys.version_info[0] == 2 else self.sessionID)
             oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 5)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -2632,6 +2664,7 @@ ExecuteFunction_args.thrift_spec = (
     (2, TType.MAP, 'parameters', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 2
     (3, TType.STRING, 'mmuID', 'UTF8', None, ),  # 3
     (4, TType.STRING, 'sessionID', 'UTF8', None, ),  # 4
+    (5, TType.STRING, 'avatarID', 'UTF8', None, ),  # 5
 )
 
 
@@ -2929,12 +2962,14 @@ class CreateSession_args(object):
     """
     Attributes:
      - sessionID
+     - sceneID
 
     """
 
 
-    def __init__(self, sessionID=None,):
+    def __init__(self, sessionID=None, sceneID=None,):
         self.sessionID = sessionID
+        self.sceneID = sceneID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -2950,6 +2985,11 @@ class CreateSession_args(object):
                     self.sessionID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 2:
+                if ftype == TType.STRING:
+                    self.sceneID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -2963,6 +3003,10 @@ class CreateSession_args(object):
         if self.sessionID is not None:
             oprot.writeFieldBegin('sessionID', TType.STRING, 1)
             oprot.writeString(self.sessionID.encode('utf-8') if sys.version_info[0] == 2 else self.sessionID)
+            oprot.writeFieldEnd()
+        if self.sceneID is not None:
+            oprot.writeFieldBegin('sceneID', TType.STRING, 2)
+            oprot.writeString(self.sceneID.encode('utf-8') if sys.version_info[0] == 2 else self.sceneID)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -2984,6 +3028,7 @@ all_structs.append(CreateSession_args)
 CreateSession_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'sessionID', 'UTF8', None, ),  # 1
+    (2, TType.STRING, 'sceneID', 'UTF8', None, ),  # 2
 )
 
 
@@ -3009,7 +3054,7 @@ class CreateSession_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3045,7 +3090,7 @@ class CreateSession_result(object):
         return not (self == other)
 all_structs.append(CreateSession_result)
 CreateSession_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -3133,7 +3178,7 @@ class CloseSession_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3169,7 +3214,7 @@ class CloseSession_result(object):
         return not (self == other)
 all_structs.append(CloseSession_result)
 CloseSession_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -3197,7 +3242,7 @@ class PushScene_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.sceneUpdates = MOSIM.mmi.scene.ttypes.MSceneUpdate()
+                    self.sceneUpdates = MMIStandard.scene.ttypes.MSceneUpdate()
                     self.sceneUpdates.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3243,7 +3288,7 @@ class PushScene_args(object):
 all_structs.append(PushScene_args)
 PushScene_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'sceneUpdates', [MOSIM.mmi.scene.ttypes.MSceneUpdate, None], None, ),  # 1
+    (1, TType.STRUCT, 'sceneUpdates', [MMIStandard.scene.ttypes.MSceneUpdate, None], None, ),  # 1
     (2, TType.STRING, 'sessionID', 'UTF8', None, ),  # 2
 )
 
@@ -3270,7 +3315,7 @@ class PushScene_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3306,7 +3351,7 @@ class PushScene_result(object):
         return not (self == other)
 all_structs.append(PushScene_result)
 PushScene_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -3378,7 +3423,7 @@ class GetLoadableMMUs_result(object):
                     self.success = []
                     (_etype69, _size66) = iprot.readListBegin()
                     for _i70 in range(_size66):
-                        _elem71 = MOSIM.mmi.mmu.ttypes.MMUDescription()
+                        _elem71 = MMIStandard.mmu.ttypes.MMUDescription()
                         _elem71.read(iprot)
                         self.success.append(_elem71)
                     iprot.readListEnd()
@@ -3419,7 +3464,7 @@ class GetLoadableMMUs_result(object):
         return not (self == other)
 all_structs.append(GetLoadableMMUs_result)
 GetLoadableMMUs_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.mmu.ttypes.MMUDescription, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.mmu.ttypes.MMUDescription, None], False), None, ),  # 0
 )
 
 
@@ -3510,7 +3555,7 @@ class GetMMus_result(object):
                     self.success = []
                     (_etype76, _size73) = iprot.readListBegin()
                     for _i77 in range(_size73):
-                        _elem78 = MOSIM.mmi.mmu.ttypes.MMUDescription()
+                        _elem78 = MMIStandard.mmu.ttypes.MMUDescription()
                         _elem78.read(iprot)
                         self.success.append(_elem78)
                     iprot.readListEnd()
@@ -3551,7 +3596,7 @@ class GetMMus_result(object):
         return not (self == other)
 all_structs.append(GetMMus_result)
 GetMMus_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.mmu.ttypes.MMUDescription, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.mmu.ttypes.MMUDescription, None], False), None, ),  # 0
 )
 
 
@@ -3651,7 +3696,7 @@ class GetDescription_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.mmu.ttypes.MMUDescription()
+                    self.success = MMIStandard.mmu.ttypes.MMUDescription()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3687,7 +3732,7 @@ class GetDescription_result(object):
         return not (self == other)
 all_structs.append(GetDescription_result)
 GetDescription_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.mmu.ttypes.MMUDescription, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.mmu.ttypes.MMUDescription, None], None, ),  # 0
 )
 
 
@@ -3778,7 +3823,7 @@ class GetScene_result(object):
                     self.success = []
                     (_etype83, _size80) = iprot.readListBegin()
                     for _i84 in range(_size80):
-                        _elem85 = MOSIM.mmi.scene.ttypes.MSceneObject()
+                        _elem85 = MMIStandard.scene.ttypes.MSceneObject()
                         _elem85.read(iprot)
                         self.success.append(_elem85)
                     iprot.readListEnd()
@@ -3819,7 +3864,7 @@ class GetScene_result(object):
         return not (self == other)
 all_structs.append(GetScene_result)
 GetScene_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MSceneObject, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.scene.ttypes.MSceneObject, None], False), None, ),  # 0
 )
 
 
@@ -3907,7 +3952,7 @@ class GetSceneChanges_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.scene.ttypes.MSceneUpdate()
+                    self.success = MMIStandard.scene.ttypes.MSceneUpdate()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3943,7 +3988,7 @@ class GetSceneChanges_result(object):
         return not (self == other)
 all_structs.append(GetSceneChanges_result)
 GetSceneChanges_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.scene.ttypes.MSceneUpdate, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.scene.ttypes.MSceneUpdate, None], None, ),  # 0
 )
 
 
@@ -4343,7 +4388,7 @@ class RestoreCheckpoint_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -4379,7 +4424,7 @@ class RestoreCheckpoint_result(object):
         return not (self == other)
 all_structs.append(RestoreCheckpoint_result)
 RestoreCheckpoint_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

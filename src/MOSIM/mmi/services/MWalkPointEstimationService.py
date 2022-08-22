@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def EstimateWalkPoints(self, sceneObjects, target, amount, properties):
         """
         Parameters:
@@ -32,9 +32,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def EstimateWalkPoints(self, sceneObjects, target, amount, properties):
         """
@@ -75,9 +75,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "EstimateWalkPoints failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["EstimateWalkPoints"] = Processor.process_EstimateWalkPoints
         self._on_message_begin = None
 
@@ -158,7 +158,7 @@ class EstimateWalkPoints_args(object):
                     self.sceneObjects = []
                     (_etype267, _size264) = iprot.readListBegin()
                     for _i268 in range(_size264):
-                        _elem269 = MOSIM.mmi.scene.ttypes.MSceneObject()
+                        _elem269 = MMIStandard.scene.ttypes.MSceneObject()
                         _elem269.read(iprot)
                         self.sceneObjects.append(_elem269)
                     iprot.readListEnd()
@@ -166,7 +166,7 @@ class EstimateWalkPoints_args(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.target = MOSIM.mmi.scene.ttypes.MSceneObject()
+                    self.target = MMIStandard.scene.ttypes.MSceneObject()
                     self.target.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -238,8 +238,8 @@ class EstimateWalkPoints_args(object):
 all_structs.append(EstimateWalkPoints_args)
 EstimateWalkPoints_args.thrift_spec = (
     None,  # 0
-    (1, TType.LIST, 'sceneObjects', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MSceneObject, None], False), None, ),  # 1
-    (2, TType.STRUCT, 'target', [MOSIM.mmi.scene.ttypes.MSceneObject, None], None, ),  # 2
+    (1, TType.LIST, 'sceneObjects', (TType.STRUCT, [MMIStandard.scene.ttypes.MSceneObject, None], False), None, ),  # 1
+    (2, TType.STRUCT, 'target', [MMIStandard.scene.ttypes.MSceneObject, None], None, ),  # 2
     (3, TType.I32, 'amount', None, None, ),  # 3
     (4, TType.MAP, 'properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 4
 )

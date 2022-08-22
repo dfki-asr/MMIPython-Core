@@ -16,8 +16,8 @@ else:
 from thrift.transport import TTransport, TSocket, TSSLSocket, THttpClient
 from thrift.protocol.TBinaryProtocol import TBinaryProtocol
 
-from MOSIM.mmi.register import MMIAdapter
-from MOSIM.mmi.register.ttypes import *
+from MMIStandard.register import MMIAdapter
+from MMIStandard.register.ttypes import *
 
 if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('')
@@ -30,11 +30,11 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('   GetBoundaryConstraints(MInstruction instruction, string mmuID, string sessionID)')
     print('  MBoolResponse CheckPrerequisites(MInstruction instruction, string mmuID, string sessionID)')
     print('  MBoolResponse Abort(string instructionID, string mmuID, string sessionID)')
-    print('  MBoolResponse Dispose(string mmuID, string sessionID)')
-    print('   ExecuteFunction(string name,  parameters, string mmuID, string sessionID)')
+    print('  MBoolResponse Dispose(string mmuID, string sessionID, string avatarID)')
+    print('   ExecuteFunction(string name,  parameters, string mmuID, string sessionID, string avatarID)')
     print('   GetStatus()')
     print('  MAdapterDescription GetAdapterDescription()')
-    print('  MBoolResponse CreateSession(string sessionID)')
+    print('  MBoolResponse CreateSession(string sessionID, string sceneID)')
     print('  MBoolResponse CloseSession(string sessionID)')
     print('  MBoolResponse PushScene(MSceneUpdate sceneUpdates, string sessionID)')
     print('   GetLoadableMMUs()')
@@ -161,16 +161,16 @@ elif cmd == 'Abort':
     pp.pprint(client.Abort(args[0], args[1], args[2],))
 
 elif cmd == 'Dispose':
-    if len(args) != 2:
-        print('Dispose requires 2 args')
+    if len(args) != 3:
+        print('Dispose requires 3 args')
         sys.exit(1)
-    pp.pprint(client.Dispose(args[0], args[1],))
+    pp.pprint(client.Dispose(args[0], args[1], args[2],))
 
 elif cmd == 'ExecuteFunction':
-    if len(args) != 4:
-        print('ExecuteFunction requires 4 args')
+    if len(args) != 5:
+        print('ExecuteFunction requires 5 args')
         sys.exit(1)
-    pp.pprint(client.ExecuteFunction(args[0], eval(args[1]), args[2], args[3],))
+    pp.pprint(client.ExecuteFunction(args[0], eval(args[1]), args[2], args[3], args[4],))
 
 elif cmd == 'GetStatus':
     if len(args) != 0:
@@ -185,10 +185,10 @@ elif cmd == 'GetAdapterDescription':
     pp.pprint(client.GetAdapterDescription())
 
 elif cmd == 'CreateSession':
-    if len(args) != 1:
-        print('CreateSession requires 1 args')
+    if len(args) != 2:
+        print('CreateSession requires 2 args')
         sys.exit(1)
-    pp.pprint(client.CreateSession(args[0],))
+    pp.pprint(client.CreateSession(args[0], args[1],))
 
 elif cmd == 'CloseSession':
     if len(args) != 1:

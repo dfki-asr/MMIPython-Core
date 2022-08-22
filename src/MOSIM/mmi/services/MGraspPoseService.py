@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def GetGraspPoses(self, posture, handType, sceneObject, repositionHand):
         """
         Parameters:
@@ -32,9 +32,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def GetGraspPoses(self, posture, handType, sceneObject, repositionHand):
         """
@@ -75,9 +75,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "GetGraspPoses failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["GetGraspPoses"] = Processor.process_GetGraspPoses
         self._on_message_begin = None
 
@@ -155,7 +155,7 @@ class GetGraspPoses_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.posture = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.posture = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.posture.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -166,7 +166,7 @@ class GetGraspPoses_args(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.sceneObject = MOSIM.mmi.scene.ttypes.MSceneObject()
+                    self.sceneObject = MMIStandard.scene.ttypes.MSceneObject()
                     self.sceneObject.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -220,9 +220,9 @@ class GetGraspPoses_args(object):
 all_structs.append(GetGraspPoses_args)
 GetGraspPoses_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'posture', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (1, TType.STRUCT, 'posture', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
     (2, TType.I32, 'handType', None, None, ),  # 2
-    (3, TType.STRUCT, 'sceneObject', [MOSIM.mmi.scene.ttypes.MSceneObject, None], None, ),  # 3
+    (3, TType.STRUCT, 'sceneObject', [MMIStandard.scene.ttypes.MSceneObject, None], None, ),  # 3
     (4, TType.BOOL, 'repositionHand', None, None, ),  # 4
 )
 
@@ -252,7 +252,7 @@ class GetGraspPoses_result(object):
                     self.success = []
                     (_etype260, _size257) = iprot.readListBegin()
                     for _i261 in range(_size257):
-                        _elem262 = MOSIM.mmi.constraints.ttypes.MGeometryConstraint()
+                        _elem262 = MMIStandard.constraints.ttypes.MGeometryConstraint()
                         _elem262.read(iprot)
                         self.success.append(_elem262)
                     iprot.readListEnd()
@@ -293,7 +293,7 @@ class GetGraspPoses_result(object):
         return not (self == other)
 all_structs.append(GetGraspPoses_result)
 GetGraspPoses_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MGeometryConstraint, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.constraints.ttypes.MGeometryConstraint, None], False), None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

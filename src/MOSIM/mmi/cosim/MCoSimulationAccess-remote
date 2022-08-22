@@ -16,24 +16,24 @@ else:
 from thrift.transport import TTransport, TSocket, TSSLSocket, THttpClient
 from thrift.protocol.TBinaryProtocol import TBinaryProtocol
 
-from MOSIM.mmi.cosim import MCoSimulationAccess
-from MOSIM.mmi.cosim.ttypes import *
+from MMIStandard.cosim import MCoSimulationAccess
+from MMIStandard.cosim.ttypes import *
 
 if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('')
     print('Usage: ' + sys.argv[0] + ' [-h host[:port]] [-u url] [-f[ramed]] [-s[sl]] [-novalidate] [-ca_certs certs] [-keyfile keyfile] [-certfile certfile] function [arg1 [arg2...]]')
     print('')
     print('Functions:')
-    print('  MBoolResponse RegisterAtEvent(MIPAddress clientAddress, string eventType)')
-    print('  MBoolResponse UnregisterAtEvent(MIPAddress clientAddress, string eventType)')
+    print('  MBoolResponse RegisterAtEvent(MIPAddress clientAddress, string eventType, string avatarID)')
+    print('  MBoolResponse UnregisterAtEvent(MIPAddress clientAddress, string eventType, string avatarID)')
     print('  MBoolResponse AssignInstruction(MInstruction instruction,  properties)')
-    print('  MBoolResponse Abort()')
+    print('  MBoolResponse Abort(string avatarID)')
     print('  MBoolResponse AbortInstruction(string instructionID)')
     print('  MBoolResponse AbortInstructions( instructionIDs)')
-    print('   GetHistoryFromTime(double startTime, double endTime, string eventType)')
-    print('   GetHistoryFromFrames(i32 fromFrame, i32 toFrame, string eventType)')
-    print('   GetHistory(string eventType)')
-    print('  MCoSimulationEvents GetCurrentEvents()')
+    print('   GetHistoryFromTime(double startTime, double endTime, string eventType, string avatarID)')
+    print('   GetHistoryFromFrames(i32 fromFrame, i32 toFrame, string eventType, string avatarID)')
+    print('   GetHistory(string eventType, string avatarID)')
+    print('  MCoSimulationEvents GetCurrentEvents(string avatarID)')
     print('   GetStatus()')
     print('  MServiceDescription GetDescription()')
     print('  MBoolResponse Setup(MAvatarDescription avatar,  properties)')
@@ -120,16 +120,16 @@ client = MCoSimulationAccess.Client(protocol)
 transport.open()
 
 if cmd == 'RegisterAtEvent':
-    if len(args) != 2:
-        print('RegisterAtEvent requires 2 args')
+    if len(args) != 3:
+        print('RegisterAtEvent requires 3 args')
         sys.exit(1)
-    pp.pprint(client.RegisterAtEvent(eval(args[0]), args[1],))
+    pp.pprint(client.RegisterAtEvent(eval(args[0]), args[1], args[2],))
 
 elif cmd == 'UnregisterAtEvent':
-    if len(args) != 2:
-        print('UnregisterAtEvent requires 2 args')
+    if len(args) != 3:
+        print('UnregisterAtEvent requires 3 args')
         sys.exit(1)
-    pp.pprint(client.UnregisterAtEvent(eval(args[0]), args[1],))
+    pp.pprint(client.UnregisterAtEvent(eval(args[0]), args[1], args[2],))
 
 elif cmd == 'AssignInstruction':
     if len(args) != 2:
@@ -138,10 +138,10 @@ elif cmd == 'AssignInstruction':
     pp.pprint(client.AssignInstruction(eval(args[0]), eval(args[1]),))
 
 elif cmd == 'Abort':
-    if len(args) != 0:
-        print('Abort requires 0 args')
+    if len(args) != 1:
+        print('Abort requires 1 args')
         sys.exit(1)
-    pp.pprint(client.Abort())
+    pp.pprint(client.Abort(args[0],))
 
 elif cmd == 'AbortInstruction':
     if len(args) != 1:
@@ -156,28 +156,28 @@ elif cmd == 'AbortInstructions':
     pp.pprint(client.AbortInstructions(eval(args[0]),))
 
 elif cmd == 'GetHistoryFromTime':
-    if len(args) != 3:
-        print('GetHistoryFromTime requires 3 args')
+    if len(args) != 4:
+        print('GetHistoryFromTime requires 4 args')
         sys.exit(1)
-    pp.pprint(client.GetHistoryFromTime(eval(args[0]), eval(args[1]), args[2],))
+    pp.pprint(client.GetHistoryFromTime(eval(args[0]), eval(args[1]), args[2], args[3],))
 
 elif cmd == 'GetHistoryFromFrames':
-    if len(args) != 3:
-        print('GetHistoryFromFrames requires 3 args')
+    if len(args) != 4:
+        print('GetHistoryFromFrames requires 4 args')
         sys.exit(1)
-    pp.pprint(client.GetHistoryFromFrames(eval(args[0]), eval(args[1]), args[2],))
+    pp.pprint(client.GetHistoryFromFrames(eval(args[0]), eval(args[1]), args[2], args[3],))
 
 elif cmd == 'GetHistory':
-    if len(args) != 1:
-        print('GetHistory requires 1 args')
+    if len(args) != 2:
+        print('GetHistory requires 2 args')
         sys.exit(1)
-    pp.pprint(client.GetHistory(args[0],))
+    pp.pprint(client.GetHistory(args[0], args[1],))
 
 elif cmd == 'GetCurrentEvents':
-    if len(args) != 0:
-        print('GetCurrentEvents requires 0 args')
+    if len(args) != 1:
+        print('GetCurrentEvents requires 1 args')
         sys.exit(1)
-    pp.pprint(client.GetCurrentEvents())
+    pp.pprint(client.GetCurrentEvents(args[0],))
 
 elif cmd == 'GetStatus':
     if len(args) != 0:

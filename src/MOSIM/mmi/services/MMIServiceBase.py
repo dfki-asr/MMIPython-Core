@@ -601,7 +601,7 @@ class GetDescription_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MServiceDescription()
+                    self.success = MMIStandard.core.ttypes.MServiceDescription()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -637,7 +637,7 @@ class GetDescription_result(object):
         return not (self == other)
 all_structs.append(GetDescription_result)
 GetDescription_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MServiceDescription, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MServiceDescription, None], None, ),  # 0
 )
 
 
@@ -665,7 +665,7 @@ class Setup_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.avatar = MOSIM.mmi.avatar.ttypes.MAvatarDescription()
+                    self.avatar = MMIStandard.avatar.ttypes.MAvatarDescription()
                     self.avatar.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -721,7 +721,7 @@ class Setup_args(object):
 all_structs.append(Setup_args)
 Setup_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'avatar', [MOSIM.mmi.avatar.ttypes.MAvatarDescription, None], None, ),  # 1
+    (1, TType.STRUCT, 'avatar', [MMIStandard.avatar.ttypes.MAvatarDescription, None], None, ),  # 1
     (2, TType.MAP, 'properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 2
 )
 
@@ -748,7 +748,7 @@ class Setup_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -784,7 +784,7 @@ class Setup_result(object):
         return not (self == other)
 all_structs.append(Setup_result)
 Setup_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1025,7 +1025,7 @@ class Dispose_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1061,7 +1061,7 @@ class Dispose_result(object):
         return not (self == other)
 all_structs.append(Dispose_result)
 Dispose_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1159,7 +1159,7 @@ class Restart_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1195,7 +1195,7 @@ class Restart_result(object):
         return not (self == other)
 all_structs.append(Restart_result)
 Restart_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

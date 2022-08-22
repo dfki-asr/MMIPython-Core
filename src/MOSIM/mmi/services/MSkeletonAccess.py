@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def InitializeAnthropometry(self, description):
         """
         Parameters:
@@ -213,9 +213,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def InitializeAnthropometry(self, description):
         """
@@ -936,9 +936,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "RecomputeCurrentPostureValues failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["InitializeAnthropometry"] = Processor.process_InitializeAnthropometry
         self._processMap["GetAvatarDescription"] = Processor.process_GetAvatarDescription
         self._processMap["SetAnimatedJoints"] = Processor.process_SetAnimatedJoints
@@ -1514,7 +1514,7 @@ class InitializeAnthropometry_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.description = MOSIM.mmi.avatar.ttypes.MAvatarDescription()
+                    self.description = MMIStandard.avatar.ttypes.MAvatarDescription()
                     self.description.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1551,7 +1551,7 @@ class InitializeAnthropometry_args(object):
 all_structs.append(InitializeAnthropometry_args)
 InitializeAnthropometry_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'description', [MOSIM.mmi.avatar.ttypes.MAvatarDescription, None], None, ),  # 1
+    (1, TType.STRUCT, 'description', [MMIStandard.avatar.ttypes.MAvatarDescription, None], None, ),  # 1
 )
 
 
@@ -1682,7 +1682,7 @@ class GetAvatarDescription_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarDescription()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarDescription()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1718,7 +1718,7 @@ class GetAvatarDescription_result(object):
         return not (self == other)
 all_structs.append(GetAvatarDescription_result)
 GetAvatarDescription_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarDescription, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarDescription, None], None, ),  # 0
 )
 
 
@@ -1869,7 +1869,7 @@ class SetChannelData_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.values = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.values = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.values.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1906,7 +1906,7 @@ class SetChannelData_args(object):
 all_structs.append(SetChannelData_args)
 SetChannelData_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'values', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (1, TType.STRUCT, 'values', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
 )
 
 
@@ -2037,7 +2037,7 @@ class GetCurrentGlobalPosture_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarPosture()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarPosture()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2073,7 +2073,7 @@ class GetCurrentGlobalPosture_result(object):
         return not (self == other)
 all_structs.append(GetCurrentGlobalPosture_result)
 GetCurrentGlobalPosture_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarPosture, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarPosture, None], None, ),  # 0
 )
 
 
@@ -2161,7 +2161,7 @@ class GetCurrentLocalPosture_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarPosture()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarPosture()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2197,7 +2197,7 @@ class GetCurrentLocalPosture_result(object):
         return not (self == other)
 all_structs.append(GetCurrentLocalPosture_result)
 GetCurrentLocalPosture_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarPosture, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarPosture, None], None, ),  # 0
 )
 
 
@@ -2285,7 +2285,7 @@ class GetCurrentPostureValues_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2321,7 +2321,7 @@ class GetCurrentPostureValues_result(object):
         return not (self == other)
 all_structs.append(GetCurrentPostureValues_result)
 GetCurrentPostureValues_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
 )
 
 
@@ -2429,7 +2429,7 @@ class GetCurrentPostureValuesPartial_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2465,7 +2465,7 @@ class GetCurrentPostureValuesPartial_result(object):
         return not (self == other)
 all_structs.append(GetCurrentPostureValuesPartial_result)
 GetCurrentPostureValuesPartial_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
 )
 
 
@@ -2556,7 +2556,7 @@ class GetCurrentJointPositions_result(object):
                     self.success = []
                     (_etype304, _size301) = iprot.readListBegin()
                     for _i305 in range(_size301):
-                        _elem306 = MOSIM.mmi.math.ttypes.MVector3()
+                        _elem306 = MMIStandard.math.ttypes.MVector3()
                         _elem306.read(iprot)
                         self.success.append(_elem306)
                     iprot.readListEnd()
@@ -2597,7 +2597,7 @@ class GetCurrentJointPositions_result(object):
         return not (self == other)
 all_structs.append(GetCurrentJointPositions_result)
 GetCurrentJointPositions_result.thrift_spec = (
-    (0, TType.LIST, 'success', (TType.STRUCT, [MOSIM.mmi.math.ttypes.MVector3, None], False), None, ),  # 0
+    (0, TType.LIST, 'success', (TType.STRUCT, [MMIStandard.math.ttypes.MVector3, None], False), None, ),  # 0
 )
 
 
@@ -2685,7 +2685,7 @@ class GetRootPosition_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MVector3()
+                    self.success = MMIStandard.math.ttypes.MVector3()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2721,7 +2721,7 @@ class GetRootPosition_result(object):
         return not (self == other)
 all_structs.append(GetRootPosition_result)
 GetRootPosition_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 0
 )
 
 
@@ -2809,7 +2809,7 @@ class GetRootRotation_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.success = MMIStandard.math.ttypes.MQuaternion()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2845,7 +2845,7 @@ class GetRootRotation_result(object):
         return not (self == other)
 all_structs.append(GetRootRotation_result)
 GetRootRotation_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 0
 )
 
 
@@ -2945,7 +2945,7 @@ class GetGlobalJointPosition_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MVector3()
+                    self.success = MMIStandard.math.ttypes.MVector3()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -2981,7 +2981,7 @@ class GetGlobalJointPosition_result(object):
         return not (self == other)
 all_structs.append(GetGlobalJointPosition_result)
 GetGlobalJointPosition_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 0
 )
 
 
@@ -3081,7 +3081,7 @@ class GetGlobalJointRotation_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.success = MMIStandard.math.ttypes.MQuaternion()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3117,7 +3117,7 @@ class GetGlobalJointRotation_result(object):
         return not (self == other)
 all_structs.append(GetGlobalJointRotation_result)
 GetGlobalJointRotation_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 0
 )
 
 
@@ -3217,7 +3217,7 @@ class GetLocalJointPosition_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MVector3()
+                    self.success = MMIStandard.math.ttypes.MVector3()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3253,7 +3253,7 @@ class GetLocalJointPosition_result(object):
         return not (self == other)
 all_structs.append(GetLocalJointPosition_result)
 GetLocalJointPosition_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 0
 )
 
 
@@ -3353,7 +3353,7 @@ class GetLocalJointRotation_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.success = MMIStandard.math.ttypes.MQuaternion()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3389,7 +3389,7 @@ class GetLocalJointRotation_result(object):
         return not (self == other)
 all_structs.append(GetLocalJointRotation_result)
 GetLocalJointRotation_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 0
 )
 
 
@@ -3422,7 +3422,7 @@ class SetRootPosition_args(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.position = MOSIM.mmi.math.ttypes.MVector3()
+                    self.position = MMIStandard.math.ttypes.MVector3()
                     self.position.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3464,7 +3464,7 @@ all_structs.append(SetRootPosition_args)
 SetRootPosition_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'avatarId', 'UTF8', None, ),  # 1
-    (2, TType.STRUCT, 'position', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 2
+    (2, TType.STRUCT, 'position', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 2
 )
 
 
@@ -3540,7 +3540,7 @@ class SetRootRotation_args(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.rotation = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.rotation = MMIStandard.math.ttypes.MQuaternion()
                     self.rotation.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3582,7 +3582,7 @@ all_structs.append(SetRootRotation_args)
 SetRootRotation_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'avatarId', 'UTF8', None, ),  # 1
-    (2, TType.STRUCT, 'rotation', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 2
+    (2, TType.STRUCT, 'rotation', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 2
 )
 
 
@@ -3665,7 +3665,7 @@ class SetGlobalJointPosition_args(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.position = MOSIM.mmi.math.ttypes.MVector3()
+                    self.position = MMIStandard.math.ttypes.MVector3()
                     self.position.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3712,7 +3712,7 @@ SetGlobalJointPosition_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'avatarId', 'UTF8', None, ),  # 1
     (2, TType.I32, 'joint', None, None, ),  # 2
-    (3, TType.STRUCT, 'position', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 3
+    (3, TType.STRUCT, 'position', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 3
 )
 
 
@@ -3795,7 +3795,7 @@ class SetGlobalJointRotation_args(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.rotation = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.rotation = MMIStandard.math.ttypes.MQuaternion()
                     self.rotation.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3842,7 +3842,7 @@ SetGlobalJointRotation_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'avatarId', 'UTF8', None, ),  # 1
     (2, TType.I32, 'joint', None, None, ),  # 2
-    (3, TType.STRUCT, 'rotation', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 3
+    (3, TType.STRUCT, 'rotation', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 3
 )
 
 
@@ -3925,7 +3925,7 @@ class SetLocalJointPosition_args(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.position = MOSIM.mmi.math.ttypes.MVector3()
+                    self.position = MMIStandard.math.ttypes.MVector3()
                     self.position.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -3972,7 +3972,7 @@ SetLocalJointPosition_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'avatarId', 'UTF8', None, ),  # 1
     (2, TType.I32, 'joint', None, None, ),  # 2
-    (3, TType.STRUCT, 'position', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 3
+    (3, TType.STRUCT, 'position', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 3
 )
 
 
@@ -4055,7 +4055,7 @@ class SetLocalJointRotation_args(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.rotation = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.rotation = MMIStandard.math.ttypes.MQuaternion()
                     self.rotation.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -4102,7 +4102,7 @@ SetLocalJointRotation_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'avatarId', 'UTF8', None, ),  # 1
     (2, TType.I32, 'joint', None, None, ),  # 2
-    (3, TType.STRUCT, 'rotation', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 3
+    (3, TType.STRUCT, 'rotation', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 3
 )
 
 
@@ -4233,7 +4233,7 @@ class RecomputeCurrentPostureValues_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -4269,7 +4269,7 @@ class RecomputeCurrentPostureValues_result(object):
         return not (self == other)
 all_structs.append(RecomputeCurrentPostureValues_result)
 RecomputeCurrentPostureValues_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,21 +19,23 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
-    def RegisterAtEvent(self, clientAddress, eventType):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
+    def RegisterAtEvent(self, clientAddress, eventType, avatarID):
         """
         Parameters:
          - clientAddress
          - eventType
+         - avatarID
 
         """
         pass
 
-    def UnregisterAtEvent(self, clientAddress, eventType):
+    def UnregisterAtEvent(self, clientAddress, eventType, avatarID):
         """
         Parameters:
          - clientAddress
          - eventType
+         - avatarID
 
         """
         pass
@@ -47,7 +49,12 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         """
         pass
 
-    def Abort(self):
+    def Abort(self, avatarID):
+        """
+        Parameters:
+         - avatarID
+
+        """
         pass
 
     def AbortInstruction(self, instructionID):
@@ -66,57 +73,67 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         """
         pass
 
-    def GetHistoryFromTime(self, startTime, endTime, eventType):
+    def GetHistoryFromTime(self, startTime, endTime, eventType, avatarID):
         """
         Parameters:
          - startTime
          - endTime
          - eventType
+         - avatarID
 
         """
         pass
 
-    def GetHistoryFromFrames(self, fromFrame, toFrame, eventType):
+    def GetHistoryFromFrames(self, fromFrame, toFrame, eventType, avatarID):
         """
         Parameters:
          - fromFrame
          - toFrame
          - eventType
+         - avatarID
 
         """
         pass
 
-    def GetHistory(self, eventType):
+    def GetHistory(self, eventType, avatarID):
         """
         Parameters:
          - eventType
+         - avatarID
 
         """
         pass
 
-    def GetCurrentEvents(self):
+    def GetCurrentEvents(self, avatarID):
+        """
+        Parameters:
+         - avatarID
+
+        """
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
-    def RegisterAtEvent(self, clientAddress, eventType):
+    def RegisterAtEvent(self, clientAddress, eventType, avatarID):
         """
         Parameters:
          - clientAddress
          - eventType
+         - avatarID
 
         """
-        self.send_RegisterAtEvent(clientAddress, eventType)
+        self.send_RegisterAtEvent(clientAddress, eventType, avatarID)
         return self.recv_RegisterAtEvent()
 
-    def send_RegisterAtEvent(self, clientAddress, eventType):
+    def send_RegisterAtEvent(self, clientAddress, eventType, avatarID):
         self._oprot.writeMessageBegin('RegisterAtEvent', TMessageType.CALL, self._seqid)
         args = RegisterAtEvent_args()
         args.clientAddress = clientAddress
         args.eventType = eventType
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -136,21 +153,23 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "RegisterAtEvent failed: unknown result")
 
-    def UnregisterAtEvent(self, clientAddress, eventType):
+    def UnregisterAtEvent(self, clientAddress, eventType, avatarID):
         """
         Parameters:
          - clientAddress
          - eventType
+         - avatarID
 
         """
-        self.send_UnregisterAtEvent(clientAddress, eventType)
+        self.send_UnregisterAtEvent(clientAddress, eventType, avatarID)
         return self.recv_UnregisterAtEvent()
 
-    def send_UnregisterAtEvent(self, clientAddress, eventType):
+    def send_UnregisterAtEvent(self, clientAddress, eventType, avatarID):
         self._oprot.writeMessageBegin('UnregisterAtEvent', TMessageType.CALL, self._seqid)
         args = UnregisterAtEvent_args()
         args.clientAddress = clientAddress
         args.eventType = eventType
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -204,13 +223,19 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "AssignInstruction failed: unknown result")
 
-    def Abort(self):
-        self.send_Abort()
+    def Abort(self, avatarID):
+        """
+        Parameters:
+         - avatarID
+
+        """
+        self.send_Abort(avatarID)
         return self.recv_Abort()
 
-    def send_Abort(self):
+    def send_Abort(self, avatarID):
         self._oprot.writeMessageBegin('Abort', TMessageType.CALL, self._seqid)
         args = Abort_args()
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -294,23 +319,25 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "AbortInstructions failed: unknown result")
 
-    def GetHistoryFromTime(self, startTime, endTime, eventType):
+    def GetHistoryFromTime(self, startTime, endTime, eventType, avatarID):
         """
         Parameters:
          - startTime
          - endTime
          - eventType
+         - avatarID
 
         """
-        self.send_GetHistoryFromTime(startTime, endTime, eventType)
+        self.send_GetHistoryFromTime(startTime, endTime, eventType, avatarID)
         return self.recv_GetHistoryFromTime()
 
-    def send_GetHistoryFromTime(self, startTime, endTime, eventType):
+    def send_GetHistoryFromTime(self, startTime, endTime, eventType, avatarID):
         self._oprot.writeMessageBegin('GetHistoryFromTime', TMessageType.CALL, self._seqid)
         args = GetHistoryFromTime_args()
         args.startTime = startTime
         args.endTime = endTime
         args.eventType = eventType
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -330,23 +357,25 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "GetHistoryFromTime failed: unknown result")
 
-    def GetHistoryFromFrames(self, fromFrame, toFrame, eventType):
+    def GetHistoryFromFrames(self, fromFrame, toFrame, eventType, avatarID):
         """
         Parameters:
          - fromFrame
          - toFrame
          - eventType
+         - avatarID
 
         """
-        self.send_GetHistoryFromFrames(fromFrame, toFrame, eventType)
+        self.send_GetHistoryFromFrames(fromFrame, toFrame, eventType, avatarID)
         return self.recv_GetHistoryFromFrames()
 
-    def send_GetHistoryFromFrames(self, fromFrame, toFrame, eventType):
+    def send_GetHistoryFromFrames(self, fromFrame, toFrame, eventType, avatarID):
         self._oprot.writeMessageBegin('GetHistoryFromFrames', TMessageType.CALL, self._seqid)
         args = GetHistoryFromFrames_args()
         args.fromFrame = fromFrame
         args.toFrame = toFrame
         args.eventType = eventType
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -366,19 +395,21 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "GetHistoryFromFrames failed: unknown result")
 
-    def GetHistory(self, eventType):
+    def GetHistory(self, eventType, avatarID):
         """
         Parameters:
          - eventType
+         - avatarID
 
         """
-        self.send_GetHistory(eventType)
+        self.send_GetHistory(eventType, avatarID)
         return self.recv_GetHistory()
 
-    def send_GetHistory(self, eventType):
+    def send_GetHistory(self, eventType, avatarID):
         self._oprot.writeMessageBegin('GetHistory', TMessageType.CALL, self._seqid)
         args = GetHistory_args()
         args.eventType = eventType
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -398,13 +429,19 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "GetHistory failed: unknown result")
 
-    def GetCurrentEvents(self):
-        self.send_GetCurrentEvents()
+    def GetCurrentEvents(self, avatarID):
+        """
+        Parameters:
+         - avatarID
+
+        """
+        self.send_GetCurrentEvents(avatarID)
         return self.recv_GetCurrentEvents()
 
-    def send_GetCurrentEvents(self):
+    def send_GetCurrentEvents(self, avatarID):
         self._oprot.writeMessageBegin('GetCurrentEvents', TMessageType.CALL, self._seqid)
         args = GetCurrentEvents_args()
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -425,9 +462,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "GetCurrentEvents failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["RegisterAtEvent"] = Processor.process_RegisterAtEvent
         self._processMap["UnregisterAtEvent"] = Processor.process_UnregisterAtEvent
         self._processMap["AssignInstruction"] = Processor.process_AssignInstruction
@@ -466,7 +503,7 @@ class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
         iprot.readMessageEnd()
         result = RegisterAtEvent_result()
         try:
-            result.success = self._handler.RegisterAtEvent(args.clientAddress, args.eventType)
+            result.success = self._handler.RegisterAtEvent(args.clientAddress, args.eventType, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -489,7 +526,7 @@ class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
         iprot.readMessageEnd()
         result = UnregisterAtEvent_result()
         try:
-            result.success = self._handler.UnregisterAtEvent(args.clientAddress, args.eventType)
+            result.success = self._handler.UnregisterAtEvent(args.clientAddress, args.eventType, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -535,7 +572,7 @@ class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
         iprot.readMessageEnd()
         result = Abort_result()
         try:
-            result.success = self._handler.Abort()
+            result.success = self._handler.Abort(args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -604,7 +641,7 @@ class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
         iprot.readMessageEnd()
         result = GetHistoryFromTime_result()
         try:
-            result.success = self._handler.GetHistoryFromTime(args.startTime, args.endTime, args.eventType)
+            result.success = self._handler.GetHistoryFromTime(args.startTime, args.endTime, args.eventType, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -627,7 +664,7 @@ class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
         iprot.readMessageEnd()
         result = GetHistoryFromFrames_result()
         try:
-            result.success = self._handler.GetHistoryFromFrames(args.fromFrame, args.toFrame, args.eventType)
+            result.success = self._handler.GetHistoryFromFrames(args.fromFrame, args.toFrame, args.eventType, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -650,7 +687,7 @@ class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
         iprot.readMessageEnd()
         result = GetHistory_result()
         try:
-            result.success = self._handler.GetHistory(args.eventType)
+            result.success = self._handler.GetHistory(args.eventType, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -673,7 +710,7 @@ class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
         iprot.readMessageEnd()
         result = GetCurrentEvents_result()
         try:
-            result.success = self._handler.GetCurrentEvents()
+            result.success = self._handler.GetCurrentEvents(args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -698,13 +735,15 @@ class RegisterAtEvent_args(object):
     Attributes:
      - clientAddress
      - eventType
+     - avatarID
 
     """
 
 
-    def __init__(self, clientAddress=None, eventType=None,):
+    def __init__(self, clientAddress=None, eventType=None, avatarID=None,):
         self.clientAddress = clientAddress
         self.eventType = eventType
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -717,13 +756,18 @@ class RegisterAtEvent_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.clientAddress = MOSIM.mmi.core.ttypes.MIPAddress()
+                    self.clientAddress = MMIStandard.core.ttypes.MIPAddress()
                     self.clientAddress.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRING:
                     self.eventType = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 3:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             else:
@@ -744,6 +788,10 @@ class RegisterAtEvent_args(object):
             oprot.writeFieldBegin('eventType', TType.STRING, 2)
             oprot.writeString(self.eventType.encode('utf-8') if sys.version_info[0] == 2 else self.eventType)
             oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 3)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -763,8 +811,9 @@ class RegisterAtEvent_args(object):
 all_structs.append(RegisterAtEvent_args)
 RegisterAtEvent_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'clientAddress', [MOSIM.mmi.core.ttypes.MIPAddress, None], None, ),  # 1
+    (1, TType.STRUCT, 'clientAddress', [MMIStandard.core.ttypes.MIPAddress, None], None, ),  # 1
     (2, TType.STRING, 'eventType', 'UTF8', None, ),  # 2
+    (3, TType.STRING, 'avatarID', 'UTF8', None, ),  # 3
 )
 
 
@@ -790,7 +839,7 @@ class RegisterAtEvent_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -826,7 +875,7 @@ class RegisterAtEvent_result(object):
         return not (self == other)
 all_structs.append(RegisterAtEvent_result)
 RegisterAtEvent_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -835,13 +884,15 @@ class UnregisterAtEvent_args(object):
     Attributes:
      - clientAddress
      - eventType
+     - avatarID
 
     """
 
 
-    def __init__(self, clientAddress=None, eventType=None,):
+    def __init__(self, clientAddress=None, eventType=None, avatarID=None,):
         self.clientAddress = clientAddress
         self.eventType = eventType
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -854,13 +905,18 @@ class UnregisterAtEvent_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.clientAddress = MOSIM.mmi.core.ttypes.MIPAddress()
+                    self.clientAddress = MMIStandard.core.ttypes.MIPAddress()
                     self.clientAddress.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRING:
                     self.eventType = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 3:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             else:
@@ -881,6 +937,10 @@ class UnregisterAtEvent_args(object):
             oprot.writeFieldBegin('eventType', TType.STRING, 2)
             oprot.writeString(self.eventType.encode('utf-8') if sys.version_info[0] == 2 else self.eventType)
             oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 3)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -900,8 +960,9 @@ class UnregisterAtEvent_args(object):
 all_structs.append(UnregisterAtEvent_args)
 UnregisterAtEvent_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'clientAddress', [MOSIM.mmi.core.ttypes.MIPAddress, None], None, ),  # 1
+    (1, TType.STRUCT, 'clientAddress', [MMIStandard.core.ttypes.MIPAddress, None], None, ),  # 1
     (2, TType.STRING, 'eventType', 'UTF8', None, ),  # 2
+    (3, TType.STRING, 'avatarID', 'UTF8', None, ),  # 3
 )
 
 
@@ -927,7 +988,7 @@ class UnregisterAtEvent_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -963,7 +1024,7 @@ class UnregisterAtEvent_result(object):
         return not (self == other)
 all_structs.append(UnregisterAtEvent_result)
 UnregisterAtEvent_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -991,7 +1052,7 @@ class AssignInstruction_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.instruction = MOSIM.mmi.mmu.ttypes.MInstruction()
+                    self.instruction = MMIStandard.mmu.ttypes.MInstruction()
                     self.instruction.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1047,7 +1108,7 @@ class AssignInstruction_args(object):
 all_structs.append(AssignInstruction_args)
 AssignInstruction_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'instruction', [MOSIM.mmi.mmu.ttypes.MInstruction, None], None, ),  # 1
+    (1, TType.STRUCT, 'instruction', [MMIStandard.mmu.ttypes.MInstruction, None], None, ),  # 1
     (2, TType.MAP, 'properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 2
 )
 
@@ -1074,7 +1135,7 @@ class AssignInstruction_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1110,12 +1171,20 @@ class AssignInstruction_result(object):
         return not (self == other)
 all_structs.append(AssignInstruction_result)
 AssignInstruction_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
 class Abort_args(object):
+    """
+    Attributes:
+     - avatarID
 
+    """
+
+
+    def __init__(self, avatarID=None,):
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1126,6 +1195,11 @@ class Abort_args(object):
             (fname, ftype, fid) = iprot.readFieldBegin()
             if ftype == TType.STOP:
                 break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1136,6 +1210,10 @@ class Abort_args(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('Abort_args')
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 1)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -1154,6 +1232,8 @@ class Abort_args(object):
         return not (self == other)
 all_structs.append(Abort_args)
 Abort_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'avatarID', 'UTF8', None, ),  # 1
 )
 
 
@@ -1179,7 +1259,7 @@ class Abort_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1215,7 +1295,7 @@ class Abort_result(object):
         return not (self == other)
 all_structs.append(Abort_result)
 Abort_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1303,7 +1383,7 @@ class AbortInstruction_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1339,7 +1419,7 @@ class AbortInstruction_result(object):
         return not (self == other)
 all_structs.append(AbortInstruction_result)
 AbortInstruction_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1435,7 +1515,7 @@ class AbortInstructions_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.core.ttypes.MBoolResponse()
+                    self.success = MMIStandard.core.ttypes.MBoolResponse()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1471,7 +1551,7 @@ class AbortInstructions_result(object):
         return not (self == other)
 all_structs.append(AbortInstructions_result)
 AbortInstructions_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.core.ttypes.MBoolResponse, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.core.ttypes.MBoolResponse, None], None, ),  # 0
 )
 
 
@@ -1481,14 +1561,16 @@ class GetHistoryFromTime_args(object):
      - startTime
      - endTime
      - eventType
+     - avatarID
 
     """
 
 
-    def __init__(self, startTime=None, endTime=None, eventType=None,):
+    def __init__(self, startTime=None, endTime=None, eventType=None, avatarID=None,):
         self.startTime = startTime
         self.endTime = endTime
         self.eventType = eventType
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1514,6 +1596,11 @@ class GetHistoryFromTime_args(object):
                     self.eventType = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 4:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1535,6 +1622,10 @@ class GetHistoryFromTime_args(object):
         if self.eventType is not None:
             oprot.writeFieldBegin('eventType', TType.STRING, 3)
             oprot.writeString(self.eventType.encode('utf-8') if sys.version_info[0] == 2 else self.eventType)
+            oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 4)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -1558,6 +1649,7 @@ GetHistoryFromTime_args.thrift_spec = (
     (1, TType.DOUBLE, 'startTime', None, None, ),  # 1
     (2, TType.DOUBLE, 'endTime', None, None, ),  # 2
     (3, TType.STRING, 'eventType', 'UTF8', None, ),  # 3
+    (4, TType.STRING, 'avatarID', 'UTF8', None, ),  # 4
 )
 
 
@@ -1637,14 +1729,16 @@ class GetHistoryFromFrames_args(object):
      - fromFrame
      - toFrame
      - eventType
+     - avatarID
 
     """
 
 
-    def __init__(self, fromFrame=None, toFrame=None, eventType=None,):
+    def __init__(self, fromFrame=None, toFrame=None, eventType=None, avatarID=None,):
         self.fromFrame = fromFrame
         self.toFrame = toFrame
         self.eventType = eventType
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1670,6 +1764,11 @@ class GetHistoryFromFrames_args(object):
                     self.eventType = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 4:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1691,6 +1790,10 @@ class GetHistoryFromFrames_args(object):
         if self.eventType is not None:
             oprot.writeFieldBegin('eventType', TType.STRING, 3)
             oprot.writeString(self.eventType.encode('utf-8') if sys.version_info[0] == 2 else self.eventType)
+            oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 4)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -1714,6 +1817,7 @@ GetHistoryFromFrames_args.thrift_spec = (
     (1, TType.I32, 'fromFrame', None, None, ),  # 1
     (2, TType.I32, 'toFrame', None, None, ),  # 2
     (3, TType.STRING, 'eventType', 'UTF8', None, ),  # 3
+    (4, TType.STRING, 'avatarID', 'UTF8', None, ),  # 4
 )
 
 
@@ -1791,12 +1895,14 @@ class GetHistory_args(object):
     """
     Attributes:
      - eventType
+     - avatarID
 
     """
 
 
-    def __init__(self, eventType=None,):
+    def __init__(self, eventType=None, avatarID=None,):
         self.eventType = eventType
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1812,6 +1918,11 @@ class GetHistory_args(object):
                     self.eventType = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 2:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1825,6 +1936,10 @@ class GetHistory_args(object):
         if self.eventType is not None:
             oprot.writeFieldBegin('eventType', TType.STRING, 1)
             oprot.writeString(self.eventType.encode('utf-8') if sys.version_info[0] == 2 else self.eventType)
+            oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 2)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -1846,6 +1961,7 @@ all_structs.append(GetHistory_args)
 GetHistory_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'eventType', 'UTF8', None, ),  # 1
+    (2, TType.STRING, 'avatarID', 'UTF8', None, ),  # 2
 )
 
 
@@ -1920,7 +2036,15 @@ GetHistory_result.thrift_spec = (
 
 
 class GetCurrentEvents_args(object):
+    """
+    Attributes:
+     - avatarID
 
+    """
+
+
+    def __init__(self, avatarID=None,):
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1931,6 +2055,11 @@ class GetCurrentEvents_args(object):
             (fname, ftype, fid) = iprot.readFieldBegin()
             if ftype == TType.STOP:
                 break
+            if fid == 1:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1941,6 +2070,10 @@ class GetCurrentEvents_args(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('GetCurrentEvents_args')
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 1)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -1959,6 +2092,8 @@ class GetCurrentEvents_args(object):
         return not (self == other)
 all_structs.append(GetCurrentEvents_args)
 GetCurrentEvents_args.thrift_spec = (
+    None,  # 0
+    (1, TType.STRING, 'avatarID', 'UTF8', None, ),  # 1
 )
 
 

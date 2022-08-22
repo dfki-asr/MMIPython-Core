@@ -11,11 +11,11 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.core.ttypes
-import MOSIM.mmi.scene.ttypes
-import MOSIM.mmi.math.ttypes
-import MOSIM.mmi.avatar.ttypes
-import MOSIM.mmi.constraints.ttypes
+import MMIStandard.core.ttypes
+import MMIStandard.scene.ttypes
+import MMIStandard.math.ttypes
+import MMIStandard.avatar.ttypes
+import MMIStandard.constraints.ttypes
 
 from thrift.transport import TTransport
 all_structs = []
@@ -89,7 +89,7 @@ class MIKServiceResult(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.Posture = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.Posture = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.Posture.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -181,7 +181,7 @@ class MWalkPoint(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.PositionConstraint = MOSIM.mmi.constraints.ttypes.MGeometryConstraint()
+                    self.PositionConstraint = MMIStandard.constraints.ttypes.MGeometryConstraint()
                     self.PositionConstraint.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -337,14 +337,14 @@ class MIKProperty(object):
 all_structs.append(MIKServiceResult)
 MIKServiceResult.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'Posture', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (1, TType.STRUCT, 'Posture', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
     (2, TType.BOOL, 'Success', None, None, ),  # 2
     (3, TType.LIST, 'Error', (TType.DOUBLE, None, False), None, ),  # 3
 )
 all_structs.append(MWalkPoint)
 MWalkPoint.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'PositionConstraint', [MOSIM.mmi.constraints.ttypes.MGeometryConstraint, None], None, ),  # 1
+    (1, TType.STRUCT, 'PositionConstraint', [MMIStandard.constraints.ttypes.MGeometryConstraint, None], None, ),  # 1
     (2, TType.DOUBLE, 'Suitability', None, None, ),  # 2
 )
 all_structs.append(MIKProperty)

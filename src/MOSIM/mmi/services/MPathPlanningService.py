@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def ComputePath(self, start, goal, sceneObjects, properties):
         """
         Parameters:
@@ -32,9 +32,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def ComputePath(self, start, goal, sceneObjects, properties):
         """
@@ -75,9 +75,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "ComputePath failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["ComputePath"] = Processor.process_ComputePath
         self._on_message_begin = None
 
@@ -155,13 +155,13 @@ class ComputePath_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.start = MOSIM.mmi.math.ttypes.MVector()
+                    self.start = MMIStandard.math.ttypes.MVector()
                     self.start.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.goal = MOSIM.mmi.math.ttypes.MVector()
+                    self.goal = MMIStandard.math.ttypes.MVector()
                     self.goal.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -170,7 +170,7 @@ class ComputePath_args(object):
                     self.sceneObjects = []
                     (_etype244, _size241) = iprot.readListBegin()
                     for _i245 in range(_size241):
-                        _elem246 = MOSIM.mmi.scene.ttypes.MSceneObject()
+                        _elem246 = MMIStandard.scene.ttypes.MSceneObject()
                         _elem246.read(iprot)
                         self.sceneObjects.append(_elem246)
                     iprot.readListEnd()
@@ -239,9 +239,9 @@ class ComputePath_args(object):
 all_structs.append(ComputePath_args)
 ComputePath_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'start', [MOSIM.mmi.math.ttypes.MVector, None], None, ),  # 1
-    (2, TType.STRUCT, 'goal', [MOSIM.mmi.math.ttypes.MVector, None], None, ),  # 2
-    (3, TType.LIST, 'sceneObjects', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MSceneObject, None], False), None, ),  # 3
+    (1, TType.STRUCT, 'start', [MMIStandard.math.ttypes.MVector, None], None, ),  # 1
+    (2, TType.STRUCT, 'goal', [MMIStandard.math.ttypes.MVector, None], None, ),  # 2
+    (3, TType.LIST, 'sceneObjects', (TType.STRUCT, [MMIStandard.scene.ttypes.MSceneObject, None], False), None, ),  # 3
     (4, TType.MAP, 'properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 4
 )
 
@@ -268,7 +268,7 @@ class ComputePath_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.constraints.ttypes.MPathConstraint()
+                    self.success = MMIStandard.constraints.ttypes.MPathConstraint()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -304,7 +304,7 @@ class ComputePath_result(object):
         return not (self == other)
 all_structs.append(ComputePath_result)
 ComputePath_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.constraints.ttypes.MPathConstraint, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.constraints.ttypes.MPathConstraint, None], None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

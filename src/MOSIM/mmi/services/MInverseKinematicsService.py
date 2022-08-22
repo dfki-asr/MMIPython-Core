@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def ComputeIK(self, postureValues, properties):
         """
         Parameters:
@@ -40,9 +40,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def ComputeIK(self, postureValues, properties):
         """
@@ -115,9 +115,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "CalculateIKPosture failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["ComputeIK"] = Processor.process_ComputeIK
         self._processMap["CalculateIKPosture"] = Processor.process_CalculateIKPosture
         self._on_message_begin = None
@@ -215,7 +215,7 @@ class ComputeIK_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.postureValues = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.postureValues = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.postureValues.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -270,7 +270,7 @@ class ComputeIK_args(object):
 all_structs.append(ComputeIK_args)
 ComputeIK_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'postureValues', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (1, TType.STRUCT, 'postureValues', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
     (2, TType.LIST, 'properties', (TType.STRUCT, [MIKProperty, None], False), None, ),  # 2
 )
 
@@ -297,7 +297,7 @@ class ComputeIK_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -333,7 +333,7 @@ class ComputeIK_result(object):
         return not (self == other)
 all_structs.append(ComputeIK_result)
 ComputeIK_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
 )
 
 
@@ -363,7 +363,7 @@ class CalculateIKPosture_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.postureValues = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.postureValues = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.postureValues.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -372,7 +372,7 @@ class CalculateIKPosture_args(object):
                     self.constraints = []
                     (_etype169, _size166) = iprot.readListBegin()
                     for _i170 in range(_size166):
-                        _elem171 = MOSIM.mmi.constraints.ttypes.MConstraint()
+                        _elem171 = MMIStandard.constraints.ttypes.MConstraint()
                         _elem171.read(iprot)
                         self.constraints.append(_elem171)
                     iprot.readListEnd()
@@ -437,8 +437,8 @@ class CalculateIKPosture_args(object):
 all_structs.append(CalculateIKPosture_args)
 CalculateIKPosture_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'postureValues', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
-    (2, TType.LIST, 'constraints', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MConstraint, None], False), None, ),  # 2
+    (1, TType.STRUCT, 'postureValues', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (2, TType.LIST, 'constraints', (TType.STRUCT, [MMIStandard.constraints.ttypes.MConstraint, None], False), None, ),  # 2
     (3, TType.MAP, 'properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 3
 )
 

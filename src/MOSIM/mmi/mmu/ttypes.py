@@ -11,10 +11,10 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.core.ttypes
-import MOSIM.mmi.avatar.ttypes
-import MOSIM.mmi.scene.ttypes
-import MOSIM.mmi.constraints.ttypes
+import MMIStandard.core.ttypes
+import MMIStandard.avatar.ttypes
+import MMIStandard.scene.ttypes
+import MMIStandard.constraints.ttypes
 
 from thrift.transport import TTransport
 all_structs = []
@@ -89,13 +89,13 @@ class MSimulationState(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.Initial = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.Initial = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.Initial.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.Current = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.Current = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.Current.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -104,7 +104,7 @@ class MSimulationState(object):
                     self.Constraints = []
                     (_etype3, _size0) = iprot.readListBegin()
                     for _i4 in range(_size0):
-                        _elem5 = MOSIM.mmi.constraints.ttypes.MConstraint()
+                        _elem5 = MMIStandard.constraints.ttypes.MConstraint()
                         _elem5.read(iprot)
                         self.Constraints.append(_elem5)
                     iprot.readListEnd()
@@ -115,7 +115,7 @@ class MSimulationState(object):
                     self.SceneManipulations = []
                     (_etype9, _size6) = iprot.readListBegin()
                     for _i10 in range(_size6):
-                        _elem11 = MOSIM.mmi.scene.ttypes.MSceneManipulation()
+                        _elem11 = MMIStandard.scene.ttypes.MSceneManipulation()
                         _elem11.read(iprot)
                         self.SceneManipulations.append(_elem11)
                     iprot.readListEnd()
@@ -225,7 +225,7 @@ class MSimulationResult(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.Posture = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.Posture = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.Posture.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -234,7 +234,7 @@ class MSimulationResult(object):
                     self.Constraints = []
                     (_etype24, _size21) = iprot.readListBegin()
                     for _i25 in range(_size21):
-                        _elem26 = MOSIM.mmi.constraints.ttypes.MConstraint()
+                        _elem26 = MMIStandard.constraints.ttypes.MConstraint()
                         _elem26.read(iprot)
                         self.Constraints.append(_elem26)
                     iprot.readListEnd()
@@ -256,7 +256,7 @@ class MSimulationResult(object):
                     self.SceneManipulations = []
                     (_etype36, _size33) = iprot.readListBegin()
                     for _i37 in range(_size33):
-                        _elem38 = MOSIM.mmi.scene.ttypes.MSceneManipulation()
+                        _elem38 = MMIStandard.scene.ttypes.MSceneManipulation()
                         _elem38.read(iprot)
                         self.SceneManipulations.append(_elem38)
                     iprot.readListEnd()
@@ -267,7 +267,7 @@ class MSimulationResult(object):
                     self.DrawingCalls = []
                     (_etype42, _size39) = iprot.readListBegin()
                     for _i43 in range(_size39):
-                        _elem44 = MOSIM.mmi.scene.ttypes.MDrawingCall()
+                        _elem44 = MMIStandard.scene.ttypes.MDrawingCall()
                         _elem44.read(iprot)
                         self.DrawingCalls.append(_elem44)
                     iprot.readListEnd()
@@ -777,7 +777,7 @@ class MMUDescription(object):
                     self.Prerequisites = []
                     (_etype75, _size72) = iprot.readListBegin()
                     for _i76 in range(_size72):
-                        _elem77 = MOSIM.mmi.constraints.ttypes.MConstraint()
+                        _elem77 = MMIStandard.constraints.ttypes.MConstraint()
                         _elem77.read(iprot)
                         self.Prerequisites.append(_elem77)
                     iprot.readListEnd()
@@ -830,7 +830,7 @@ class MMUDescription(object):
                     self.Parameters = []
                     (_etype100, _size97) = iprot.readListBegin()
                     for _i101 in range(_size97):
-                        _elem102 = MOSIM.mmi.core.ttypes.MParameter()
+                        _elem102 = MMIStandard.core.ttypes.MParameter()
                         _elem102.read(iprot)
                         self.Parameters.append(_elem102)
                     iprot.readListEnd()
@@ -841,7 +841,7 @@ class MMUDescription(object):
                     self.SceneParameters = []
                     (_etype106, _size103) = iprot.readListBegin()
                     for _i107 in range(_size103):
-                        _elem108 = MOSIM.mmi.core.ttypes.MParameter()
+                        _elem108 = MMIStandard.core.ttypes.MParameter()
                         _elem108.read(iprot)
                         self.SceneParameters.append(_elem108)
                     iprot.readListEnd()
@@ -1010,6 +1010,7 @@ class MInstruction(object):
      - ID
      - Name
      - MotionType
+     - AvatarID
      - Properties
      - Constraints
      - StartCondition
@@ -1020,10 +1021,11 @@ class MInstruction(object):
     """
 
 
-    def __init__(self, ID=None, Name=None, MotionType=None, Properties=None, Constraints=None, StartCondition=None, EndCondition=None, Action=None, Instructions=None,):
+    def __init__(self, ID=None, Name=None, MotionType=None, AvatarID=None, Properties=None, Constraints=None, StartCondition=None, EndCondition=None, Action=None, Instructions=None,):
         self.ID = ID
         self.Name = Name
         self.MotionType = MotionType
+        self.AvatarID = AvatarID
         self.Properties = Properties
         self.Constraints = Constraints
         self.StartCondition = StartCondition
@@ -1056,6 +1058,11 @@ class MInstruction(object):
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
+                if ftype == TType.STRING:
+                    self.AvatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 5:
                 if ftype == TType.MAP:
                     self.Properties = {}
                     (_ktype117, _vtype118, _size116) = iprot.readMapBegin()
@@ -1066,33 +1073,33 @@ class MInstruction(object):
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
-            elif fid == 5:
+            elif fid == 6:
                 if ftype == TType.LIST:
                     self.Constraints = []
                     (_etype126, _size123) = iprot.readListBegin()
                     for _i127 in range(_size123):
-                        _elem128 = MOSIM.mmi.constraints.ttypes.MConstraint()
+                        _elem128 = MMIStandard.constraints.ttypes.MConstraint()
                         _elem128.read(iprot)
                         self.Constraints.append(_elem128)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
-            elif fid == 6:
+            elif fid == 7:
                 if ftype == TType.STRING:
                     self.StartCondition = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 7:
+            elif fid == 8:
                 if ftype == TType.STRING:
                     self.EndCondition = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 8:
+            elif fid == 9:
                 if ftype == TType.STRING:
                     self.Action = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 9:
+            elif fid == 10:
                 if ftype == TType.LIST:
                     self.Instructions = []
                     (_etype132, _size129) = iprot.readListBegin()
@@ -1125,8 +1132,12 @@ class MInstruction(object):
             oprot.writeFieldBegin('MotionType', TType.STRING, 3)
             oprot.writeString(self.MotionType.encode('utf-8') if sys.version_info[0] == 2 else self.MotionType)
             oprot.writeFieldEnd()
+        if self.AvatarID is not None:
+            oprot.writeFieldBegin('AvatarID', TType.STRING, 4)
+            oprot.writeString(self.AvatarID.encode('utf-8') if sys.version_info[0] == 2 else self.AvatarID)
+            oprot.writeFieldEnd()
         if self.Properties is not None:
-            oprot.writeFieldBegin('Properties', TType.MAP, 4)
+            oprot.writeFieldBegin('Properties', TType.MAP, 5)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.Properties))
             for kiter135, viter136 in self.Properties.items():
                 oprot.writeString(kiter135.encode('utf-8') if sys.version_info[0] == 2 else kiter135)
@@ -1134,26 +1145,26 @@ class MInstruction(object):
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         if self.Constraints is not None:
-            oprot.writeFieldBegin('Constraints', TType.LIST, 5)
+            oprot.writeFieldBegin('Constraints', TType.LIST, 6)
             oprot.writeListBegin(TType.STRUCT, len(self.Constraints))
             for iter137 in self.Constraints:
                 iter137.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.StartCondition is not None:
-            oprot.writeFieldBegin('StartCondition', TType.STRING, 6)
+            oprot.writeFieldBegin('StartCondition', TType.STRING, 7)
             oprot.writeString(self.StartCondition.encode('utf-8') if sys.version_info[0] == 2 else self.StartCondition)
             oprot.writeFieldEnd()
         if self.EndCondition is not None:
-            oprot.writeFieldBegin('EndCondition', TType.STRING, 7)
+            oprot.writeFieldBegin('EndCondition', TType.STRING, 8)
             oprot.writeString(self.EndCondition.encode('utf-8') if sys.version_info[0] == 2 else self.EndCondition)
             oprot.writeFieldEnd()
         if self.Action is not None:
-            oprot.writeFieldBegin('Action', TType.STRING, 8)
+            oprot.writeFieldBegin('Action', TType.STRING, 9)
             oprot.writeString(self.Action.encode('utf-8') if sys.version_info[0] == 2 else self.Action)
             oprot.writeFieldEnd()
         if self.Instructions is not None:
-            oprot.writeFieldBegin('Instructions', TType.LIST, 9)
+            oprot.writeFieldBegin('Instructions', TType.LIST, 10)
             oprot.writeListBegin(TType.STRUCT, len(self.Instructions))
             for iter138 in self.Instructions:
                 iter138.write(oprot)
@@ -1169,6 +1180,8 @@ class MInstruction(object):
             raise TProtocolException(message='Required field Name is unset!')
         if self.MotionType is None:
             raise TProtocolException(message='Required field MotionType is unset!')
+        if self.AvatarID is None:
+            raise TProtocolException(message='Required field AvatarID is unset!')
         return
 
     def __repr__(self):
@@ -1184,20 +1197,20 @@ class MInstruction(object):
 all_structs.append(MSimulationState)
 MSimulationState.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'Initial', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
-    (2, TType.STRUCT, 'Current', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 2
-    (3, TType.LIST, 'Constraints', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MConstraint, None], False), None, ),  # 3
-    (4, TType.LIST, 'SceneManipulations', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MSceneManipulation, None], False), None, ),  # 4
+    (1, TType.STRUCT, 'Initial', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (2, TType.STRUCT, 'Current', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 2
+    (3, TType.LIST, 'Constraints', (TType.STRUCT, [MMIStandard.constraints.ttypes.MConstraint, None], False), None, ),  # 3
+    (4, TType.LIST, 'SceneManipulations', (TType.STRUCT, [MMIStandard.scene.ttypes.MSceneManipulation, None], False), None, ),  # 4
     (5, TType.LIST, 'Events', (TType.STRUCT, [MSimulationEvent, None], False), None, ),  # 5
 )
 all_structs.append(MSimulationResult)
 MSimulationResult.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'Posture', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
-    (2, TType.LIST, 'Constraints', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MConstraint, None], False), None, ),  # 2
+    (1, TType.STRUCT, 'Posture', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (2, TType.LIST, 'Constraints', (TType.STRUCT, [MMIStandard.constraints.ttypes.MConstraint, None], False), None, ),  # 2
     (3, TType.LIST, 'Events', (TType.STRUCT, [MSimulationEvent, None], False), None, ),  # 3
-    (4, TType.LIST, 'SceneManipulations', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MSceneManipulation, None], False), None, ),  # 4
-    (5, TType.LIST, 'DrawingCalls', (TType.STRUCT, [MOSIM.mmi.scene.ttypes.MDrawingCall, None], False), None, ),  # 5
+    (4, TType.LIST, 'SceneManipulations', (TType.STRUCT, [MMIStandard.scene.ttypes.MSceneManipulation, None], False), None, ),  # 4
+    (5, TType.LIST, 'DrawingCalls', (TType.STRUCT, [MMIStandard.scene.ttypes.MDrawingCall, None], False), None, ),  # 5
     (6, TType.LIST, 'LogData', (TType.STRING, 'UTF8', False), None, ),  # 6
 )
 all_structs.append(MSimulationEvent)
@@ -1237,15 +1250,15 @@ MMUDescription.thrift_spec = (
     (6, TType.STRING, 'Language', 'UTF8', None, ),  # 6
     (7, TType.STRING, 'Author', 'UTF8', None, ),  # 7
     (8, TType.STRING, 'Version', 'UTF8', None, ),  # 8
-    (9, TType.LIST, 'Prerequisites', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MConstraint, None], False), None, ),  # 9
+    (9, TType.LIST, 'Prerequisites', (TType.STRUCT, [MMIStandard.constraints.ttypes.MConstraint, None], False), None, ),  # 9
     None,  # 10
     (11, TType.MAP, 'Properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 11
     (12, TType.LIST, 'Dependencies', (TType.STRUCT, [MDependency, None], False), None, ),  # 12
     (13, TType.LIST, 'Events', (TType.STRING, 'UTF8', False), None, ),  # 13
     (14, TType.STRING, 'LongDescription', 'UTF8', None, ),  # 14
     (15, TType.STRING, 'ShortDescription', 'UTF8', None, ),  # 15
-    (16, TType.LIST, 'Parameters', (TType.STRUCT, [MOSIM.mmi.core.ttypes.MParameter, None], False), None, ),  # 16
-    (17, TType.LIST, 'SceneParameters', (TType.STRUCT, [MOSIM.mmi.core.ttypes.MParameter, None], False), None, ),  # 17
+    (16, TType.LIST, 'Parameters', (TType.STRUCT, [MMIStandard.core.ttypes.MParameter, None], False), None, ),  # 16
+    (17, TType.LIST, 'SceneParameters', (TType.STRUCT, [MMIStandard.core.ttypes.MParameter, None], False), None, ),  # 17
     (18, TType.STRING, 'Vendor', 'UTF8', None, ),  # 18
     (19, TType.STRING, 'VendorDomain', 'UTF8', None, ),  # 19
     (20, TType.STRING, 'MmuUrl', 'UTF8', None, ),  # 20
@@ -1257,12 +1270,13 @@ MInstruction.thrift_spec = (
     (1, TType.STRING, 'ID', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'Name', 'UTF8', None, ),  # 2
     (3, TType.STRING, 'MotionType', 'UTF8', None, ),  # 3
-    (4, TType.MAP, 'Properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 4
-    (5, TType.LIST, 'Constraints', (TType.STRUCT, [MOSIM.mmi.constraints.ttypes.MConstraint, None], False), None, ),  # 5
-    (6, TType.STRING, 'StartCondition', 'UTF8', None, ),  # 6
-    (7, TType.STRING, 'EndCondition', 'UTF8', None, ),  # 7
-    (8, TType.STRING, 'Action', 'UTF8', None, ),  # 8
-    (9, TType.LIST, 'Instructions', (TType.STRUCT, [MInstruction, None], False), None, ),  # 9
+    (4, TType.STRING, 'AvatarID', 'UTF8', None, ),  # 4
+    (5, TType.MAP, 'Properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 5
+    (6, TType.LIST, 'Constraints', (TType.STRUCT, [MMIStandard.constraints.ttypes.MConstraint, None], False), None, ),  # 6
+    (7, TType.STRING, 'StartCondition', 'UTF8', None, ),  # 7
+    (8, TType.STRING, 'EndCondition', 'UTF8', None, ),  # 8
+    (9, TType.STRING, 'Action', 'UTF8', None, ),  # 9
+    (10, TType.LIST, 'Instructions', (TType.STRUCT, [MInstruction, None], False), None, ),  # 10
 )
 fix_spec(all_structs)
 del all_structs

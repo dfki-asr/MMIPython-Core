@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.math.ttypes
+import MMIStandard.math.ttypes
 
 from thrift.transport import TTransport
 all_structs = []
@@ -419,13 +419,13 @@ class MJoint(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.Position = MOSIM.mmi.math.ttypes.MVector3()
+                    self.Position = MMIStandard.math.ttypes.MVector3()
                     self.Position.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.STRUCT:
-                    self.Rotation = MOSIM.mmi.math.ttypes.MQuaternion()
+                    self.Rotation = MMIStandard.math.ttypes.MQuaternion()
                     self.Rotation.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -921,8 +921,8 @@ MJoint.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'ID', 'UTF8', None, ),  # 1
     (2, TType.I32, 'Type', None, None, ),  # 2
-    (3, TType.STRUCT, 'Position', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 3
-    (4, TType.STRUCT, 'Rotation', [MOSIM.mmi.math.ttypes.MQuaternion, None], None, ),  # 4
+    (3, TType.STRUCT, 'Position', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 3
+    (4, TType.STRUCT, 'Rotation', [MMIStandard.math.ttypes.MQuaternion, None], None, ),  # 4
     (5, TType.LIST, 'Channels', (TType.I32, None, False), None, ),  # 5
     (6, TType.STRING, 'Parent', 'UTF8', None, ),  # 6
 )

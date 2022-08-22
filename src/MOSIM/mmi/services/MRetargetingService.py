@@ -11,7 +11,7 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.services.MMIServiceBase
+import MMIStandard.services.MMIServiceBase
 import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
@@ -19,7 +19,7 @@ from thrift.transport import TTransport
 all_structs = []
 
 
-class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
+class Iface(MMIStandard.services.MMIServiceBase.Iface):
     def SetupRetargeting(self, globalTarget):
         """
         Parameters:
@@ -45,9 +45,9 @@ class Iface(MOSIM.mmi.services.MMIServiceBase.Iface):
         pass
 
 
-class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
+class Client(MMIStandard.services.MMIServiceBase.Client, Iface):
     def __init__(self, iprot, oprot=None):
-        MOSIM.mmi.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
+        MMIStandard.services.MMIServiceBase.Client.__init__(self, iprot, oprot)
 
     def SetupRetargeting(self, globalTarget):
         """
@@ -146,9 +146,9 @@ class Client(MOSIM.mmi.services.MMIServiceBase.Client, Iface):
         raise TApplicationException(TApplicationException.MISSING_RESULT, "RetargetToTarget failed: unknown result")
 
 
-class Processor(MOSIM.mmi.services.MMIServiceBase.Processor, Iface, TProcessor):
+class Processor(MMIStandard.services.MMIServiceBase.Processor, Iface, TProcessor):
     def __init__(self, handler):
-        MOSIM.mmi.services.MMIServiceBase.Processor.__init__(self, handler)
+        MMIStandard.services.MMIServiceBase.Processor.__init__(self, handler)
         self._processMap["SetupRetargeting"] = Processor.process_SetupRetargeting
         self._processMap["RetargetToIntermediate"] = Processor.process_RetargetToIntermediate
         self._processMap["RetargetToTarget"] = Processor.process_RetargetToTarget
@@ -268,7 +268,7 @@ class SetupRetargeting_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.globalTarget = MOSIM.mmi.avatar.ttypes.MAvatarPosture()
+                    self.globalTarget = MMIStandard.avatar.ttypes.MAvatarPosture()
                     self.globalTarget.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -305,7 +305,7 @@ class SetupRetargeting_args(object):
 all_structs.append(SetupRetargeting_args)
 SetupRetargeting_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'globalTarget', [MOSIM.mmi.avatar.ttypes.MAvatarPosture, None], None, ),  # 1
+    (1, TType.STRUCT, 'globalTarget', [MMIStandard.avatar.ttypes.MAvatarPosture, None], None, ),  # 1
 )
 
 
@@ -331,7 +331,7 @@ class SetupRetargeting_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarDescription()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarDescription()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -367,7 +367,7 @@ class SetupRetargeting_result(object):
         return not (self == other)
 all_structs.append(SetupRetargeting_result)
 SetupRetargeting_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarDescription, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarDescription, None], None, ),  # 0
 )
 
 
@@ -393,7 +393,7 @@ class RetargetToIntermediate_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.globalTarget = MOSIM.mmi.avatar.ttypes.MAvatarPosture()
+                    self.globalTarget = MMIStandard.avatar.ttypes.MAvatarPosture()
                     self.globalTarget.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -430,7 +430,7 @@ class RetargetToIntermediate_args(object):
 all_structs.append(RetargetToIntermediate_args)
 RetargetToIntermediate_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'globalTarget', [MOSIM.mmi.avatar.ttypes.MAvatarPosture, None], None, ),  # 1
+    (1, TType.STRUCT, 'globalTarget', [MMIStandard.avatar.ttypes.MAvatarPosture, None], None, ),  # 1
 )
 
 
@@ -456,7 +456,7 @@ class RetargetToIntermediate_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -492,7 +492,7 @@ class RetargetToIntermediate_result(object):
         return not (self == other)
 all_structs.append(RetargetToIntermediate_result)
 RetargetToIntermediate_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 0
 )
 
 
@@ -518,7 +518,7 @@ class RetargetToTarget_args(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.intermediatePostureValues = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.intermediatePostureValues = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.intermediatePostureValues.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -555,7 +555,7 @@ class RetargetToTarget_args(object):
 all_structs.append(RetargetToTarget_args)
 RetargetToTarget_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'intermediatePostureValues', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (1, TType.STRUCT, 'intermediatePostureValues', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
 )
 
 
@@ -581,7 +581,7 @@ class RetargetToTarget_result(object):
                 break
             if fid == 0:
                 if ftype == TType.STRUCT:
-                    self.success = MOSIM.mmi.avatar.ttypes.MAvatarPosture()
+                    self.success = MMIStandard.avatar.ttypes.MAvatarPosture()
                     self.success.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -617,7 +617,7 @@ class RetargetToTarget_result(object):
         return not (self == other)
 all_structs.append(RetargetToTarget_result)
 RetargetToTarget_result.thrift_spec = (
-    (0, TType.STRUCT, 'success', [MOSIM.mmi.avatar.ttypes.MAvatarPosture, None], None, ),  # 0
+    (0, TType.STRUCT, 'success', [MMIStandard.avatar.ttypes.MAvatarPosture, None], None, ),  # 0
 )
 fix_spec(all_structs)
 del all_structs

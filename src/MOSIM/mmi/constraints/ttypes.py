@@ -11,8 +11,8 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.math.ttypes
-import MOSIM.mmi.avatar.ttypes
+import MMIStandard.math.ttypes
+import MMIStandard.avatar.ttypes
 
 from thrift.transport import TTransport
 all_structs = []
@@ -361,7 +361,7 @@ class MGeometryConstraint(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.ParentToConstraint = MOSIM.mmi.math.ttypes.MTransform()
+                    self.ParentToConstraint = MMIStandard.math.ttypes.MTransform()
                     self.ParentToConstraint.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -467,19 +467,19 @@ class MVelocityConstraint(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.ParentToConstraint = MOSIM.mmi.math.ttypes.MTransform()
+                    self.ParentToConstraint = MMIStandard.math.ttypes.MTransform()
                     self.ParentToConstraint.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.TranslationalVelocity = MOSIM.mmi.math.ttypes.MVector3()
+                    self.TranslationalVelocity = MMIStandard.math.ttypes.MVector3()
                     self.TranslationalVelocity.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.STRUCT:
-                    self.RotationalVelocity = MOSIM.mmi.math.ttypes.MVector3()
+                    self.RotationalVelocity = MMIStandard.math.ttypes.MVector3()
                     self.RotationalVelocity.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -573,19 +573,19 @@ class MAccelerationConstraint(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRUCT:
-                    self.ParentToConstraint = MOSIM.mmi.math.ttypes.MTransform()
+                    self.ParentToConstraint = MMIStandard.math.ttypes.MTransform()
                     self.ParentToConstraint.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRUCT:
-                    self.TranslationalAcceleration = MOSIM.mmi.math.ttypes.MVector3()
+                    self.TranslationalAcceleration = MMIStandard.math.ttypes.MVector3()
                     self.TranslationalAcceleration.read(iprot)
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.STRUCT:
-                    self.RotationalAcceleration = MOSIM.mmi.math.ttypes.MVector3()
+                    self.RotationalAcceleration = MMIStandard.math.ttypes.MVector3()
                     self.RotationalAcceleration.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -915,7 +915,7 @@ class MPostureConstraint(object):
                 break
             if fid == 1:
                 if ftype == TType.STRUCT:
-                    self.posture = MOSIM.mmi.avatar.ttypes.MAvatarPostureValues()
+                    self.posture = MMIStandard.avatar.ttypes.MAvatarPostureValues()
                     self.posture.read(iprot)
                 else:
                     iprot.skip(ftype)
@@ -1162,7 +1162,7 @@ all_structs.append(MGeometryConstraint)
 MGeometryConstraint.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'ParentObjectID', 'UTF8', None, ),  # 1
-    (2, TType.STRUCT, 'ParentToConstraint', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 2
+    (2, TType.STRUCT, 'ParentToConstraint', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 2
     (3, TType.STRUCT, 'TranslationConstraint', [MTranslationConstraint, None], None, ),  # 3
     (4, TType.STRUCT, 'RotationConstraint', [MRotationConstraint, None], None, ),  # 4
     (5, TType.DOUBLE, 'WeightingFactor', None, None, ),  # 5
@@ -1171,18 +1171,18 @@ all_structs.append(MVelocityConstraint)
 MVelocityConstraint.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'ParentObjectID', 'UTF8', None, ),  # 1
-    (2, TType.STRUCT, 'ParentToConstraint', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 2
-    (3, TType.STRUCT, 'TranslationalVelocity', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 3
-    (4, TType.STRUCT, 'RotationalVelocity', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 4
+    (2, TType.STRUCT, 'ParentToConstraint', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 2
+    (3, TType.STRUCT, 'TranslationalVelocity', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 3
+    (4, TType.STRUCT, 'RotationalVelocity', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 4
     (5, TType.DOUBLE, 'WeightingFactor', None, None, ),  # 5
 )
 all_structs.append(MAccelerationConstraint)
 MAccelerationConstraint.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'ParentObjectID', 'UTF8', None, ),  # 1
-    (2, TType.STRUCT, 'ParentToConstraint', [MOSIM.mmi.math.ttypes.MTransform, None], None, ),  # 2
-    (3, TType.STRUCT, 'TranslationalAcceleration', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 3
-    (4, TType.STRUCT, 'RotationalAcceleration', [MOSIM.mmi.math.ttypes.MVector3, None], None, ),  # 4
+    (2, TType.STRUCT, 'ParentToConstraint', [MMIStandard.math.ttypes.MTransform, None], None, ),  # 2
+    (3, TType.STRUCT, 'TranslationalAcceleration', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 3
+    (4, TType.STRUCT, 'RotationalAcceleration', [MMIStandard.math.ttypes.MVector3, None], None, ),  # 4
     (5, TType.DOUBLE, 'WeightingFactor', None, None, ),  # 5
 )
 all_structs.append(MPathConstraint)
@@ -1208,7 +1208,7 @@ MJointPathConstraint.thrift_spec = (
 all_structs.append(MPostureConstraint)
 MPostureConstraint.thrift_spec = (
     None,  # 0
-    (1, TType.STRUCT, 'posture', [MOSIM.mmi.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
+    (1, TType.STRUCT, 'posture', [MMIStandard.avatar.ttypes.MAvatarPostureValues, None], None, ),  # 1
     (2, TType.LIST, 'JointConstraints', (TType.STRUCT, [MJointConstraint, None], False), None, ),  # 2
 )
 all_structs.append(MConstraint)

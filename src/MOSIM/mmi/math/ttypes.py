@@ -342,15 +342,17 @@ class MTransform(object):
      - ID
      - Position
      - Rotation
+     - Scale
      - Parent
 
     """
 
 
-    def __init__(self, ID=None, Position=None, Rotation=None, Parent=None,):
+    def __init__(self, ID=None, Position=None, Rotation=None, Scale=None, Parent=None,):
         self.ID = ID
         self.Position = Position
         self.Rotation = Rotation
+        self.Scale = Scale
         self.Parent = Parent
 
     def read(self, iprot):
@@ -380,6 +382,12 @@ class MTransform(object):
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
+                if ftype == TType.STRUCT:
+                    self.Scale = MVector3()
+                    self.Scale.read(iprot)
+                else:
+                    iprot.skip(ftype)
+            elif fid == 5:
                 if ftype == TType.STRING:
                     self.Parent = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
@@ -406,8 +414,12 @@ class MTransform(object):
             oprot.writeFieldBegin('Rotation', TType.STRUCT, 3)
             self.Rotation.write(oprot)
             oprot.writeFieldEnd()
+        if self.Scale is not None:
+            oprot.writeFieldBegin('Scale', TType.STRUCT, 4)
+            self.Scale.write(oprot)
+            oprot.writeFieldEnd()
         if self.Parent is not None:
-            oprot.writeFieldBegin('Parent', TType.STRING, 4)
+            oprot.writeFieldBegin('Parent', TType.STRING, 5)
             oprot.writeString(self.Parent.encode('utf-8') if sys.version_info[0] == 2 else self.Parent)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -420,6 +432,8 @@ class MTransform(object):
             raise TProtocolException(message='Required field Position is unset!')
         if self.Rotation is None:
             raise TProtocolException(message='Required field Rotation is unset!')
+        if self.Scale is None:
+            raise TProtocolException(message='Required field Scale is unset!')
         return
 
     def __repr__(self):
@@ -464,7 +478,8 @@ MTransform.thrift_spec = (
     (1, TType.STRING, 'ID', 'UTF8', None, ),  # 1
     (2, TType.STRUCT, 'Position', [MVector3, None], None, ),  # 2
     (3, TType.STRUCT, 'Rotation', [MQuaternion, None], None, ),  # 3
-    (4, TType.STRING, 'Parent', 'UTF8', None, ),  # 4
+    (4, TType.STRUCT, 'Scale', [MVector3, None], None, ),  # 4
+    (5, TType.STRING, 'Parent', 'UTF8', None, ),  # 5
 )
 fix_spec(all_structs)
 del all_structs

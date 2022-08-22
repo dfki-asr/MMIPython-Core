@@ -11,10 +11,10 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.core.ttypes
-import MOSIM.mmi.avatar.ttypes
-import MOSIM.mmi.mmu.ttypes
-import MOSIM.mmi.services.ttypes
+import MMIStandard.core.ttypes
+import MMIStandard.avatar.ttypes
+import MMIStandard.mmu.ttypes
+import MMIStandard.services.ttypes
 
 from thrift.transport import TTransport
 all_structs = []
@@ -49,7 +49,7 @@ class MCoSimulationEvents(object):
                     self.Events = []
                     (_etype3, _size0) = iprot.readListBegin()
                     for _i4 in range(_size0):
-                        _elem5 = MOSIM.mmi.mmu.ttypes.MSimulationEvent()
+                        _elem5 = MMIStandard.mmu.ttypes.MSimulationEvent()
                         _elem5.read(iprot)
                         self.Events.append(_elem5)
                     iprot.readListEnd()
@@ -115,7 +115,7 @@ class MCoSimulationEvents(object):
 all_structs.append(MCoSimulationEvents)
 MCoSimulationEvents.thrift_spec = (
     None,  # 0
-    (1, TType.LIST, 'Events', (TType.STRUCT, [MOSIM.mmi.mmu.ttypes.MSimulationEvent, None], False), None, ),  # 1
+    (1, TType.LIST, 'Events', (TType.STRUCT, [MMIStandard.mmu.ttypes.MSimulationEvent, None], False), None, ),  # 1
     (2, TType.DOUBLE, 'SimulationTime', None, None, ),  # 2
     (3, TType.I32, 'FrameNumber', None, None, ),  # 3
 )

@@ -16,8 +16,8 @@ else:
 from thrift.transport import TTransport, TSocket, TSSLSocket, THttpClient
 from thrift.protocol.TBinaryProtocol import TBinaryProtocol
 
-from MOSIM.mmi.cosim import MCoSimulationEventCallback
-from MOSIM.mmi.cosim.ttypes import *
+from MMIStandard.cosim import MCoSimulationEventCallback
+from MMIStandard.cosim.ttypes import *
 
 if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('')

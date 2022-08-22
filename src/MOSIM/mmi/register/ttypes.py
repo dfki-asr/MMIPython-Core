@@ -11,11 +11,11 @@ from thrift.protocol.TProtocol import TProtocolException
 from thrift.TRecursive import fix_spec
 
 import sys
-import MOSIM.mmi.core.ttypes
-import MOSIM.mmi.avatar.ttypes
-import MOSIM.mmi.scene.ttypes
-import MOSIM.mmi.mmu.ttypes
-import MOSIM.mmi.constraints.ttypes
+import MMIStandard.core.ttypes
+import MMIStandard.avatar.ttypes
+import MMIStandard.scene.ttypes
+import MMIStandard.mmu.ttypes
+import MMIStandard.constraints.ttypes
 
 from thrift.transport import TTransport
 all_structs = []
@@ -71,7 +71,7 @@ class MAdapterDescription(object):
                     self.Addresses = []
                     (_etype3, _size0) = iprot.readListBegin()
                     for _i4 in range(_size0):
-                        _elem5 = MOSIM.mmi.core.ttypes.MIPAddress()
+                        _elem5 = MMIStandard.core.ttypes.MIPAddress()
                         _elem5.read(iprot)
                         self.Addresses.append(_elem5)
                     iprot.readListEnd()
@@ -93,7 +93,7 @@ class MAdapterDescription(object):
                     self.Parameters = []
                     (_etype16, _size13) = iprot.readListBegin()
                     for _i17 in range(_size13):
-                        _elem18 = MOSIM.mmi.core.ttypes.MParameter()
+                        _elem18 = MMIStandard.core.ttypes.MParameter()
                         _elem18.read(iprot)
                         self.Parameters.append(_elem18)
                     iprot.readListEnd()
@@ -173,9 +173,9 @@ MAdapterDescription.thrift_spec = (
     (1, TType.STRING, 'Name', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'ID', 'UTF8', None, ),  # 2
     (3, TType.STRING, 'Language', 'UTF8', None, ),  # 3
-    (4, TType.LIST, 'Addresses', (TType.STRUCT, [MOSIM.mmi.core.ttypes.MIPAddress, None], False), None, ),  # 4
+    (4, TType.LIST, 'Addresses', (TType.STRUCT, [MMIStandard.core.ttypes.MIPAddress, None], False), None, ),  # 4
     (5, TType.MAP, 'Properties', (TType.STRING, 'UTF8', TType.STRING, 'UTF8', False), None, ),  # 5
-    (6, TType.LIST, 'Parameters', (TType.STRUCT, [MOSIM.mmi.core.ttypes.MParameter, None], False), None, ),  # 6
+    (6, TType.LIST, 'Parameters', (TType.STRUCT, [MMIStandard.core.ttypes.MParameter, None], False), None, ),  # 6
 )
 fix_spec(all_structs)
 del all_structs

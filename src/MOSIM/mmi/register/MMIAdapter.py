@@ -110,11 +110,10 @@ class Iface(object):
     def GetAdapterDescription(self):
         pass
 
-    def CreateSession(self, sessionID, sceneID):
+    def CreateSession(self, sessionID):
         """
         Parameters:
          - sessionID
-         - sceneID
 
         """
         pass
@@ -181,21 +180,23 @@ class Iface(object):
         """
         pass
 
-    def CreateCheckpoint(self, mmuID, sessionID):
+    def CreateCheckpoint(self, mmuID, sessionID, avatarID):
         """
         Parameters:
          - mmuID
          - sessionID
+         - avatarID
 
         """
         pass
 
-    def RestoreCheckpoint(self, mmuID, sessionID, checkpointData):
+    def RestoreCheckpoint(self, mmuID, sessionID, checkpointData, avatarID):
         """
         Parameters:
          - mmuID
          - sessionID
          - checkpointData
+         - avatarID
 
         """
         pass
@@ -558,21 +559,19 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "GetAdapterDescription failed: unknown result")
 
-    def CreateSession(self, sessionID, sceneID):
+    def CreateSession(self, sessionID):
         """
         Parameters:
          - sessionID
-         - sceneID
 
         """
-        self.send_CreateSession(sessionID, sceneID)
+        self.send_CreateSession(sessionID)
         return self.recv_CreateSession()
 
-    def send_CreateSession(self, sessionID, sceneID):
+    def send_CreateSession(self, sessionID):
         self._oprot.writeMessageBegin('CreateSession', TMessageType.CALL, self._seqid)
         args = CreateSession_args()
         args.sessionID = sessionID
-        args.sceneID = sceneID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -848,21 +847,23 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "LoadMMUs failed: unknown result")
 
-    def CreateCheckpoint(self, mmuID, sessionID):
+    def CreateCheckpoint(self, mmuID, sessionID, avatarID):
         """
         Parameters:
          - mmuID
          - sessionID
+         - avatarID
 
         """
-        self.send_CreateCheckpoint(mmuID, sessionID)
+        self.send_CreateCheckpoint(mmuID, sessionID, avatarID)
         return self.recv_CreateCheckpoint()
 
-    def send_CreateCheckpoint(self, mmuID, sessionID):
+    def send_CreateCheckpoint(self, mmuID, sessionID, avatarID):
         self._oprot.writeMessageBegin('CreateCheckpoint', TMessageType.CALL, self._seqid)
         args = CreateCheckpoint_args()
         args.mmuID = mmuID
         args.sessionID = sessionID
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -882,23 +883,25 @@ class Client(Iface):
             return result.success
         raise TApplicationException(TApplicationException.MISSING_RESULT, "CreateCheckpoint failed: unknown result")
 
-    def RestoreCheckpoint(self, mmuID, sessionID, checkpointData):
+    def RestoreCheckpoint(self, mmuID, sessionID, checkpointData, avatarID):
         """
         Parameters:
          - mmuID
          - sessionID
          - checkpointData
+         - avatarID
 
         """
-        self.send_RestoreCheckpoint(mmuID, sessionID, checkpointData)
+        self.send_RestoreCheckpoint(mmuID, sessionID, checkpointData, avatarID)
         return self.recv_RestoreCheckpoint()
 
-    def send_RestoreCheckpoint(self, mmuID, sessionID, checkpointData):
+    def send_RestoreCheckpoint(self, mmuID, sessionID, checkpointData, avatarID):
         self._oprot.writeMessageBegin('RestoreCheckpoint', TMessageType.CALL, self._seqid)
         args = RestoreCheckpoint_args()
         args.mmuID = mmuID
         args.sessionID = sessionID
         args.checkpointData = checkpointData
+        args.avatarID = avatarID
         args.write(self._oprot)
         self._oprot.writeMessageEnd()
         self._oprot.trans.flush()
@@ -1202,7 +1205,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = CreateSession_result()
         try:
-            result.success = self._handler.CreateSession(args.sessionID, args.sceneID)
+            result.success = self._handler.CreateSession(args.sessionID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -1409,7 +1412,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = CreateCheckpoint_result()
         try:
-            result.success = self._handler.CreateCheckpoint(args.mmuID, args.sessionID)
+            result.success = self._handler.CreateCheckpoint(args.mmuID, args.sessionID, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -1432,7 +1435,7 @@ class Processor(Iface, TProcessor):
         iprot.readMessageEnd()
         result = RestoreCheckpoint_result()
         try:
-            result.success = self._handler.RestoreCheckpoint(args.mmuID, args.sessionID, args.checkpointData)
+            result.success = self._handler.RestoreCheckpoint(args.mmuID, args.sessionID, args.checkpointData, args.avatarID)
             msg_type = TMessageType.REPLY
         except TTransport.TTransportException:
             raise
@@ -2962,14 +2965,12 @@ class CreateSession_args(object):
     """
     Attributes:
      - sessionID
-     - sceneID
 
     """
 
 
-    def __init__(self, sessionID=None, sceneID=None,):
+    def __init__(self, sessionID=None,):
         self.sessionID = sessionID
-        self.sceneID = sceneID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -2985,11 +2986,6 @@ class CreateSession_args(object):
                     self.sessionID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 2:
-                if ftype == TType.STRING:
-                    self.sceneID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                else:
-                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -3003,10 +2999,6 @@ class CreateSession_args(object):
         if self.sessionID is not None:
             oprot.writeFieldBegin('sessionID', TType.STRING, 1)
             oprot.writeString(self.sessionID.encode('utf-8') if sys.version_info[0] == 2 else self.sessionID)
-            oprot.writeFieldEnd()
-        if self.sceneID is not None:
-            oprot.writeFieldBegin('sceneID', TType.STRING, 2)
-            oprot.writeString(self.sceneID.encode('utf-8') if sys.version_info[0] == 2 else self.sceneID)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -3028,7 +3020,6 @@ all_structs.append(CreateSession_args)
 CreateSession_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'sessionID', 'UTF8', None, ),  # 1
-    (2, TType.STRING, 'sceneID', 'UTF8', None, ),  # 2
 )
 
 
@@ -4150,13 +4141,15 @@ class CreateCheckpoint_args(object):
     Attributes:
      - mmuID
      - sessionID
+     - avatarID
 
     """
 
 
-    def __init__(self, mmuID=None, sessionID=None,):
+    def __init__(self, mmuID=None, sessionID=None, avatarID=None,):
         self.mmuID = mmuID
         self.sessionID = sessionID
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -4177,6 +4170,11 @@ class CreateCheckpoint_args(object):
                     self.sessionID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 3:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -4194,6 +4192,10 @@ class CreateCheckpoint_args(object):
         if self.sessionID is not None:
             oprot.writeFieldBegin('sessionID', TType.STRING, 2)
             oprot.writeString(self.sessionID.encode('utf-8') if sys.version_info[0] == 2 else self.sessionID)
+            oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 3)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -4216,6 +4218,7 @@ CreateCheckpoint_args.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'mmuID', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'sessionID', 'UTF8', None, ),  # 2
+    (3, TType.STRING, 'avatarID', 'UTF8', None, ),  # 3
 )
 
 
@@ -4286,14 +4289,16 @@ class RestoreCheckpoint_args(object):
      - mmuID
      - sessionID
      - checkpointData
+     - avatarID
 
     """
 
 
-    def __init__(self, mmuID=None, sessionID=None, checkpointData=None,):
+    def __init__(self, mmuID=None, sessionID=None, checkpointData=None, avatarID=None,):
         self.mmuID = mmuID
         self.sessionID = sessionID
         self.checkpointData = checkpointData
+        self.avatarID = avatarID
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -4319,6 +4324,11 @@ class RestoreCheckpoint_args(object):
                     self.checkpointData = iprot.readBinary()
                 else:
                     iprot.skip(ftype)
+            elif fid == 4:
+                if ftype == TType.STRING:
+                    self.avatarID = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -4340,6 +4350,10 @@ class RestoreCheckpoint_args(object):
         if self.checkpointData is not None:
             oprot.writeFieldBegin('checkpointData', TType.STRING, 3)
             oprot.writeBinary(self.checkpointData)
+            oprot.writeFieldEnd()
+        if self.avatarID is not None:
+            oprot.writeFieldBegin('avatarID', TType.STRING, 4)
+            oprot.writeString(self.avatarID.encode('utf-8') if sys.version_info[0] == 2 else self.avatarID)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -4363,6 +4377,7 @@ RestoreCheckpoint_args.thrift_spec = (
     (1, TType.STRING, 'mmuID', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'sessionID', 'UTF8', None, ),  # 2
     (3, TType.STRING, 'checkpointData', 'BINARY', None, ),  # 3
+    (4, TType.STRING, 'avatarID', 'UTF8', None, ),  # 4
 )
 
 

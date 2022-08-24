@@ -151,14 +151,16 @@ class MotionModelInterface(MotionModelUnit.Iface,ABC):
         pass
 
     @abstractmethod
-    def Dispose(self, parameters):
+    def Dispose(self, avatarID, parameters):
         """
         A method for disposing the internally used resources
         
-         Parameters
+        Parameters
         ---------
-        parameters: dictionary<str,stra>
-          optional parameters
+         - avatarID:
+            avatar ID
+         - parameters: dictionary<str,stra>
+            optional parameters
         
           Returns
         --------
@@ -168,14 +170,16 @@ class MotionModelInterface(MotionModelUnit.Iface,ABC):
         pass
 
     @abstractmethod
-    def CreateCheckpoint(self):
+    def CreateCheckpoint(self, avatarID):
         """
         Creates a Checkpoint
         
-         Parameters
+        Parameters
         ---------
-        parameters: dictionary<str,stra>
-          optional parameters
+         - parameters: dictionary<str,stra>
+            optional parameters
+         - avatarID:
+            avatar ID
         
             Returns
         -------
@@ -185,14 +189,16 @@ class MotionModelInterface(MotionModelUnit.Iface,ABC):
         pass
 
     @abstractmethod
-    def RestoreCheckpoint(self, data):
+    def RestoreCheckpoint(self, data, avatarID):
         """
         Restores the checkpoint from the data
         
         Parameters
         ----------
-        data : object
+         - data : object
             The checkpoint data
+         - avatarID:
+            avatar ID
             
         Returns
         -------
@@ -201,12 +207,14 @@ class MotionModelInterface(MotionModelUnit.Iface,ABC):
         pass
 
     @abstractmethod
-    def ExecuteFunction(self, name, parameters):
+    def ExecuteFunction(self, name, avatarID, parameters):
         """
         //Method for executing an arbitrary function (optionally)
         Parameters:
          - name : str
             name of the isntruction
+         - avatarID:
+            avatar ID
          - parameters : dictionary<str,str> 
             optional parameters
 

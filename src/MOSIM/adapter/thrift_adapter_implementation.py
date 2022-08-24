@@ -333,7 +333,7 @@ class ThriftAdapterImplementation(MMIAdapter.Iface):
 
 
 
-    def Dispose(self, mmuID, sessionID):
+    def Dispose(self, mmuID, sessionID, avatarID):
         """
         
         Called to release ressources from a MMU.
@@ -344,6 +344,8 @@ class ThriftAdapterImplementation(MMIAdapter.Iface):
             The mmuID
         sessionID : str
             The session ID
+        avatarID : str
+            The avatar ID
             
         Returns
         -------
@@ -593,7 +595,7 @@ class ThriftAdapterImplementation(MMIAdapter.Iface):
         return check
                     
 
-    def CreateCheckpoint(self, mmuID, sessionID):
+    def CreateCheckpoint(self, mmuID, sessionID, avatarID):
         """
         Creates a checkpoint for the specified MMU.
         The checkpoint contains the internal state of each MMU which can be later used to restore the state.
@@ -604,6 +606,8 @@ class ThriftAdapterImplementation(MMIAdapter.Iface):
             The mmu ID
         sessionID : str
             The session ID
+        avatarID : str
+            The avatar ID
         """
         
         assert (isinstance(sessionID, str)),"SessionID is no string"
@@ -658,7 +662,7 @@ class ThriftAdapterImplementation(MMIAdapter.Iface):
             return None
 
 
-    def ExecuteFunction(self, name, parameters, mmuID, sessionID):
+    def ExecuteFunction(self, name, parameters, mmuID, sessionID, avatarID):
         assert (isinstance(name, str)),"SessionID is no string"
         assert (isinstance(parameters, dict)),"SessionID is no string"
 

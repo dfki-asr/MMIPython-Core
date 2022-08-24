@@ -330,7 +330,7 @@ class IAdapterAccess(object):
         """
         return self._client.dispose()
         
-    def dispose_mmu(self, mmuID, sessionID):
+    def dispose_mmu(self, mmuID, sessionID, avatarID):
         """
         
         Called to release ressources from a MMU.
@@ -349,8 +349,9 @@ class IAdapterAccess(object):
         
         assert (isinstance(sessionID, str)),"SessionID is no string"
         assert (isinstance(mmuID, str)),"mmuID is no string"
+        assert (isinstance(avatarID, str)), "avatarID is not string"
         
-        return self._client.get_adapter().Dispose(mmuID, sessionID)
+        return self._client.get_adapter().Dispose(mmuID, sessionID, avatarID)
     
     def create_session(self, reference_avatar, sessionID):
         """
@@ -417,7 +418,7 @@ class IAdapterAccess(object):
         """
         return self._client.get_adapter().GetStatus()
     
-    def create_checkpoint(self, mmuID, sessionID):
+    def create_checkpoint(self, mmuID, sessionID, avatarID):
         """
         Creates a new checkpoint for the specific MMU
         
@@ -435,10 +436,11 @@ class IAdapterAccess(object):
         """
         assert (isinstance(mmuID, str)),"mmuID is no string"
         assert (isinstance(sessionID, str)),"SessionID is no string"
+        assert (isinstance(avatarID, str)), "avatarID is not string"
         
-        return self._client.get_adapter().CreateCheckpoint(mmuID, sessionID)
+        return self._client.get_adapter().CreateCheckpoint(mmuID, sessionID, avatarID)
     
-    def restore_checkpoint(self, mmuID, sessionID, data):
+    def restore_checkpoint(self, mmuID, sessionID, data, avatarID):
         """
         Restores a checkpoint for a given MMU
         
@@ -458,6 +460,7 @@ class IAdapterAccess(object):
         assert (isinstance(mmuID, str)),"mmuID is no string"
         assert (isinstance(sessionID, str)),"SessionID is no string"
         assert (isinstance(data, bytearray)),"data is no bytearray"
+        assert (isinstance(avatarID, str)), "avatarID is not string"
         
         return self._client.get_adapter().RestoreCheckpoint(mmuID, sessionID, data)
 

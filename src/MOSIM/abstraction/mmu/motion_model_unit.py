@@ -216,7 +216,7 @@ class MotionModelUnit(MotionModelInterface):
         """
         return self.__adapter_access.abort(self.id, self._sessionID)
 
-    def dispose(self):
+    def dispose(self, avatarID):
         """
         A method for disposing the internally used resources
             
@@ -224,9 +224,9 @@ class MotionModelUnit(MotionModelInterface):
         -------
         bool
         """
-        return self.__adapter_access.dispose_mmu(self.id, self._sessionID)
+        return self.__adapter_access.dispose_mmu(self.id, self._sessionID, avatarID)
         
-    def create_checkpoint(self):
+    def create_checkpoint(self, avatarID):
         """
         Creates a new checkpoint for the specific MMU
         
@@ -236,9 +236,9 @@ class MotionModelUnit(MotionModelInterface):
             The checkpoint
         """
         
-        return self.__adapter_access.create_checkpoint(self.id, self._sessionID)
+        return self.__adapter_access.create_checkpoint(self.id, self._sessionID, avatarID)
     
-    def restore_checkpoint(self, data):
+    def restore_checkpoint(self, data, avatarID):
         """
         Restores a checkpoint for a given MMU
         
@@ -253,5 +253,5 @@ class MotionModelUnit(MotionModelInterface):
         """
         assert (isinstance(data, bytes)),"data is no bytes"
         
-        return self.__adapter_access.restore_checkpoint(self.id, self._sessionID, data)
+        return self.__adapter_access.restore_checkpoint(self.id, self._sessionID, data, avatarID)
     

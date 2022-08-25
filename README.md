@@ -17,7 +17,7 @@ For more information on the MOSIM repository, please visit our [main repository]
 ## Package Structure
 
 The MOSIM python package is structured in the following way: 
-- `MOSIM.mmi`: auto-compiled thrift interface and data-model classes. Do not change these, as they will be overwritten when deploying a new MOSIM framework version
+- `MMIStandard`: auto-compiled thrift interface and data-model classes. Do not change these, as they will be overwritten when deploying a new MOSIM framework version
 - `MOSIM.core`: base classes for MMUs, skeleton-access, scene-access and thrift clients
 - `MOSIM.extensions`: helpful functions for handling MAvatarPostures, MQuaternions and MVector3s. 
 - `MOSIM.abstraction`: Interface function definitions. 

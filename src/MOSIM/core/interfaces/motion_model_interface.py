@@ -6,11 +6,11 @@
 """
 
 """
-from MOSIM.mmi.mmu import MotionModelUnit
+from MMIStandard.mmu import MotionModelUnit
 from MOSIM.core.services.service_access import ServiceAccess
 #from MOSIM.core.interfaces.scene_access import ISceneAccess
-from MOSIM.mmi.services import MSceneAccess
-from MOSIM.mmi.mmu.ttypes import MInstruction, MSimulationState
+from MMIStandard.services import MSceneAccess
+from MMIStandard.mmu.ttypes import MInstruction, MSimulationState
 from abc import ABC, abstractmethod
 
 class MotionModelInterface(MotionModelUnit.Iface,ABC):

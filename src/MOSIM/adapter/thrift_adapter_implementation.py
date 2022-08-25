@@ -10,13 +10,13 @@
 import os
 import json
 from datetime import datetime
-from MOSIM.mmi.avatar.ttypes import MAvatarDescription, MAvatarDescription
-from MOSIM.mmi.scene.ttypes import MSceneUpdate, MSceneManipulation
-from MOSIM.mmi.core.ttypes import MBoolResponse, MIPAddress
-from MOSIM.mmi.mmu.ttypes import MSimulationState, MInstruction
-from MOSIM.mmi.register.ttypes import MAdapterDescription
-from MOSIM.mmi.register import MMIAdapter, MMIRegisterService
-#from MOSIM.mmi.ttypes import MAvatarPosture, MInstruction, MAvatarState, MAvatarDescription, MSceneManipulation, MIPAddress
+from MMIStandard.avatar.ttypes import MAvatarDescription, MAvatarDescription
+from MMIStandard.scene.ttypes import MSceneUpdate, MSceneManipulation
+from MMIStandard.core.ttypes import MBoolResponse, MIPAddress
+from MMIStandard.mmu.ttypes import MSimulationState, MInstruction
+from MMIStandard.register.ttypes import MAdapterDescription
+from MMIStandard.register import MMIAdapter, MMIRegisterService
+#from MMIStandard.ttypes import MAvatarPosture, MInstruction, MAvatarState, MAvatarDescription, MSceneManipulation, MIPAddress
 #from MMIStandard import MMIAdapter
 
 from MOSIM.core.utils.description_utils import create_mmu_description

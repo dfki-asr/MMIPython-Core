@@ -11,9 +11,9 @@
 ##not needed anymore motion_model_interface must be implemented by a MMU
 
 
-from MOSIM.mmi.mmu.ttypes import MInstruction, MMUDescription, MSimulationState
-from MOSIM.mmi.avatar.ttypes import MAvatarDescription
-#from MOSIM.mmi.ttypes import MMUDescription, MAvatarDescription, MInstruction
+from MMIStandard.mmu.ttypes import MInstruction, MMUDescription, MSimulationState
+from MMIStandard.avatar.ttypes import MAvatarDescription
+#from MMIStandard.ttypes import MMUDescription, MAvatarDescription, MInstruction
 
 from MOSIM.core.interfaces.motion_model_interface import MotionModelInterface
 #from MOSIM.core.containers.avatar_state import AvatarState

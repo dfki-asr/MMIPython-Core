@@ -10,11 +10,11 @@ Contains helper methods for the access classes
 
 from threading import Thread
 
-from MOSIM.mmi.register.ttypes import MAdapterDescription
-from MOSIM.mmi.core.ttypes import MIPAddress
-#from MOSIM.mmi.ttypes import AdapterDescription, MBoneType, MIPAddress
-from MOSIM.mmi.register import MMIAdapter
-from MOSIM.mmi.register import MMIRegisterService
+from MMIStandard.register.ttypes import MAdapterDescription
+from MMIStandard.core.ttypes import MIPAddress
+#from MMIStandard.ttypes import AdapterDescription, MBoneType, MIPAddress
+from MMIStandard.register import MMIAdapter
+from MMIStandard.register import MMIRegisterService
 #from MMIStandard import MMIAdapter, MMURegisterService
 
 from MOSIM.core.utils.thrift_client import ThriftClient

@@ -12,8 +12,8 @@ from thrift.transport import TTransport
 from thrift.protocol import TCompactProtocol
 from thrift.server import TServer
 
-from MOSIM.mmi.core.ttypes import MIPAddress
-from MOSIM.mmi.register import MMIAdapter
+from MMIStandard.core.ttypes import MIPAddress
+from MMIStandard.register import MMIAdapter
 from MOSIM.adapter.thrift_adapter_implementation import ThriftAdapterImplementation
 from MOSIM.adapter import AdapterController
 from MOSIM.adapter.session.session_data import SessionData

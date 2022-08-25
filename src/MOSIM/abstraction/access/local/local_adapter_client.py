@@ -8,7 +8,7 @@
 
 """
 
-from MOSIM.mmi.register import MMIAdapter
+from MMIStandard.register import MMIAdapter
 #from MMIStandard import MMIAdapter
 
 from MOSIM.abstraction.access.interface.adapter_client import IAdapterClient

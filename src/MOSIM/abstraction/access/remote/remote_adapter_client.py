@@ -12,7 +12,7 @@ from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TCompactProtocol
 
-from MOSIM.mmi.register.ttypes import MAdapterDescription
+from MMIStandard.register.ttypes import MAdapterDescription
 #from MMIStandard import MMIAdapter
 
 from MOSIM.abstraction.access.interface.adapter_client import IAdapterClient

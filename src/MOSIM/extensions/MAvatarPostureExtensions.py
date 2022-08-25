@@ -3,8 +3,8 @@
 ## Original author(s): Janis Sprenger
 
 
-from MOSIM.mmi.avatar.ttypes import MAvatarPosture, MJoint, MJointType, MChannel
-from MOSIM.mmi.math.ttypes import MQuaternion, MVector3
+from MMIStandard.avatar.ttypes import MAvatarPosture, MJoint, MJointType, MChannel
+from MMIStandard.math.ttypes import MQuaternion, MVector3
 
 import json
 

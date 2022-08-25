@@ -9,7 +9,7 @@ Class which contains the data of the sessions and MMUs
 from datetime import datetime
 from MOSIM.adapter.session.avatar_content import AvatarContent
 from MOSIM.adapter.session.session_content import SessionContent
-from MOSIM.mmi.core.ttypes import MBoolResponse
+from MMIStandard.core.ttypes import MBoolResponse
 
 import MOSIM.core.scene.remote_scene_access as remote_scene_access
 import MOSIM.core.skeleton.remote_skeleton_access as remote_skeleton_access

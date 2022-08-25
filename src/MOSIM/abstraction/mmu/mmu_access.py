@@ -12,11 +12,11 @@
 from threading import Thread
 from queue import Queue
 
-from MOSIM.mmi.register.ttypes import MAdapterDescription
-from MOSIM.mmi.core.ttypes import MIPAddress
-# from MOSIM.mmi.services import MServiceAccess
-#from MOSIM.mmi.ttypes import AdapterDescription, MIPAddress
-from MOSIM.mmi.register import MMIAdapter
+from MMIStandard.register.ttypes import MAdapterDescription
+from MMIStandard.core.ttypes import MIPAddress
+# from MMIStandard.services import MServiceAccess
+#from MMIStandard.ttypes import AdapterDescription, MIPAddress
+from MMIStandard.register import MMIAdapter
 #from MMIStandard import MMIAdapter
 
 from MOSIM.core.services.service_access import ServiceAccess

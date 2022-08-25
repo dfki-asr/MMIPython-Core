@@ -3,7 +3,7 @@
 ## Original author(s): Janis Sprenger, Usama Bin Aslam
 
 
-from MOSIM.mmi.math.ttypes import MQuaternion, MVector3
+from MMIStandard.math.ttypes import MQuaternion, MVector3
 
 from .MVector3Extensions import Multiply
 

@@ -4,7 +4,7 @@
 
 
 from MOSIM.core.utils.thrift_client import ThriftClient
-from MOSIM.mmi.services import MSkeletonAccess
+from MMIStandard.services import MSkeletonAccess
 
 def initialize(register_ip_address) -> MSkeletonAccess:
 	# Get the service descriptions from the mmu register

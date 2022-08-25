@@ -7,8 +7,8 @@
 """
 
 """
-from MOSIM.mmi.register.ttypes import MAdapterDescription
-#from MOSIM.mmi.ttypes import AdapterDescription
+from MMIStandard.register.ttypes import MAdapterDescription
+#from MMIStandard.ttypes import AdapterDescription
 
 from MOSIM.abstraction.access.interface.adapter_access import IAdapterAccess
 

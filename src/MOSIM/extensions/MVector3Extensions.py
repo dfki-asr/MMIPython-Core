@@ -2,7 +2,7 @@
 ## The content of this file has been developed in the context of the MOSIM research project.
 ## Original author(s): Janis Sprenger, Usama Bin Aslam
 
-from MOSIM.mmi.math.ttypes import MQuaternion, MVector3
+from MMIStandard.math.ttypes import MQuaternion, MVector3
 
 import math
 import sys

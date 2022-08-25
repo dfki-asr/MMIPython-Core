@@ -9,9 +9,9 @@ import time
 import threading
 from datetime import datetime
 
-from MOSIM.mmi.core.ttypes import MBoolResponse, MIPAddress
-from MOSIM.mmi.register.ttypes import MAdapterDescription
-from MOSIM.mmi.register import MMIRegisterService, MMIAdapter
+from MMIStandard.core.ttypes import MBoolResponse, MIPAddress
+from MMIStandard.register.ttypes import MAdapterDescription
+from MMIStandard.register import MMIRegisterService, MMIAdapter
 
 from MOSIM.adapter.session.session_data import SessionData
 from MOSIM.core.utils.thrift_client import ThriftClient

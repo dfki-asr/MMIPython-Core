@@ -7,10 +7,10 @@
 """
 
 """
-from MOSIM.mmi.avatar.ttypes import MAvatarPosture, MAvatarDescription 
-from MOSIM.mmi.scene.ttypes import MSceneManipulation,  MSceneManipulation
-from MOSIM.mmi.mmu.ttypes import MMUDescription, MInstruction, MSimulationState
-#from MOSIM.mmi.ttypes import MSceneManipulation, MAvatarPosture, MMUDescription, MAvatarDescription, MInstruction, MAvatarState
+from MMIStandard.avatar.ttypes import MAvatarPosture, MAvatarDescription 
+from MMIStandard.scene.ttypes import MSceneManipulation,  MSceneManipulation
+from MMIStandard.mmu.ttypes import MMUDescription, MInstruction, MSimulationState
+#from MMIStandard.ttypes import MSceneManipulation, MAvatarPosture, MMUDescription, MAvatarDescription, MInstruction, MAvatarState
 
 import MOSIM.abstraction.mmu.motion_model_unit
 import MOSIM.abstraction.mmu.mmu_access

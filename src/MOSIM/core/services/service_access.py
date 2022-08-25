@@ -7,16 +7,16 @@
 
 """
 
-from MOSIM.mmi.scene.ttypes import MSceneObject, MCollider
-from MOSIM.mmi.avatar.ttypes import MAvatarPostureValues, MAvatarPosture
-from MOSIM.mmi.core.ttypes import MIPAddress
-from MOSIM.mmi.services.ttypes import MIKProperty
-from MOSIM.mmi.math.ttypes import MTransform
+from MMIStandard.scene.ttypes import MSceneObject, MCollider
+from MMIStandard.avatar.ttypes import MAvatarPostureValues, MAvatarPosture
+from MMIStandard.core.ttypes import MIPAddress
+from MMIStandard.services.ttypes import MIKProperty
+from MMIStandard.math.ttypes import MTransform
 
-from MOSIM.mmi.register import MMIRegisterService
-from MOSIM.mmi.services import MGraspPoseService, MPathPlanningService, MRetargetingService, MCollisionDetectionService, MInverseKinematicsService
+from MMIStandard.register import MMIRegisterService
+from MMIStandard.services import MGraspPoseService, MPathPlanningService, MRetargetingService, MCollisionDetectionService, MInverseKinematicsService
 
-#from MOSIM.mmi.ttypes import MAvatarPosture, MAvatarPostureValues, MVector, MCollider, MTransform, IKProperty, MBoneType, MSceneObject, MIPAddress
+#from MMIStandard.ttypes import MAvatarPosture, MAvatarPostureValues, MVector, MCollider, MTransform, IKProperty, MBoneType, MSceneObject, MIPAddress
 #from MMIStandard import IKService, CollisionDetectionService, PathPlanningService, RetargetingService, GraspPoseService, MMURegisterService
 
 from MOSIM.core.utils.thrift_client import ThriftClient

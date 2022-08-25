@@ -8,12 +8,12 @@
 
 """
 
-from MOSIM.mmi.core.ttypes import MParameter, MServiceDescription
-from MOSIM.mmi.mmu.ttypes import MMUDescription
-from MOSIM.mmi.constraints.ttypes import MConstraint
-from MOSIM.mmi.register.ttypes import MAdapterDescription
+from MMIStandard.core.ttypes import MParameter, MServiceDescription
+from MMIStandard.mmu.ttypes import MMUDescription
+from MMIStandard.constraints.ttypes import MConstraint
+from MMIStandard.register.ttypes import MAdapterDescription
 
-#from MOSIM.mmi.ttypes import ServiceDescription, AdapterDescription, MMUDescription
+#from MMIStandard.ttypes import ServiceDescription, AdapterDescription, MMUDescription
 
 def create_service_description(json_dict):
     """

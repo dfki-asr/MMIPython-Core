@@ -9,7 +9,7 @@
 
 #from MOSIM.core.containers.avatar_state import AvatarState
 from MOSIM.core.interfaces.motion_model_interface import MotionModelInterface
-from MOSIM.mmi.mmu.ttypes import MSimulationState
+from MMIStandard.mmu.ttypes import MSimulationState
 
 class CoSimulationInterface(MotionModelInterface):
     """

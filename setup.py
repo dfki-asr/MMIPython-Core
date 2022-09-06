@@ -133,7 +133,7 @@ setup(
     #
     #   py_modules=["my_module"],
     #
-    packages=find_packages('src', include=["MOSIM", "MOSIM.*"]),  # Required
+    packages=find_packages('src', include=["MOSIM", "MOSIM.*", "MMIStandard", "MMIStandard.*"]),  # Required
 
     # Specify which Python versions you support. In contrast to the
     # 'Programming Language' classifiers above, 'pip install' will check this

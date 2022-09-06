@@ -388,14 +388,16 @@ class MTransformUpdate(object):
      - Position
      - Rotation
      - Parent
+     - Scale
 
     """
 
 
-    def __init__(self, Position=None, Rotation=None, Parent=None,):
+    def __init__(self, Position=None, Rotation=None, Parent=None, Scale=None,):
         self.Position = Position
         self.Rotation = Rotation
         self.Parent = Parent
+        self.Scale = Scale
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -431,6 +433,16 @@ class MTransformUpdate(object):
                     self.Parent = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 4:
+                if ftype == TType.LIST:
+                    self.Scale = []
+                    (_etype15, _size12) = iprot.readListBegin()
+                    for _i16 in range(_size12):
+                        _elem17 = iprot.readDouble()
+                        self.Scale.append(_elem17)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -444,20 +456,27 @@ class MTransformUpdate(object):
         if self.Position is not None:
             oprot.writeFieldBegin('Position', TType.LIST, 1)
             oprot.writeListBegin(TType.DOUBLE, len(self.Position))
-            for iter12 in self.Position:
-                oprot.writeDouble(iter12)
+            for iter18 in self.Position:
+                oprot.writeDouble(iter18)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Rotation is not None:
             oprot.writeFieldBegin('Rotation', TType.LIST, 2)
             oprot.writeListBegin(TType.DOUBLE, len(self.Rotation))
-            for iter13 in self.Rotation:
-                oprot.writeDouble(iter13)
+            for iter19 in self.Rotation:
+                oprot.writeDouble(iter19)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Parent is not None:
             oprot.writeFieldBegin('Parent', TType.STRING, 3)
             oprot.writeString(self.Parent.encode('utf-8') if sys.version_info[0] == 2 else self.Parent)
+            oprot.writeFieldEnd()
+        if self.Scale is not None:
+            oprot.writeFieldBegin('Scale', TType.LIST, 4)
+            oprot.writeListBegin(TType.DOUBLE, len(self.Scale))
+            for iter20 in self.Scale:
+                oprot.writeDouble(iter20)
+            oprot.writeListEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -597,60 +616,60 @@ class MPhysicsProperties(object):
             elif fid == 2:
                 if ftype == TType.LIST:
                     self.CenterOfMass = []
-                    (_etype17, _size14) = iprot.readListBegin()
-                    for _i18 in range(_size14):
-                        _elem19 = iprot.readDouble()
-                        self.CenterOfMass.append(_elem19)
+                    (_etype24, _size21) = iprot.readListBegin()
+                    for _i25 in range(_size21):
+                        _elem26 = iprot.readDouble()
+                        self.CenterOfMass.append(_elem26)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.LIST:
                     self.Inertia = []
-                    (_etype23, _size20) = iprot.readListBegin()
-                    for _i24 in range(_size20):
-                        _elem25 = iprot.readDouble()
-                        self.Inertia.append(_elem25)
+                    (_etype30, _size27) = iprot.readListBegin()
+                    for _i31 in range(_size27):
+                        _elem32 = iprot.readDouble()
+                        self.Inertia.append(_elem32)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.LIST:
                     self.Velocity = []
-                    (_etype29, _size26) = iprot.readListBegin()
-                    for _i30 in range(_size26):
-                        _elem31 = iprot.readDouble()
-                        self.Velocity.append(_elem31)
+                    (_etype36, _size33) = iprot.readListBegin()
+                    for _i37 in range(_size33):
+                        _elem38 = iprot.readDouble()
+                        self.Velocity.append(_elem38)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 5:
                 if ftype == TType.LIST:
                     self.AngularVelocity = []
-                    (_etype35, _size32) = iprot.readListBegin()
-                    for _i36 in range(_size32):
-                        _elem37 = iprot.readDouble()
-                        self.AngularVelocity.append(_elem37)
+                    (_etype42, _size39) = iprot.readListBegin()
+                    for _i43 in range(_size39):
+                        _elem44 = iprot.readDouble()
+                        self.AngularVelocity.append(_elem44)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 6:
                 if ftype == TType.LIST:
                     self.NetForce = []
-                    (_etype41, _size38) = iprot.readListBegin()
-                    for _i42 in range(_size38):
-                        _elem43 = iprot.readDouble()
-                        self.NetForce.append(_elem43)
+                    (_etype48, _size45) = iprot.readListBegin()
+                    for _i49 in range(_size45):
+                        _elem50 = iprot.readDouble()
+                        self.NetForce.append(_elem50)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 7:
                 if ftype == TType.LIST:
                     self.NetTorque = []
-                    (_etype47, _size44) = iprot.readListBegin()
-                    for _i48 in range(_size44):
-                        _elem49 = iprot.readDouble()
-                        self.NetTorque.append(_elem49)
+                    (_etype54, _size51) = iprot.readListBegin()
+                    for _i55 in range(_size51):
+                        _elem56 = iprot.readDouble()
+                        self.NetTorque.append(_elem56)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -696,43 +715,43 @@ class MPhysicsProperties(object):
         if self.CenterOfMass is not None:
             oprot.writeFieldBegin('CenterOfMass', TType.LIST, 2)
             oprot.writeListBegin(TType.DOUBLE, len(self.CenterOfMass))
-            for iter50 in self.CenterOfMass:
-                oprot.writeDouble(iter50)
+            for iter57 in self.CenterOfMass:
+                oprot.writeDouble(iter57)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Inertia is not None:
             oprot.writeFieldBegin('Inertia', TType.LIST, 3)
             oprot.writeListBegin(TType.DOUBLE, len(self.Inertia))
-            for iter51 in self.Inertia:
-                oprot.writeDouble(iter51)
+            for iter58 in self.Inertia:
+                oprot.writeDouble(iter58)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Velocity is not None:
             oprot.writeFieldBegin('Velocity', TType.LIST, 4)
             oprot.writeListBegin(TType.DOUBLE, len(self.Velocity))
-            for iter52 in self.Velocity:
-                oprot.writeDouble(iter52)
+            for iter59 in self.Velocity:
+                oprot.writeDouble(iter59)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.AngularVelocity is not None:
             oprot.writeFieldBegin('AngularVelocity', TType.LIST, 5)
             oprot.writeListBegin(TType.DOUBLE, len(self.AngularVelocity))
-            for iter53 in self.AngularVelocity:
-                oprot.writeDouble(iter53)
+            for iter60 in self.AngularVelocity:
+                oprot.writeDouble(iter60)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.NetForce is not None:
             oprot.writeFieldBegin('NetForce', TType.LIST, 6)
             oprot.writeListBegin(TType.DOUBLE, len(self.NetForce))
-            for iter54 in self.NetForce:
-                oprot.writeDouble(iter54)
+            for iter61 in self.NetForce:
+                oprot.writeDouble(iter61)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.NetTorque is not None:
             oprot.writeFieldBegin('NetTorque', TType.LIST, 7)
             oprot.writeListBegin(TType.DOUBLE, len(self.NetTorque))
-            for iter55 in self.NetTorque:
-                oprot.writeDouble(iter55)
+            for iter62 in self.NetTorque:
+                oprot.writeDouble(iter62)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Mu1 is not None:
@@ -1243,21 +1262,21 @@ class MMeshColliderProperties(object):
             if fid == 1:
                 if ftype == TType.LIST:
                     self.Vertices = []
-                    (_etype59, _size56) = iprot.readListBegin()
-                    for _i60 in range(_size56):
-                        _elem61 = MMIStandard.math.ttypes.MVector3()
-                        _elem61.read(iprot)
-                        self.Vertices.append(_elem61)
+                    (_etype66, _size63) = iprot.readListBegin()
+                    for _i67 in range(_size63):
+                        _elem68 = MMIStandard.math.ttypes.MVector3()
+                        _elem68.read(iprot)
+                        self.Vertices.append(_elem68)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.LIST:
                     self.Triangles = []
-                    (_etype65, _size62) = iprot.readListBegin()
-                    for _i66 in range(_size62):
-                        _elem67 = iprot.readI32()
-                        self.Triangles.append(_elem67)
+                    (_etype72, _size69) = iprot.readListBegin()
+                    for _i73 in range(_size69):
+                        _elem74 = iprot.readI32()
+                        self.Triangles.append(_elem74)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -1274,15 +1293,15 @@ class MMeshColliderProperties(object):
         if self.Vertices is not None:
             oprot.writeFieldBegin('Vertices', TType.LIST, 1)
             oprot.writeListBegin(TType.STRUCT, len(self.Vertices))
-            for iter68 in self.Vertices:
-                iter68.write(oprot)
+            for iter75 in self.Vertices:
+                iter75.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Triangles is not None:
             oprot.writeFieldBegin('Triangles', TType.LIST, 2)
             oprot.writeListBegin(TType.I32, len(self.Triangles))
-            for iter69 in self.Triangles:
-                oprot.writeI32(iter69)
+            for iter76 in self.Triangles:
+                oprot.writeI32(iter76)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -1343,43 +1362,43 @@ class MMesh(object):
             elif fid == 2:
                 if ftype == TType.LIST:
                     self.Vertices = []
-                    (_etype73, _size70) = iprot.readListBegin()
-                    for _i74 in range(_size70):
-                        _elem75 = MMIStandard.math.ttypes.MVector3()
-                        _elem75.read(iprot)
-                        self.Vertices.append(_elem75)
+                    (_etype80, _size77) = iprot.readListBegin()
+                    for _i81 in range(_size77):
+                        _elem82 = MMIStandard.math.ttypes.MVector3()
+                        _elem82.read(iprot)
+                        self.Vertices.append(_elem82)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.LIST:
                     self.Triangles = []
-                    (_etype79, _size76) = iprot.readListBegin()
-                    for _i80 in range(_size76):
-                        _elem81 = iprot.readI32()
-                        self.Triangles.append(_elem81)
+                    (_etype86, _size83) = iprot.readListBegin()
+                    for _i87 in range(_size83):
+                        _elem88 = iprot.readI32()
+                        self.Triangles.append(_elem88)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.LIST:
                     self.UVCoordinates = []
-                    (_etype85, _size82) = iprot.readListBegin()
-                    for _i86 in range(_size82):
-                        _elem87 = MMIStandard.math.ttypes.MVector2()
-                        _elem87.read(iprot)
-                        self.UVCoordinates.append(_elem87)
+                    (_etype92, _size89) = iprot.readListBegin()
+                    for _i93 in range(_size89):
+                        _elem94 = MMIStandard.math.ttypes.MVector2()
+                        _elem94.read(iprot)
+                        self.UVCoordinates.append(_elem94)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 5:
                 if ftype == TType.MAP:
                     self.Properties = {}
-                    (_ktype89, _vtype90, _size88) = iprot.readMapBegin()
-                    for _i92 in range(_size88):
-                        _key93 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val94 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.Properties[_key93] = _val94
+                    (_ktype96, _vtype97, _size95) = iprot.readMapBegin()
+                    for _i99 in range(_size95):
+                        _key100 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val101 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.Properties[_key100] = _val101
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -1400,30 +1419,30 @@ class MMesh(object):
         if self.Vertices is not None:
             oprot.writeFieldBegin('Vertices', TType.LIST, 2)
             oprot.writeListBegin(TType.STRUCT, len(self.Vertices))
-            for iter95 in self.Vertices:
-                iter95.write(oprot)
+            for iter102 in self.Vertices:
+                iter102.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Triangles is not None:
             oprot.writeFieldBegin('Triangles', TType.LIST, 3)
             oprot.writeListBegin(TType.I32, len(self.Triangles))
-            for iter96 in self.Triangles:
-                oprot.writeI32(iter96)
+            for iter103 in self.Triangles:
+                oprot.writeI32(iter103)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.UVCoordinates is not None:
             oprot.writeFieldBegin('UVCoordinates', TType.LIST, 4)
             oprot.writeListBegin(TType.STRUCT, len(self.UVCoordinates))
-            for iter97 in self.UVCoordinates:
-                iter97.write(oprot)
+            for iter104 in self.UVCoordinates:
+                iter104.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Properties is not None:
             oprot.writeFieldBegin('Properties', TType.MAP, 5)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.Properties))
-            for kiter98, viter99 in self.Properties.items():
-                oprot.writeString(kiter98.encode('utf-8') if sys.version_info[0] == 2 else kiter98)
-                oprot.writeString(viter99.encode('utf-8') if sys.version_info[0] == 2 else viter99)
+            for kiter105, viter106 in self.Properties.items():
+                oprot.writeString(kiter105.encode('utf-8') if sys.version_info[0] == 2 else kiter105)
+                oprot.writeString(viter106.encode('utf-8') if sys.version_info[0] == 2 else viter106)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -1477,32 +1496,32 @@ class MNavigationMesh(object):
             if fid == 1:
                 if ftype == TType.LIST:
                     self.Vertices = []
-                    (_etype103, _size100) = iprot.readListBegin()
-                    for _i104 in range(_size100):
-                        _elem105 = MMIStandard.math.ttypes.MVector3()
-                        _elem105.read(iprot)
-                        self.Vertices.append(_elem105)
+                    (_etype110, _size107) = iprot.readListBegin()
+                    for _i111 in range(_size107):
+                        _elem112 = MMIStandard.math.ttypes.MVector3()
+                        _elem112.read(iprot)
+                        self.Vertices.append(_elem112)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.LIST:
                     self.Triangles = []
-                    (_etype109, _size106) = iprot.readListBegin()
-                    for _i110 in range(_size106):
-                        _elem111 = iprot.readI32()
-                        self.Triangles.append(_elem111)
+                    (_etype116, _size113) = iprot.readListBegin()
+                    for _i117 in range(_size113):
+                        _elem118 = iprot.readI32()
+                        self.Triangles.append(_elem118)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.MAP:
                     self.Properties = {}
-                    (_ktype113, _vtype114, _size112) = iprot.readMapBegin()
-                    for _i116 in range(_size112):
-                        _key117 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val118 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.Properties[_key117] = _val118
+                    (_ktype120, _vtype121, _size119) = iprot.readMapBegin()
+                    for _i123 in range(_size119):
+                        _key124 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val125 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.Properties[_key124] = _val125
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -1519,23 +1538,23 @@ class MNavigationMesh(object):
         if self.Vertices is not None:
             oprot.writeFieldBegin('Vertices', TType.LIST, 1)
             oprot.writeListBegin(TType.STRUCT, len(self.Vertices))
-            for iter119 in self.Vertices:
-                iter119.write(oprot)
+            for iter126 in self.Vertices:
+                iter126.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Triangles is not None:
             oprot.writeFieldBegin('Triangles', TType.LIST, 2)
             oprot.writeListBegin(TType.I32, len(self.Triangles))
-            for iter120 in self.Triangles:
-                oprot.writeI32(iter120)
+            for iter127 in self.Triangles:
+                oprot.writeI32(iter127)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Properties is not None:
             oprot.writeFieldBegin('Properties', TType.MAP, 3)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.Properties))
-            for kiter121, viter122 in self.Properties.items():
-                oprot.writeString(kiter121.encode('utf-8') if sys.version_info[0] == 2 else kiter121)
-                oprot.writeString(viter122.encode('utf-8') if sys.version_info[0] == 2 else viter122)
+            for kiter128, viter129 in self.Properties.items():
+                oprot.writeString(kiter128.encode('utf-8') if sys.version_info[0] == 2 else kiter128)
+                oprot.writeString(viter129.encode('utf-8') if sys.version_info[0] == 2 else viter129)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -1592,21 +1611,21 @@ class MDrawingCall(object):
             elif fid == 2:
                 if ftype == TType.LIST:
                     self.Data = []
-                    (_etype126, _size123) = iprot.readListBegin()
-                    for _i127 in range(_size123):
-                        _elem128 = iprot.readDouble()
-                        self.Data.append(_elem128)
+                    (_etype133, _size130) = iprot.readListBegin()
+                    for _i134 in range(_size130):
+                        _elem135 = iprot.readDouble()
+                        self.Data.append(_elem135)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.MAP:
                     self.Properties = {}
-                    (_ktype130, _vtype131, _size129) = iprot.readMapBegin()
-                    for _i133 in range(_size129):
-                        _key134 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val135 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.Properties[_key134] = _val135
+                    (_ktype137, _vtype138, _size136) = iprot.readMapBegin()
+                    for _i140 in range(_size136):
+                        _key141 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val142 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.Properties[_key141] = _val142
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -1627,16 +1646,16 @@ class MDrawingCall(object):
         if self.Data is not None:
             oprot.writeFieldBegin('Data', TType.LIST, 2)
             oprot.writeListBegin(TType.DOUBLE, len(self.Data))
-            for iter136 in self.Data:
-                oprot.writeDouble(iter136)
+            for iter143 in self.Data:
+                oprot.writeDouble(iter143)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Properties is not None:
             oprot.writeFieldBegin('Properties', TType.MAP, 3)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.Properties))
-            for kiter137, viter138 in self.Properties.items():
-                oprot.writeString(kiter137.encode('utf-8') if sys.version_info[0] == 2 else kiter137)
-                oprot.writeString(viter138.encode('utf-8') if sys.version_info[0] == 2 else viter138)
+            for kiter144, viter145 in self.Properties.items():
+                oprot.writeString(kiter144.encode('utf-8') if sys.version_info[0] == 2 else kiter144)
+                oprot.writeString(viter145.encode('utf-8') if sys.version_info[0] == 2 else viter145)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -1698,21 +1717,21 @@ class MPhysicsInteraction(object):
             elif fid == 3:
                 if ftype == TType.LIST:
                     self.Values = []
-                    (_etype142, _size139) = iprot.readListBegin()
-                    for _i143 in range(_size139):
-                        _elem144 = iprot.readDouble()
-                        self.Values.append(_elem144)
+                    (_etype149, _size146) = iprot.readListBegin()
+                    for _i150 in range(_size146):
+                        _elem151 = iprot.readDouble()
+                        self.Values.append(_elem151)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.MAP:
                     self.Properties = {}
-                    (_ktype146, _vtype147, _size145) = iprot.readMapBegin()
-                    for _i149 in range(_size145):
-                        _key150 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val151 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.Properties[_key150] = _val151
+                    (_ktype153, _vtype154, _size152) = iprot.readMapBegin()
+                    for _i156 in range(_size152):
+                        _key157 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val158 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.Properties[_key157] = _val158
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -1737,16 +1756,16 @@ class MPhysicsInteraction(object):
         if self.Values is not None:
             oprot.writeFieldBegin('Values', TType.LIST, 3)
             oprot.writeListBegin(TType.DOUBLE, len(self.Values))
-            for iter152 in self.Values:
-                oprot.writeDouble(iter152)
+            for iter159 in self.Values:
+                oprot.writeDouble(iter159)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Properties is not None:
             oprot.writeFieldBegin('Properties', TType.MAP, 4)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.Properties))
-            for kiter153, viter154 in self.Properties.items():
-                oprot.writeString(kiter153.encode('utf-8') if sys.version_info[0] == 2 else kiter153)
-                oprot.writeString(viter154.encode('utf-8') if sys.version_info[0] == 2 else viter154)
+            for kiter160, viter161 in self.Properties.items():
+                oprot.writeString(kiter160.encode('utf-8') if sys.version_info[0] == 2 else kiter160)
+                oprot.writeString(viter161.encode('utf-8') if sys.version_info[0] == 2 else viter161)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -1802,44 +1821,44 @@ class MSceneManipulation(object):
             if fid == 1:
                 if ftype == TType.LIST:
                     self.Transforms = []
-                    (_etype158, _size155) = iprot.readListBegin()
-                    for _i159 in range(_size155):
-                        _elem160 = MTransformManipulation()
-                        _elem160.read(iprot)
-                        self.Transforms.append(_elem160)
+                    (_etype165, _size162) = iprot.readListBegin()
+                    for _i166 in range(_size162):
+                        _elem167 = MTransformManipulation()
+                        _elem167.read(iprot)
+                        self.Transforms.append(_elem167)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.LIST:
                     self.PhysicsInteractions = []
-                    (_etype164, _size161) = iprot.readListBegin()
-                    for _i165 in range(_size161):
-                        _elem166 = MPhysicsInteraction()
-                        _elem166.read(iprot)
-                        self.PhysicsInteractions.append(_elem166)
+                    (_etype171, _size168) = iprot.readListBegin()
+                    for _i172 in range(_size168):
+                        _elem173 = MPhysicsInteraction()
+                        _elem173.read(iprot)
+                        self.PhysicsInteractions.append(_elem173)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.LIST:
                     self.Properties = []
-                    (_etype170, _size167) = iprot.readListBegin()
-                    for _i171 in range(_size167):
-                        _elem172 = MPropertyManipulation()
-                        _elem172.read(iprot)
-                        self.Properties.append(_elem172)
+                    (_etype177, _size174) = iprot.readListBegin()
+                    for _i178 in range(_size174):
+                        _elem179 = MPropertyManipulation()
+                        _elem179.read(iprot)
+                        self.Properties.append(_elem179)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.LIST:
                     self.Attachments = []
-                    (_etype176, _size173) = iprot.readListBegin()
-                    for _i177 in range(_size173):
-                        _elem178 = MAttachmentManipulation()
-                        _elem178.read(iprot)
-                        self.Attachments.append(_elem178)
+                    (_etype183, _size180) = iprot.readListBegin()
+                    for _i184 in range(_size180):
+                        _elem185 = MAttachmentManipulation()
+                        _elem185.read(iprot)
+                        self.Attachments.append(_elem185)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -1856,29 +1875,29 @@ class MSceneManipulation(object):
         if self.Transforms is not None:
             oprot.writeFieldBegin('Transforms', TType.LIST, 1)
             oprot.writeListBegin(TType.STRUCT, len(self.Transforms))
-            for iter179 in self.Transforms:
-                iter179.write(oprot)
+            for iter186 in self.Transforms:
+                iter186.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.PhysicsInteractions is not None:
             oprot.writeFieldBegin('PhysicsInteractions', TType.LIST, 2)
             oprot.writeListBegin(TType.STRUCT, len(self.PhysicsInteractions))
-            for iter180 in self.PhysicsInteractions:
-                iter180.write(oprot)
+            for iter187 in self.PhysicsInteractions:
+                iter187.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Properties is not None:
             oprot.writeFieldBegin('Properties', TType.LIST, 3)
             oprot.writeListBegin(TType.STRUCT, len(self.Properties))
-            for iter181 in self.Properties:
-                iter181.write(oprot)
+            for iter188 in self.Properties:
+                iter188.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Attachments is not None:
             oprot.writeFieldBegin('Attachments', TType.LIST, 4)
             oprot.writeListBegin(TType.STRUCT, len(self.Attachments))
-            for iter182 in self.Attachments:
-                iter182.write(oprot)
+            for iter189 in self.Attachments:
+                iter189.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -2002,22 +2021,22 @@ class MCollider(object):
             elif fid == 11:
                 if ftype == TType.LIST:
                     self.Colliders = []
-                    (_etype186, _size183) = iprot.readListBegin()
-                    for _i187 in range(_size183):
-                        _elem188 = MCollider()
-                        _elem188.read(iprot)
-                        self.Colliders.append(_elem188)
+                    (_etype193, _size190) = iprot.readListBegin()
+                    for _i194 in range(_size190):
+                        _elem195 = MCollider()
+                        _elem195.read(iprot)
+                        self.Colliders.append(_elem195)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 12:
                 if ftype == TType.MAP:
                     self.Properties = {}
-                    (_ktype190, _vtype191, _size189) = iprot.readMapBegin()
-                    for _i193 in range(_size189):
-                        _key194 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val195 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.Properties[_key194] = _val195
+                    (_ktype197, _vtype198, _size196) = iprot.readMapBegin()
+                    for _i200 in range(_size196):
+                        _key201 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val202 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.Properties[_key201] = _val202
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
@@ -2074,16 +2093,16 @@ class MCollider(object):
         if self.Colliders is not None:
             oprot.writeFieldBegin('Colliders', TType.LIST, 11)
             oprot.writeListBegin(TType.STRUCT, len(self.Colliders))
-            for iter196 in self.Colliders:
-                iter196.write(oprot)
+            for iter203 in self.Colliders:
+                iter203.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Properties is not None:
             oprot.writeFieldBegin('Properties', TType.MAP, 12)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.Properties))
-            for kiter197, viter198 in self.Properties.items():
-                oprot.writeString(kiter197.encode('utf-8') if sys.version_info[0] == 2 else kiter197)
-                oprot.writeString(viter198.encode('utf-8') if sys.version_info[0] == 2 else viter198)
+            for kiter204, viter205 in self.Properties.items():
+                oprot.writeString(kiter204.encode('utf-8') if sys.version_info[0] == 2 else kiter204)
+                oprot.writeString(viter205.encode('utf-8') if sys.version_info[0] == 2 else viter205)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -2181,33 +2200,33 @@ class MSceneObject(object):
             elif fid == 8:
                 if ftype == TType.MAP:
                     self.Properties = {}
-                    (_ktype200, _vtype201, _size199) = iprot.readMapBegin()
-                    for _i203 in range(_size199):
-                        _key204 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val205 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.Properties[_key204] = _val205
+                    (_ktype207, _vtype208, _size206) = iprot.readMapBegin()
+                    for _i210 in range(_size206):
+                        _key211 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        _val212 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.Properties[_key211] = _val212
                     iprot.readMapEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 9:
                 if ftype == TType.LIST:
                     self.Attachments = []
-                    (_etype209, _size206) = iprot.readListBegin()
-                    for _i210 in range(_size206):
-                        _elem211 = MAttachment()
-                        _elem211.read(iprot)
-                        self.Attachments.append(_elem211)
+                    (_etype216, _size213) = iprot.readListBegin()
+                    for _i217 in range(_size213):
+                        _elem218 = MAttachment()
+                        _elem218.read(iprot)
+                        self.Attachments.append(_elem218)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 10:
                 if ftype == TType.LIST:
                     self.Constraints = []
-                    (_etype215, _size212) = iprot.readListBegin()
-                    for _i216 in range(_size212):
-                        _elem217 = MMIStandard.constraints.ttypes.MConstraint()
-                        _elem217.read(iprot)
-                        self.Constraints.append(_elem217)
+                    (_etype222, _size219) = iprot.readListBegin()
+                    for _i223 in range(_size219):
+                        _elem224 = MMIStandard.constraints.ttypes.MConstraint()
+                        _elem224.read(iprot)
+                        self.Constraints.append(_elem224)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -2248,23 +2267,23 @@ class MSceneObject(object):
         if self.Properties is not None:
             oprot.writeFieldBegin('Properties', TType.MAP, 8)
             oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.Properties))
-            for kiter218, viter219 in self.Properties.items():
-                oprot.writeString(kiter218.encode('utf-8') if sys.version_info[0] == 2 else kiter218)
-                oprot.writeString(viter219.encode('utf-8') if sys.version_info[0] == 2 else viter219)
+            for kiter225, viter226 in self.Properties.items():
+                oprot.writeString(kiter225.encode('utf-8') if sys.version_info[0] == 2 else kiter225)
+                oprot.writeString(viter226.encode('utf-8') if sys.version_info[0] == 2 else viter226)
             oprot.writeMapEnd()
             oprot.writeFieldEnd()
         if self.Attachments is not None:
             oprot.writeFieldBegin('Attachments', TType.LIST, 9)
             oprot.writeListBegin(TType.STRUCT, len(self.Attachments))
-            for iter220 in self.Attachments:
-                iter220.write(oprot)
+            for iter227 in self.Attachments:
+                iter227.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Constraints is not None:
             oprot.writeFieldBegin('Constraints', TType.LIST, 10)
             oprot.writeListBegin(TType.STRUCT, len(self.Constraints))
-            for iter221 in self.Constraints:
-                iter221.write(oprot)
+            for iter228 in self.Constraints:
+                iter228.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -2366,44 +2385,44 @@ class MSceneObjectUpdate(object):
             elif fid == 7:
                 if ftype == TType.LIST:
                     self.HandPoses = []
-                    (_etype225, _size222) = iprot.readListBegin()
-                    for _i226 in range(_size222):
-                        _elem227 = MMIStandard.avatar.ttypes.MHandPose()
-                        _elem227.read(iprot)
-                        self.HandPoses.append(_elem227)
+                    (_etype232, _size229) = iprot.readListBegin()
+                    for _i233 in range(_size229):
+                        _elem234 = MMIStandard.avatar.ttypes.MHandPose()
+                        _elem234.read(iprot)
+                        self.HandPoses.append(_elem234)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 8:
                 if ftype == TType.LIST:
                     self.Properties = []
-                    (_etype231, _size228) = iprot.readListBegin()
-                    for _i232 in range(_size228):
-                        _elem233 = MPropertyUpdate()
-                        _elem233.read(iprot)
-                        self.Properties.append(_elem233)
+                    (_etype238, _size235) = iprot.readListBegin()
+                    for _i239 in range(_size235):
+                        _elem240 = MPropertyUpdate()
+                        _elem240.read(iprot)
+                        self.Properties.append(_elem240)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 9:
                 if ftype == TType.LIST:
                     self.Attachments = []
-                    (_etype237, _size234) = iprot.readListBegin()
-                    for _i238 in range(_size234):
-                        _elem239 = MAttachment()
-                        _elem239.read(iprot)
-                        self.Attachments.append(_elem239)
+                    (_etype244, _size241) = iprot.readListBegin()
+                    for _i245 in range(_size241):
+                        _elem246 = MAttachment()
+                        _elem246.read(iprot)
+                        self.Attachments.append(_elem246)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 10:
                 if ftype == TType.LIST:
                     self.Constraints = []
-                    (_etype243, _size240) = iprot.readListBegin()
-                    for _i244 in range(_size240):
-                        _elem245 = MMIStandard.constraints.ttypes.MConstraint()
-                        _elem245.read(iprot)
-                        self.Constraints.append(_elem245)
+                    (_etype250, _size247) = iprot.readListBegin()
+                    for _i251 in range(_size247):
+                        _elem252 = MMIStandard.constraints.ttypes.MConstraint()
+                        _elem252.read(iprot)
+                        self.Constraints.append(_elem252)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -2444,29 +2463,29 @@ class MSceneObjectUpdate(object):
         if self.HandPoses is not None:
             oprot.writeFieldBegin('HandPoses', TType.LIST, 7)
             oprot.writeListBegin(TType.STRUCT, len(self.HandPoses))
-            for iter246 in self.HandPoses:
-                iter246.write(oprot)
+            for iter253 in self.HandPoses:
+                iter253.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Properties is not None:
             oprot.writeFieldBegin('Properties', TType.LIST, 8)
             oprot.writeListBegin(TType.STRUCT, len(self.Properties))
-            for iter247 in self.Properties:
-                iter247.write(oprot)
+            for iter254 in self.Properties:
+                iter254.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Attachments is not None:
             oprot.writeFieldBegin('Attachments', TType.LIST, 9)
             oprot.writeListBegin(TType.STRUCT, len(self.Attachments))
-            for iter248 in self.Attachments:
-                iter248.write(oprot)
+            for iter255 in self.Attachments:
+                iter255.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Constraints is not None:
             oprot.writeFieldBegin('Constraints', TType.LIST, 10)
             oprot.writeListBegin(TType.STRUCT, len(self.Constraints))
-            for iter249 in self.Constraints:
-                iter249.write(oprot)
+            for iter256 in self.Constraints:
+                iter256.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -2522,64 +2541,64 @@ class MSceneUpdate(object):
             if fid == 1:
                 if ftype == TType.LIST:
                     self.AddedSceneObjects = []
-                    (_etype253, _size250) = iprot.readListBegin()
-                    for _i254 in range(_size250):
-                        _elem255 = MSceneObject()
-                        _elem255.read(iprot)
-                        self.AddedSceneObjects.append(_elem255)
+                    (_etype260, _size257) = iprot.readListBegin()
+                    for _i261 in range(_size257):
+                        _elem262 = MSceneObject()
+                        _elem262.read(iprot)
+                        self.AddedSceneObjects.append(_elem262)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.LIST:
                     self.ChangedSceneObjects = []
-                    (_etype259, _size256) = iprot.readListBegin()
-                    for _i260 in range(_size256):
-                        _elem261 = MSceneObjectUpdate()
-                        _elem261.read(iprot)
-                        self.ChangedSceneObjects.append(_elem261)
+                    (_etype266, _size263) = iprot.readListBegin()
+                    for _i267 in range(_size263):
+                        _elem268 = MSceneObjectUpdate()
+                        _elem268.read(iprot)
+                        self.ChangedSceneObjects.append(_elem268)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.LIST:
                     self.RemovedSceneObjects = []
-                    (_etype265, _size262) = iprot.readListBegin()
-                    for _i266 in range(_size262):
-                        _elem267 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.RemovedSceneObjects.append(_elem267)
+                    (_etype272, _size269) = iprot.readListBegin()
+                    for _i273 in range(_size269):
+                        _elem274 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.RemovedSceneObjects.append(_elem274)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 5:
                 if ftype == TType.LIST:
                     self.AddedAvatars = []
-                    (_etype271, _size268) = iprot.readListBegin()
-                    for _i272 in range(_size268):
-                        _elem273 = MMIStandard.avatar.ttypes.MAvatar()
-                        _elem273.read(iprot)
-                        self.AddedAvatars.append(_elem273)
+                    (_etype278, _size275) = iprot.readListBegin()
+                    for _i279 in range(_size275):
+                        _elem280 = MMIStandard.avatar.ttypes.MAvatar()
+                        _elem280.read(iprot)
+                        self.AddedAvatars.append(_elem280)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 6:
                 if ftype == TType.LIST:
                     self.ChangedAvatars = []
-                    (_etype277, _size274) = iprot.readListBegin()
-                    for _i278 in range(_size274):
-                        _elem279 = MAvatarUpdate()
-                        _elem279.read(iprot)
-                        self.ChangedAvatars.append(_elem279)
+                    (_etype284, _size281) = iprot.readListBegin()
+                    for _i285 in range(_size281):
+                        _elem286 = MAvatarUpdate()
+                        _elem286.read(iprot)
+                        self.ChangedAvatars.append(_elem286)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 7:
                 if ftype == TType.LIST:
                     self.RemovedAvatars = []
-                    (_etype283, _size280) = iprot.readListBegin()
-                    for _i284 in range(_size280):
-                        _elem285 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.RemovedAvatars.append(_elem285)
+                    (_etype290, _size287) = iprot.readListBegin()
+                    for _i291 in range(_size287):
+                        _elem292 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.RemovedAvatars.append(_elem292)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -2596,43 +2615,43 @@ class MSceneUpdate(object):
         if self.AddedSceneObjects is not None:
             oprot.writeFieldBegin('AddedSceneObjects', TType.LIST, 1)
             oprot.writeListBegin(TType.STRUCT, len(self.AddedSceneObjects))
-            for iter286 in self.AddedSceneObjects:
-                iter286.write(oprot)
+            for iter293 in self.AddedSceneObjects:
+                iter293.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.ChangedSceneObjects is not None:
             oprot.writeFieldBegin('ChangedSceneObjects', TType.LIST, 2)
             oprot.writeListBegin(TType.STRUCT, len(self.ChangedSceneObjects))
-            for iter287 in self.ChangedSceneObjects:
-                iter287.write(oprot)
+            for iter294 in self.ChangedSceneObjects:
+                iter294.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.RemovedSceneObjects is not None:
             oprot.writeFieldBegin('RemovedSceneObjects', TType.LIST, 3)
             oprot.writeListBegin(TType.STRING, len(self.RemovedSceneObjects))
-            for iter288 in self.RemovedSceneObjects:
-                oprot.writeString(iter288.encode('utf-8') if sys.version_info[0] == 2 else iter288)
+            for iter295 in self.RemovedSceneObjects:
+                oprot.writeString(iter295.encode('utf-8') if sys.version_info[0] == 2 else iter295)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.AddedAvatars is not None:
             oprot.writeFieldBegin('AddedAvatars', TType.LIST, 5)
             oprot.writeListBegin(TType.STRUCT, len(self.AddedAvatars))
-            for iter289 in self.AddedAvatars:
-                iter289.write(oprot)
+            for iter296 in self.AddedAvatars:
+                iter296.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.ChangedAvatars is not None:
             oprot.writeFieldBegin('ChangedAvatars', TType.LIST, 6)
             oprot.writeListBegin(TType.STRUCT, len(self.ChangedAvatars))
-            for iter290 in self.ChangedAvatars:
-                iter290.write(oprot)
+            for iter297 in self.ChangedAvatars:
+                iter297.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.RemovedAvatars is not None:
             oprot.writeFieldBegin('RemovedAvatars', TType.LIST, 7)
             oprot.writeListBegin(TType.STRING, len(self.RemovedAvatars))
-            for iter291 in self.RemovedAvatars:
-                oprot.writeString(iter291.encode('utf-8') if sys.version_info[0] == 2 else iter291)
+            for iter298 in self.RemovedAvatars:
+                oprot.writeString(iter298.encode('utf-8') if sys.version_info[0] == 2 else iter298)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -2695,10 +2714,10 @@ class MAvatarUpdate(object):
             elif fid == 3:
                 if ftype == TType.LIST:
                     self.SceneObjects = []
-                    (_etype295, _size292) = iprot.readListBegin()
-                    for _i296 in range(_size292):
-                        _elem297 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        self.SceneObjects.append(_elem297)
+                    (_etype302, _size299) = iprot.readListBegin()
+                    for _i303 in range(_size299):
+                        _elem304 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                        self.SceneObjects.append(_elem304)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -2711,11 +2730,11 @@ class MAvatarUpdate(object):
             elif fid == 5:
                 if ftype == TType.LIST:
                     self.Properties = []
-                    (_etype301, _size298) = iprot.readListBegin()
-                    for _i302 in range(_size298):
-                        _elem303 = MPropertyUpdate()
-                        _elem303.read(iprot)
-                        self.Properties.append(_elem303)
+                    (_etype308, _size305) = iprot.readListBegin()
+                    for _i309 in range(_size305):
+                        _elem310 = MPropertyUpdate()
+                        _elem310.read(iprot)
+                        self.Properties.append(_elem310)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -2740,8 +2759,8 @@ class MAvatarUpdate(object):
         if self.SceneObjects is not None:
             oprot.writeFieldBegin('SceneObjects', TType.LIST, 3)
             oprot.writeListBegin(TType.STRING, len(self.SceneObjects))
-            for iter304 in self.SceneObjects:
-                oprot.writeString(iter304.encode('utf-8') if sys.version_info[0] == 2 else iter304)
+            for iter311 in self.SceneObjects:
+                oprot.writeString(iter311.encode('utf-8') if sys.version_info[0] == 2 else iter311)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.Description is not None:
@@ -2751,8 +2770,8 @@ class MAvatarUpdate(object):
         if self.Properties is not None:
             oprot.writeFieldBegin('Properties', TType.LIST, 5)
             oprot.writeListBegin(TType.STRUCT, len(self.Properties))
-            for iter305 in self.Properties:
-                iter305.write(oprot)
+            for iter312 in self.Properties:
+                iter312.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
@@ -2802,6 +2821,7 @@ MTransformUpdate.thrift_spec = (
     (1, TType.LIST, 'Position', (TType.DOUBLE, None, False), None, ),  # 1
     (2, TType.LIST, 'Rotation', (TType.DOUBLE, None, False), None, ),  # 2
     (3, TType.STRING, 'Parent', 'UTF8', None, ),  # 3
+    (4, TType.LIST, 'Scale', (TType.DOUBLE, None, False), None, ),  # 4
 )
 all_structs.append(MPropertyUpdate)
 MPropertyUpdate.thrift_spec = (

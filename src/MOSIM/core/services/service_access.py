@@ -108,6 +108,7 @@ class ServiceAccess(object):
     def GetRetargetingService(self):
         if self.__RetargetingService is None:
             description = self._get_service_description("Retargeting")
+            print("Connecting to Retargeting at",description.Addresses[0].Address,":",description.Addresses[0].Port)
             self.__RetargetingService = ThriftClient(description.Addresses[0].Address, description.Addresses[0].Port, MRetargetingService.Client)
             self.__RetargetingService.__enter__()
         return self.__RetargetingService._access
@@ -122,6 +123,7 @@ class ServiceAccess(object):
     def GetService(self, name, ServiceType):
         if not name in self.loadedServices:
             description = self._get_service_description(name)
+            print("Connecting to Service ",name," at ", description.Addresses[0].Address, ":", description.Addresses[0].Port)
             self.loadedServices[name] = ThriftClient(description.Addresses[0].Address, description.Addresses[0].Port, ServiceType.Client)
             self.loadedServices[name].__enter__()
         return self.loadedServices[name]._access
